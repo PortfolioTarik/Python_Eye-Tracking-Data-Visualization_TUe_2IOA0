@@ -31,6 +31,12 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'homepage.apps.HomepageConfig',
+    'import_csv.apps.ImportCsvConfig',
+    'visualization_boxplot.apps.VisualizationBoxplotConfig',
+    'visualization_linechart.apps.VisualizationLinechartConfig',
+    'visualization_scatterplot.apps.VisualizationScatterplotConfig',
+    'visualization_starplot.apps.VisualizationStarplotConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

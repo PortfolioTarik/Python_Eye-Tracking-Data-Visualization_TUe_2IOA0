@@ -5,4 +5,7 @@ from django.http import HttpResponse
 
 
 def home(request):
-    return HttpResponse('<h1> This webpage will be dedicated to CSV-import</h1>')
+    context = {
+        'var': 10
+    }
+    return render(request, 'website_import.html', context)

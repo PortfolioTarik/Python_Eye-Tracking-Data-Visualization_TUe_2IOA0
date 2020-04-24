@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>[2IOA0 Group 23A] <br> Welcome to our eye-tracking-software :)! </h1>
+{% for webpage in webpages %}
+        <div>
+        <h2> <a href="{{ webpage.url }}">{{ webpage.title }}</a></h2>
+        </div>
+{% endfor %}
+</body>
+</html>
