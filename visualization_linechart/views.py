@@ -7,7 +7,7 @@ import pandas as pd
 
 def home(request):
     df_eye = pd.read_csv(
-        'C:/Users/TARIKSSD/Desktop/2IOA0 - Project/2ioa0-23a-eye-tracking-and-visualization/import_csv/csv/all_fixation_data_cleaned_up.csv', encoding='unicode_escape', sep="\t")
+        'C:/Users/20190870/Documents/2IOA0/2ioa0-23a-eye-tracking-and-visualization/visualization_linechart/csv/all_fixation_data_cleaned_up.csv', encoding='unicode_escape', sep="\t")
     #source = ColumnDataSource(df_eye)
     title = 'y = f(x)'
 
@@ -23,5 +23,5 @@ def home(request):
     script, div = components(plot)
 
     # Feed them to the Django template.
-    return render(request, 'website_import.html',
+    return render(request, 'website_linechart.html',
                   {'script': script, 'div': div})
