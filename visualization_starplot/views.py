@@ -6,6 +6,7 @@ from django.http import HttpResponse
 
 def home(request):
     context = {
-        'var': 10
+        'age': 22,
+        'name': 'Fanni'
     }
     return render(request, 'website_starplot.html', context)
