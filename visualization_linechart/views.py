@@ -3,11 +3,14 @@ from django.shortcuts import render
 from bokeh.plotting import figure, output_file, show
 from bokeh.embed import components
 import pandas as pd
+import os
 
 
 def home(request):
-    df_eye = pd.read_csv(
-        'C:/Users/20190870/Documents/2IOA0/2ioa0-23a-eye-tracking-and-visualization/visualization_linechart/csv/all_fixation_data_cleaned_up.csv', encoding='unicode_escape', sep="\t")
+    # Returns the Path your .py file is in
+    workpath = os.path.dirname(os.path.abspath(__file__))
+    df_eye = pd.read_csv(workpath +
+                         '/csv/all_fixation_data_cleaned_up.csv', encoding='unicode_escape', sep="\t")
     #source = ColumnDataSource(df_eye)
     title = 'y = f(x)'
 
