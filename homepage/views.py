@@ -1,3 +1,4 @@
+# Generated en coded by Tarik Hacialiogullari
 from django.shortcuts import render
 
 # Create your views here.

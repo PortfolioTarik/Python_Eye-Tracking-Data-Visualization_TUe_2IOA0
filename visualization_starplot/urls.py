@@ -1,3 +1,4 @@
+# Generated en coded by Tarik Hacialiogullari
 """eye_tracking_visualizations_group23a URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:

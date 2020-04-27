@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+# Generated en coded by Tarik Hacialiogullari
 INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
     'import_csv.apps.ImportCsvConfig',
