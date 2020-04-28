@@ -12,16 +12,17 @@ def home(request):
     df_eye = pd.read_csv(workpath +
                          '/csv/all_fixation_data_cleaned_up.csv', encoding='unicode_escape', sep="\t")
     #source = ColumnDataSource(df_eye)
-    title = 'y = f(x)'
+    title = 'p1'
 
     plot = figure(title=title,
-                  x_axis_label='X-Axis',
-                  y_axis_label='Y-Axis',
-                  plot_width=400,
-                  plot_height=400)
+                  x_axis_label='Timestamp',
+                  y_axis_label='FixationIndex',
+                  plot_width=800,
+                  plot_height=800
+                  )
 
-    plot.line(df_eye['Timestamp'], df_eye['MappedFixationPointX'],
-              legend_label='f(x)', line_width=2)
+    plot.line(df_eye['Timestamp'], df_eye['FixationIndex'],
+               line_width=2)
     # Store components
     script, div = components(plot)
 
