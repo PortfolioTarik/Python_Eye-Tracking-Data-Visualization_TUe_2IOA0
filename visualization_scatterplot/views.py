@@ -1,11 +1,25 @@
-from django.shortcuts import render
+from bokeh.plotting import figure, output_file, show
+import numpy as np
+import pandas as pd
+import os
 
-# Create your views here.
-from django.http import HttpResponse
 
+df = pd.read_csv('all_fixation_data_cleaned_up.csv', delimiter="\t", engine="python")
+#df = pd.read_csv('C:/Users/Egresits fanni/Documents/TUe Eindhoven/2IOA0 - HTI Webtech/all_fixation_data_cleaned_up.csv')
+print(df.head())
 
-def home(request):
-    context = {
-        'var': 10
-    }
-    return render(request, 'website_scatterplot.html', context)
+# prepare some data
+x = df[df['StimuliName'] =='01_Antwerpen_S1.jpg']["Timestamp"]
+y = df[df['StimuliName'] =='01_Antwerpen_S1.jpg']["FixationIndex"]
+
+# output to static HTML file
+output_file("lines.html")
+
+# create a new plot with a title and axis labels
+p = figure(title="simple scatter example", x_axis_label='x', y_axis_label='y')
+
+# add a line renderer with legend and line thickness
+p.scatter(x, y, legend_label="Temp.", line_width=2)
+
+# show the results
+show(p)
