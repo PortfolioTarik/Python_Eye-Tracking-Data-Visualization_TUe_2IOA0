@@ -25,7 +25,7 @@ SECRET_KEY = '9708)$&ovqi=!eo-61@-+@bon$j4u+^4v^azj_07rm1y40xnap'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://eye-tracking-23a.herokuapp.com/']
 
 
 # Application definition
