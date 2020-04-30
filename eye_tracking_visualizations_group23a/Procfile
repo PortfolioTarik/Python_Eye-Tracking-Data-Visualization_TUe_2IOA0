@@ -1,1 +1,1 @@
-python manage.py runserver
+web: gunicorn eye_tracking_visualizations_group23a.wsgi
