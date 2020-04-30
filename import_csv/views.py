@@ -1,15 +1,44 @@
 from django.shortcuts import render
 
+import csv, io
+from django.contrib import messages
+from import_csv.models import FixationData
+
 # Create your views here.
-from django.http import HttpResponse
+
+def upload_csv(request):
+    template = "website_import.html"
+    data = FixationData.objects.all()
+    
+    prompt = {'order': 'test',
+    'profiles': data}
+
+    if request.method == "GET":
+        return render(request,template,prompt)
+
+    csvfile = request.FILES['file']
+    
+    if not csvfile.name.endswith('csv'):
+        messages.error(request, 'This is not a csv file')
+
+    dataset = csvfile.read().decode('UTF-8', 'replace')
+
+    io_string = io.StringIO(dataset)
+    next(io_string)
+    for column in csv.reader(io_string, delimiter='\t'):
+        _, created = FixationData.objects.update_or_create(
+            timestamp = column[0],
+            stimuli_name = column[1],
+            fixation_index = column[2],
+            fixation_duration = column[3],
+            mapped_fixation_point_X = column[4],
+            mapped_fixation_point_Y = column[5],
+            user = column[6],
+            description = column[7]
+        )
+
+    context = {}
+
+    return render(request, template, context)
 
 
-def home(request):
-    context = {
-        'var': functiontwo(10)
-    }
-    return render(request, 'website_import.html', context)
-
-
-def functiontwo(input):
-    return input + 5
