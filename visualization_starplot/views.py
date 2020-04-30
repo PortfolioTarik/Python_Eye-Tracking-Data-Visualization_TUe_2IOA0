@@ -50,7 +50,7 @@ def home(request):
              color="red", size=8)
 
     # add background
-    p.image_url(url=['../06_Hamburg_S1.jpg'], x=0,
+    p.image_url(url=[workpath + '/06_Hamburg_S1.jpg'], x=0,
                 y=1200, w=1651, h=1200, alpha=0.3)
 
     # show the results
