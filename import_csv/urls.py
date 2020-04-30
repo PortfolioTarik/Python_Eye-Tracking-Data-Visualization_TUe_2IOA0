@@ -17,5 +17,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.home, name='import_csv_home'),
+    path('', views.upload_csv, name='import_csv_home'),
 ]
