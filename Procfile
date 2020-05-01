@@ -1,0 +1,1 @@
+web: gunicorn eye_tracking_visualizations_group23a.wsgi --log-file -
