@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['https://eye-tracking-23a.herokuapp.com/']
 # Application definition
 # Generated en coded by Tarik Hacialiogullari
 INSTALLED_APPS = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # DJANGO WHITENOISE CONFIGURATION
     'homepage.apps.HomepageConfig',
     'import_csv.apps.ImportCsvConfig',
     'visualization_boxplot.apps.VisualizationBoxplotConfig',
@@ -124,6 +125,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
