@@ -11,6 +11,7 @@ from bokeh.plotting import figure, show, output_file
 import os
 import plotly.graph_objects as go
 import plotly.offline as offline
+from PIL import Image
 
 
 def home(request):
@@ -32,6 +33,7 @@ def home(request):
            (test['user'] == 'p1')]["MappedFixationPointX"]
     y = df[(test['StimuliName'] == '06_Hamburg_S1.jpg') &
            (test['user'] == 'p1')]["MappedFixationPointY"]
+
     z = df[(test['StimuliName'] == '06b_Hamburg_S2.jpg') &
            (test['user'] == 'p16')]["MappedFixationPointX"]
     w = df[(test['StimuliName'] == '06b_Hamburg_S2.jpg') &
@@ -55,19 +57,82 @@ def home(request):
     # # add background
     # p.image_url(url=['../06_Hamburg_S1.jpg'], x=0,
     #             y=1200, w=1651, h=1200, alpha=0.3)
-
-    x = np.random.uniform(-1, 1, size=500)
-    y = np.random.uniform(-1, 1, size=500)
+    img = Image.open(workpath + '/06_Hamburg_S1.jpg')
 
     fig = go.Figure(go.Histogram2dContour(
         x=x,
         y=y,
         colorscale='Blues'
     ))
+
+    fig.update_layout(
+        autosize=False,
+        width=700,
+        height=600,
+        #  margin=dict(
+        #      l=50,
+        #      r=50,
+        #      b=100,
+        #      t=100,
+        #      pad=4
+        #  )
+    )
+    fig.add_layout_image(
+        dict(
+            # source=img,
+            source='https://i.ibb.co/VQSkMnN/06-Hamburg-S1.jpg',
+            xref="x",
+            yref="y",
+            x=0,
+            y=0,
+            sizex=500,
+            sizey=300,
+            sizing="contain",
+            opacity=0.7,
+            visible=True,
+            layer="below")
+    )
+
+    fig2 = go.Figure(go.Histogram2dContour(
+        x=z,
+        y=w,
+        colorscale='Blues'
+    ))
+
+    fig2.update_layout(
+        autosize=False,
+        width=700,
+        height=600,
+        #  margin=dict(
+        #      l=50,
+        #      r=50,
+        #      b=100,
+        #      t=100,
+        #      pad=4
+        #  )
+    )
+    fig2.add_layout_image(
+        dict(
+            # source=img,
+            source='https://i.ibb.co/VQSkMnN/06-Hamburg-S1.jpg',
+            xref="x",
+            yref="y",
+            x=0,
+            y=0,
+            sizex=500,
+            sizey=300,
+            sizing="contain",
+            opacity=0.7,
+            visible=True,
+            layer="below")
+    )
     # fig.show()
     # fig.write_html("file.html")
     # show the results
+    # fig.show()
     graph = fig.to_html(full_html=False, default_height=500, default_width=700)
+    graph2 = fig2.to_html(
+        full_html=False, default_height=500, default_width=700)
     script = ""
     # script, div = components(offline.plot(
     # fig, include_plotlyjs=True, output_type='div'))
@@ -76,4 +141,4 @@ def home(request):
     #     'name': 'Tarik'
     # }
     return render(request, 'website_boxplot.html',
-                  {'script': script, 'div': graph})
+                  {'script': script, 'div': graph, 'div2': graph2})
