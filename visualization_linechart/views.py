@@ -1,40 +1,75 @@
 from django.shortcuts import render
+
+# Create your views here.
+from django.http import HttpResponse
 from bokeh.plotting import figure, output_file, show
 from bokeh.embed import components
-import numpy as np # linear algebra
-import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
-import math
+import numpy as np
+import pandas as pd
+from bokeh.plotting import figure, show, output_file
 import os
-from bokeh.io import show, output_file
-from bokeh.models import ColumnDataSource, Legend, LegendItem, Scatter
-from bokeh.plotting import figure, output_file, show, output_notebook
-from bokeh.models.tools import HoverTool
-from bokeh.core.properties import value
-from bokeh.palettes import Spectral10, Category20, Category20_17, inferno, magma, viridis
-from bokeh.transform import jitter
+from bokeh.layouts import row
+
 
 def home(request):
-    #Fixation duration for y axis and Mapped fixation point x or time stamp on
-    #x axis and the user to compare each of users with dropdown menu
-    dtype = {'Timestamp':np.uint16, 'FixationDuration':np.unit16, 
-    'MappedFixationPointX':np.unit16, 'User':str}
 
     workpath = os.path.dirname(os.path.abspath(__file__))
-    path = '/csv/all_fixation_data_cleaned_up.csv'
-    df_eye = pd.read_csv(workpath + path, usecols=dtype.keys(), dtype=dtype)
+    # path is '/csv/all_fixation_data_cleaned_up.csv'
+    df_eye = pd.read_csv(workpath + '/csv/all_fixation_data_cleaned_up.csv', encoding='unicode_escape', sep="\t")
+
+    # copy dataset with specialized columns (just for testing something)
+    df_eye_test = df_eye[['user', 'StimuliName']].copy()
     
-    #tools to add to graph
-    TOOLS = "pan, wheel_zoom, box_zoom, box_select,reset, save"
+    #Using the data for x axis Timestamp and y axis time duration to see time spent per point
+    x = df_eye[(df_eye_test['StimuliName'] == '06_Hamburg_S1.jpg') &
+           (df_eye_test['user'] == 'p1')]["Timestamp"]
+    y = df_eye[(df_eye_test['StimuliName'] == '06_Hamburg_S1.jpg') &
+           (df_eye_test['user'] == 'p1')]["FixationDuration"]
+    print(x)
 
-    #Build Line chart 
-    p = figure(title="Fixation duration and mapped fix", tools = TOOLS)
-    p.line(x='MappedFixationPointX', y='FixationDuration')
-    p.xaxis.axis_label = 'MappedFixationPointX'
-    p.yaxis.axis_label = 'FixationDuration'
-    p.xgrid.grid_line_color = None
-    show(p)
+    # output to static HTML file
+    output_file("lines.html")
 
+    # create a new plot with a title and axis labels
+    p1 = figure(plot_width=600, plot_height=400, x_range=(38000, 43000), y_range=(100, 700),
+               title="Fixation Duration per point for color", x_axis_label='Timestamp',
+               y_axis_label='FixationDuration')
 
+    # add a line renderer with legend and line thickness
+    p1.line(x, y, legend_label="P1.", line_width=2, color="red")
+    p1.circle(x, y, fill_color="black",
+             color="red", size=6)
+#Another Line Chart to compare two users of color and gray
+    # copy dataset with specialized columns (just for testing something)
+    df_eye_test_2 = df_eye[['user', 'StimuliName']].copy()
     
-    # Feed them to the Django template.
-    return render(request, 'website_linechart.html')
+    #Using the data for x axis Timestamp and y axis time duration to see time spent per point
+    a = df_eye[(df_eye_test_2['StimuliName'] == '06b_Hamburg_S2.jpg') &
+           (df_eye_test_2['user'] == 'p9')]["Timestamp"]
+    b = df_eye[(df_eye_test_2['StimuliName'] == '06b_Hamburg_S2.jpg') &
+           (df_eye_test_2['user'] == 'p9')]["FixationDuration"]
+    print(x)
+
+    # output to static HTML file
+    output_file("lines.html")
+
+    # create a new plot with a title and axis labels
+    p2 = figure(plot_width=600, plot_height=400, x_range=(190000, 202000), y_range=(100, 700),
+               title="Fixation Duration per point for gray", x_axis_label='Timestamp',
+               y_axis_label='FixationDuration')
+
+    # add a line renderer with legend and line thickness
+    p2.line(a, b, legend_label="P9.", line_width=2, color="red")
+    p2.circle(a, b, fill_color="black",
+             color="red", size=6)
+    #For layout
+    show(row(p1, p2))
+
+    # show the results
+    script, div = components(p1,p2)
+    context = {
+        'age': 18,
+        'name': 'Omar'
+    }
+    return render(request, 'website_starplot.html',
+                  {'script': script, 'div': div})
