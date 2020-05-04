@@ -26,7 +26,7 @@ def home(request):
                (df_eye_test['user'] == 'p1')]["Timestamp"]
     y = df_eye[(df_eye_test['StimuliName'] == '06_Hamburg_S1.jpg') &
                (df_eye_test['user'] == 'p1')]["FixationDuration"]
-    print(x)
+    # print(x)
 
     # output to static HTML file
     # output_file("lines.html")
@@ -49,7 +49,7 @@ def home(request):
                (df_eye_test_2['user'] == 'p9')]["Timestamp"]
     b = df_eye[(df_eye_test_2['StimuliName'] == '06b_Hamburg_S2.jpg') &
                (df_eye_test_2['user'] == 'p9')]["FixationDuration"]
-    print(x)
+    # print(x)
 
     # output to static HTML file
     # output_file("lines.html")
