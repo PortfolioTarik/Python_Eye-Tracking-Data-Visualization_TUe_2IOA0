@@ -33,15 +33,18 @@ def home(request):
            (test['user'] == 'p16')]["MappedFixationPointX"]
     w = df[(test['StimuliName'] == '06b_Hamburg_S2.jpg') &
            (test['user'] == 'p16')]["MappedFixationPointY"]
-    print(z)
+    # print(z)
 
     # output to static HTML file
-    output_file("lines.html")
+    # output_file("lines.html")
 
     # create a new plot with a title and axis labels
     p = figure(plot_width=800, plot_height=600, x_range=(0, 1651), y_range=(0, 1200),
                title="Gaze plot of Hamburg of the first user", x_axis_label='Mapped Fixation Point X',
                y_axis_label='Mapped Fixation Point Y')
+
+    p.image_url(url=[
+        'https://i.ibb.co/VQSkMnN/06-Hamburg-S1.jpg'], x=0, y=1200, w=1651, h=1200)
 
     # add a line renderer with legend and line thickness
     p.line(x, y, legend_label="P1.", line_width=2, color="red")
@@ -50,8 +53,6 @@ def home(request):
              color="red", size=8)
 
     # add background
-    p.image_url(url=[workpath + '/06_Hamburg_S1.jpg'], x=0,
-                y=1200, w=1651, h=1200, alpha=0.3)
 
     # show the results
     script, div = components(p)

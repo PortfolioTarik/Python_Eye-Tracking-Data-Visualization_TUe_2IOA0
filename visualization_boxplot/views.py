@@ -8,6 +8,7 @@ from bokeh.embed import components
 import numpy as np
 import pandas as pd
 from bokeh.plotting import figure, show, output_file
+from bokeh.layouts import row
 import os
 import plotly.graph_objects as go
 import plotly.offline as offline
@@ -59,86 +60,107 @@ def home(request):
     #             y=1200, w=1651, h=1200, alpha=0.3)
     img = Image.open(workpath + '/06_Hamburg_S1.jpg')
 
-    fig = go.Figure(go.Histogram2dContour(
-        x=x,
-        y=y,
-        colorscale='Blues'
-    ))
-
-    fig.update_layout(
+    layout = go.Layout(
+        title='My title',
         autosize=False,
-        width=700,
-        height=600,
-        #  margin=dict(
-        #      l=50,
-        #      r=50,
-        #      b=100,
-        #      t=100,
-        #      pad=4
-        #  )
-    )
-    fig.add_layout_image(
-        dict(
-            # source=img,
+        width=750,
+        height=500,
+        images=[dict(
             source='https://i.ibb.co/VQSkMnN/06-Hamburg-S1.jpg',
             xref="x",
             yref="y",
             x=0,
-            y=0,
-            sizex=500,
-            sizey=300,
-            sizing="contain",
+            y=1200,
+            sizex=1651,
+            sizey=1200,
+            sizing="stretch",
             opacity=0.7,
-            visible=True,
-            layer="below")
-    )
+            layer="above")])
+
+    fig = go.Figure(go.Histogram2dContour(
+        x=x,
+        y=y,
+        colorscale='Blues'
+    ), layout)
+
+    # fig.update_layout(
+    #     autosize=False,
+    #     width=700,
+    #     height=600,
+    #     #  margin=dict(
+    #     #      l=50,
+    #     #      r=50,
+    #     #      b=100,
+    #     #      t=100,
+    #     #      pad=4
+    #     #  )
+    # )
+    # fig.add_layout_image(
+    #     dict(
+    #         # source=img,
+    #         source='https://i.ibb.co/VQSkMnN/06-Hamburg-S1.jpg',
+    #         xref="x",
+    #         yref="y",
+    #         x=0,
+    #         y=1200,
+    #         sizex=1651,
+    #         sizey=1200,
+    #         sizing="contain",
+    #         opacity=0.5,
+    #         visible=True,
+    #         layer="above")
+    # )
 
     fig2 = go.Figure(go.Histogram2dContour(
         x=z,
         y=w,
         colorscale='Blues'
-    ))
+    ), layout)
 
-    fig2.update_layout(
-        autosize=False,
-        width=700,
-        height=600,
-        #  margin=dict(
-        #      l=50,
-        #      r=50,
-        #      b=100,
-        #      t=100,
-        #      pad=4
-        #  )
-    )
-    fig2.add_layout_image(
-        dict(
-            # source=img,
-            source='https://i.ibb.co/VQSkMnN/06-Hamburg-S1.jpg',
-            xref="x",
-            yref="y",
-            x=0,
-            y=0,
-            sizex=500,
-            sizey=300,
-            sizing="contain",
-            opacity=0.7,
-            visible=True,
-            layer="below")
-    )
-    # fig.show()
-    # fig.write_html("file.html")
+    # fig2.update_layout(
+    #     autosize=False,
+    #     width=700,
+    #     height=600,
+    #     #  margin=dict(
+    #     #      l=50,
+    #     #      r=50,
+    #     #      b=100,
+    #     #      t=100,
+    #     #      pad=4
+    #     #  )
+    # )
+    # fig2.add_layout_image(
+    #     dict(
+    #         # source=img,
+    #         source='https://images.plot.ly/language-icons/api-home/python-logo.png',
+    #         xref="x",
+    #         yref="y",
+    #         x=0,
+    #         y=0,
+    #         sizex=500,
+    #         sizey=300,
+    #         sizing="contain",
+    #         opacity=0.7,
+    #         visible=True,
+    #         layer="below")
+    # )
+    # # fig.show()
+    # fig.write_html("file2.html")
     # show the results
     # fig.show()
-    graph = fig.to_html(full_html=False, default_height=500, default_width=700)
+    fig.update_layout(template="plotly_white")
+    graph = fig.to_html(
+        full_html=False, default_height=500, default_width=1000)
     graph2 = fig2.to_html(
-        full_html=False, default_height=500, default_width=700)
+        full_html=False, default_height=500, default_width=1000)
     script = ""
-    # script, div = components(offline.plot(
-    # fig, include_plotlyjs=True, output_type='div'))
-    # context = {
-    #     'age': 22,
-    #     'name': 'Tarik'
-    # }
+
+
+# script, div = components(offline.plot(
+# fig, include_plotlyjs=True, output_type='div'))
+# context = {
+#     'age': 22,
+#     'name': 'Tarik'
+# }
     return render(request, 'website_boxplot.html',
                   {'script': script, 'div': graph, 'div2': graph2})
