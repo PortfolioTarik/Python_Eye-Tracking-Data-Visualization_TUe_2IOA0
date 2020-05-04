@@ -11,13 +11,9 @@ import os
 
 
 def home(request):
-
     workpath = os.path.dirname(os.path.abspath(__file__))
-    path = '/csv/all_fixation_data_cleaned_up.csv'
     df = pd.read_csv(workpath +
                      '/all_fixation_data_cleaned_up.csv', encoding='unicode_escape', sep="\t")
-    # df = pd.read_csv('C:/Users/Egresits fanni/Documents/TUe Eindhoven/2IOA0 - HTI Webtech/all_fixation_data_cleaned_up.csv')
-    # print(df.head())
 
     # copy dataset with specialized columns (just for testing something)
     test = df[['user', 'StimuliName']].copy()
@@ -33,7 +29,6 @@ def home(request):
            (test['user'] == 'p16')]["MappedFixationPointX"]
     w = df[(test['StimuliName'] == '06b_Hamburg_S2.jpg') &
            (test['user'] == 'p16')]["MappedFixationPointY"]
-    # print(z)
 
     # output to static HTML file
     # output_file("lines.html")
