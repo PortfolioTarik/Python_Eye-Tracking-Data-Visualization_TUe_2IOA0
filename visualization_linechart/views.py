@@ -10,7 +10,7 @@ from bokeh.plotting import figure, show, output_file
 import os
 from bokeh.layouts import row
 
-
+#Omar LineChart
 def home(request):
 
     workpath = os.path.dirname(os.path.abspath(__file__))
@@ -53,8 +53,8 @@ def home(request):
     # output to static HTML file
     output_file("lines.html")
 
-    # create a new plot with a title and axis labels
-    p2 = figure(plot_width=600, plot_height=400, x_range=(190000, 202000), y_range=(100, 700),
+    # create a new plot with a title and axis labels 
+    p2 = figure(plot_width=600, plot_height=400,
                title="Fixation Duration per point for gray", x_axis_label='Timestamp',
                y_axis_label='FixationDuration')
 
@@ -62,6 +62,7 @@ def home(request):
     p2.line(a, b, legend_label="P9.", line_width=2, color="red")
     p2.circle(a, b, fill_color="black",
              color="red", size=6)
+
     #For layout
     show(row(p1, p2))
 
