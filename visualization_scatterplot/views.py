@@ -1,12 +1,15 @@
+#Coded by Youssef Selim
+
 from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse
 from bokeh.plotting import figure, output_file, show
+from bokeh.models import ColumnDataSource, Label, LabelSet, Range1d
+from bokeh.layouts import row
 from bokeh.embed import components
 import numpy as np
 import pandas as pd
-from bokeh.plotting import figure, show, output_file
 import os
 from bokeh.models import ColumnDataSource
 from bokeh.palettes import Spectral6
@@ -25,25 +28,38 @@ def home(request):
     # print(test[test['user'] == "p2"] & test[test['StimuliName'] == "07_Moskau_S1.jpg"])
     # prepare some data 3 criteria
     x = df[(test['StimuliName'] == '06_Hamburg_S1.jpg') &
-           (test['user'] == 'p1')]["MappedFixationPointX"]
+           (test['user'] == 'p1')]["Timestamp"]
+    y= df[(test['StimuliName'] == '06_Hamburg_S1.jpg') &
+           (test['user'] == 'p1')]["FixationDuration"]
+    z = df[(test['StimuliName'] == '06b_Hamburg_S2.jpg') &
+           (test['user'] == 'p16')]["Timestamp"]
+    w = df[(test['StimuliName'] == '06b_Hamburg_S2.jpg') &
+           (test['user'] == 'p16')]["FixationDuration"]
 
-    fruits = ['(x1,y2)', '(x2,y2)', '(x4,y4)',
-              '(x5,y5)', '(x6,y6)', '(x7,y8)']
-    counts = [5, 3, 4, 2, 4, 6]
 
-    p = figure(x_range=fruits, plot_height=250, title="Fruit Counts",
-               toolbar_location=None, tools="")
+    s1 = figure(
+     plot_height=250, title="Bar chart of hamburg for user 1(color)", x_axis_label='Timestamp', y_axis_label='Fixation Duration',
+               toolbar_location="right", tools="box_select, wheel_zoom, pan, reset, save, hover")
+    
+    s2 = figure(
+     plot_height=250, title="Bar chart of hamburg for user 16(gray)",x_axis_label='Timestamp', y_axis_label='Fixation Duration',
+               toolbar_location="right", tools="box_select, wheel_zoom, pan, reset, save, hover")
 
-    p.vbar(x=fruits, top=counts, width=0.9)
+    s1.vbar(x=x, top=y, width=50, color = 'red', legend_label="P1")
+    s2.vbar(x=z, top=w, width =50, color ='green', legend_label="P16")
+    s1.xgrid.grid_line_color = None
+    s1.y_range.start = 0
+    s2.xgrid.grid_line_color = None
+    s2.y_range.start = 0
+    p = row(s1, s2)
 
-    p.xgrid.grid_line_color = None
-    p.y_range.start = 0
+    
 
     # show the results
     script, div = components(p)
     context = {
-        'age': 22,
-        'name': 'Omar'
+        'age': 18,
+        'name': 'Youssef'
     }
     return render(request, 'website_scatterplot.html',
                   {'script': script, 'div': div})
