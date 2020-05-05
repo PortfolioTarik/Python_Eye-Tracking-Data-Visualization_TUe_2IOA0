@@ -21,6 +21,8 @@ def home(request):
 
     # print(test[test['user'] == "p2"] & test[test['StimuliName'] == "07_Moskau_S1.jpg"])
     # prepare some data 3 criteria
+    userData = df[(test['StimuliName'] == '06_Hamburg_S1.jpg')
+                  & (test['user'] == 'p1')]
     x = df[(test['StimuliName'] == '06_Hamburg_S1.jpg') &
            (test['user'] == 'p1')]["MappedFixationPointX"]
     y = df[(test['StimuliName'] == '06_Hamburg_S1.jpg') &
@@ -44,8 +46,22 @@ def home(request):
     # add a line renderer with legend and line thickness
     p.line(x, y, legend_label="P1.", line_width=2, color="red")
     p.line(z, w, legend_label="P16.", line_width=2, color="blue")
-    p.circle(x, y, fill_color="red",
-             color="red", size=8)
+    #count = 0
+#     for hor in x:
+#         ver = y.iloc[count]
+#         count = count + 1
+#         print('x= ' + str(hor) + ' ver= ' + str(ver))
+#         p.circle(hor, ver, fill_color="red",
+#                  color="red", size=8)
+    count = 0
+    for index, row in userData.iterrows():
+        p.circle(row['MappedFixationPointX'], row['MappedFixationPointY'],
+                 fill_color="black", color="red", size=row['FixationDuration']/15, name='len')
+
+    # p.circle(x, y, fill_color="red",
+     # color="red", size=8)
+
+    # x.head()
 
     # add background
 
