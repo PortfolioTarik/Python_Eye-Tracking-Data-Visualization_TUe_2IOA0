@@ -1,8 +1,11 @@
+#Coded by Youssef Selim
+
 from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse
 from bokeh.plotting import figure, output_file, show
+from bokeh.models import ColumnDataSource, Label, LabelSet, Range1d
 from bokeh.layouts import row
 from bokeh.embed import components
 import numpy as np
@@ -36,11 +39,11 @@ def home(request):
 
     s1 = figure(
      plot_height=250, title="Bar chart of hamburg for user 1(color)", x_axis_label='Timestamp', y_axis_label='Fixation Duration',
-               toolbar_location=None, tools="")
+               toolbar_location="right", tools="box_select, wheel_zoom, pan, reset, save, hover")
     
     s2 = figure(
      plot_height=250, title="Bar chart of hamburg for user 16(gray)",x_axis_label='Timestamp', y_axis_label='Fixation Duration',
-               toolbar_location=None, tools="")
+               toolbar_location="right", tools="box_select, wheel_zoom, pan, reset, save, hover")
 
     s1.vbar(x=x, top=y, width=50, color = 'red', legend_label="P1")
     s2.vbar(x=z, top=w, width =50, color ='green', legend_label="P16")
