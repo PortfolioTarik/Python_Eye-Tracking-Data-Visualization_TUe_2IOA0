@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse
+from bokeh.models import ColumnDataSource, Label, LabelSet, Range1d
 from bokeh.plotting import figure, output_file, show
 from bokeh.embed import components
 import numpy as np
@@ -46,30 +47,42 @@ def home(request):
     # add a line renderer with legend and line thickness
     p.line(x, y, legend_label="P1.", line_width=2, color="red")
     p.line(z, w, legend_label="P16.", line_width=2, color="blue")
-    #count = 0
+    # count = 0
 #     for hor in x:
 #         ver = y.iloc[count]
 #         count = count + 1
 #         print('x= ' + str(hor) + ' ver= ' + str(ver))
 #         p.circle(hor, ver, fill_color="red",
 #                  color="red", size=8)
-    count = 0
-    for index, row in userData.iterrows():
-        p.circle(row['MappedFixationPointX'], row['MappedFixationPointY'],
-                 fill_color="black", color="red", size=row['FixationDuration']/15, name='len')
+    sizePath = x.count()
+    numericalArr = list(range(1, sizePath + 1))
+    fixDur = userData['FixationDuration']
+    fixationDurationArr = [fixDur.iloc[[i]] /
+                           15 for i in list(range(0, sizePath))]
+    # numericalArr = [str(i) for i in list(range(1, sizePath))]
 
+    source = ColumnDataSource(data=dict(height=y,
+                                        weight=x,
+                                        names=numericalArr,
+                                        fixationDuration=fixationDurationArr))
+#     count = 0
+#     for index, row in userData.iterrows():
+    # p.circle(row['MappedFixationPointX'], row['MappedFixationPointY'],
+    #         fill_color="black", color="red", size=row['FixationDuration']/15, name='len')
+    #  p.add_layout(Label(x=row['MappedFixationPointX'], y=row['MappedFixationPointY'], text=str(count), level='glyph',
+    #                     x_offset=5, y_offset=5, render_mode='canvas'))
+    #  count = count + 1
+    p.circle('weight', 'height', fill_color="black",
+             color="red", size='fixationDuration', source=source)
     # p.circle(x, y, fill_color="red",
-     # color="red", size=8)
+    # color="red", size=8)
 
     # x.head()
-
+    p.add_layout(LabelSet(x='weight', y='height', text='names', level='overlay',
+                          x_offset=5, y_offset=5, text_color="red", source=source, render_mode='canvas'))
     # add background
 
     # show the results
     script, div = components(p)
-    context = {
-        'age': 22,
-        'name': 'Fanni'
-    }
     return render(request, 'website_starplot.html',
                   {'script': script, 'div': div})
