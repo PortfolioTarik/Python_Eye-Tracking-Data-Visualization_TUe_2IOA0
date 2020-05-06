@@ -7,20 +7,21 @@
 <body>
     {% if messages %}
         {% for message in messages %}
-            <div>
-                <strong>{{messages|safe}}</strong>
-            </div>
+                <li class="{{ message.tags }}">{{ message }}</li>
         {% endfor %}
-    {% else %}
-    {{profiles}}
+    {% endif %}
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
+        <large>On this page you can upload your dataset.</large>
+        <br>
+        <small>Your dataset should contain: Timestamp, Stimuli name, Fixation index, Fixation duration, Mapped fixation point X, Mapped fixation point Y, User, Description.</small>
+        <br>
         <label for="file1"> Upload a file</label>
         <input type="file" id="file1" name="file">
-        <small>Only accepts CSV files</small>
-        <button type="submit">Upload</button>"
+        <br>
+        <td></td><small> Only accepts CSV files</small>
+        <button type="submit">Upload</button>
     </form>
-    {% endif %}
     {% for profile in profiles %}
     {{profile.name}}
     {% endfor %}

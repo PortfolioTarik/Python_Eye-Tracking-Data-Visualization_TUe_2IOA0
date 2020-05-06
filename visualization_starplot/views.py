@@ -10,6 +10,7 @@ import numpy as np
 import pandas as pd
 from bokeh.plotting import figure, show, output_file
 import os
+from import_csv.models import FixationData
 
 
 def addUserToGraph(userDataOriginal, p, color):
@@ -38,6 +39,13 @@ def addUserToGraph(userDataOriginal, p, color):
 
 
 def home(request):
+    all_data = FixationData.objects.all()
+    type(all_data)
+    print(all_data)
+    df_test = pd.DataFrame(list(all_data))
+    print(df_test.info)
+    # df_test.head()
+
     workpath = os.path.dirname(os.path.abspath(__file__))
     df = pd.read_csv(workpath +
                      '/all_fixation_data_cleaned_up.csv', encoding='unicode_escape', sep="\t")
