@@ -54,31 +54,25 @@ def home(request):
     # output to static HTML file
     # output_file("lines.html")
 
-<<<<<<< HEAD
+
     # create a new plot with a title and axis labels 
     p2 = figure(plot_width=600, plot_height=400,
                title="Fixation Duration per point for gray", x_axis_label='Timestamp',
                y_axis_label='FixationDuration')
-=======
+
     # create a new plot with a title and axis labels
     p2 = figure(plot_width=600, plot_height=400, x_range=(190000, 202000), y_range=(100, 700),
                 title="Fixation Duration per point for gray", x_axis_label='Timestamp',
                 y_axis_label='FixationDuration')
->>>>>>> 4fe0e41685d533adfbeb2685a1a647b6f3d210b2
+
 
     # add a line renderer with legend and line thickness
     p2.line(a, b, legend_label="P9.", line_width=2, color="red")
     p2.circle(a, b, fill_color="black",
-<<<<<<< HEAD
              color="red", size=6)
 
     #For layout
-    show(row(p1, p2))
-=======
-              color="red", size=6)
-    # For layout
     #show(row(p1, p2))
->>>>>>> 4fe0e41685d533adfbeb2685a1a647b6f3d210b2
 
     # show the results
     script, div = components(row(p1, p2))
