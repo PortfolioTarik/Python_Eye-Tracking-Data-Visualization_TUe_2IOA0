@@ -60,6 +60,65 @@ def home(request):
         colorscale='Blues'
     ), layout)
 
+    fig.update_layout(
+        updatemenus=[
+            dict(
+                buttons=list([
+                    dict(
+                        args=["type", "heatmap"],
+                        label="01_Antwerpen_S1.jpg",
+                        method="update"
+                    ),
+                    dict(
+                        args=["type", "heatmap"],
+                        label="02_Berlin_S1.jpg",
+                        method="update"
+                    ),
+                    dict(
+                        args=["type", "heatmap"],
+                        label="03_Bordeaux_S1.jpg",
+                        method="update"
+                    ),
+                    dict(
+                        args=["type", "heatmap"],
+                        label="04_Kln_S1.jpg",
+                        method="update"
+                    ),
+                    dict(
+                        args=["type", "heatmap"],
+                        label="05_Frankfurt_S1.jpg",
+                        method="update"
+                    ),
+                    dict(
+                        args=["type", "heatmap"],
+                        label="06_Hamburg_S1.jpg",
+                        method="update"
+                    ),
+                    dict(
+                        args=["type", "heatmap"],
+                        label="07_Moskau_S1.jpg",
+                        method="update"
+                    ),
+                ]),
+                direction="down",
+                pad={"r": 10, "t": 10},
+                showactive=True,
+                x=0.18,
+                xanchor="left",
+                y=1.14,
+                yanchor="top"
+            ),
+        ]
+    )
+
+# Add annotation
+    fig.update_layout(
+        annotations=[
+            dict(text="Stimuli:", showarrow=False,
+            x=0, y=1.085, yref="paper", align="left")
+        ]
+    )
+
     # fig.update_layout(
     #     autosize=False,
     #     width=700,
