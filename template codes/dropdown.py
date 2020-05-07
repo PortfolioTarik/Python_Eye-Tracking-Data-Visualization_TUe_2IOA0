@@ -13,7 +13,9 @@ import pandas as pd
 #    margin=dict(t=0, b=0, l=0, r=0),
 #)
 
+
 # Add dropdown
+# !! for data changa use UPDATE method, for graph type change use RESTYLE !!
 fig.update_layout(
     updatemenus=[
         dict(
@@ -21,37 +23,37 @@ fig.update_layout(
                 dict(
                     args=["type", "surface"],
                     label="01_Antwerpen_S1.jpg",
-                    method="restyle"
+                    method="update"
                 ),
                 dict(
                     args=["type", "surface"],
                     label="02_Berlin_S1.jpg",
-                    method="restyle"
+                    method="update"
                 ),
                 dict(
                     args=["type", "surface"],
                     label="03_Bordeaux_S1.jpg",
-                    method="restyle"
+                    method="update"
                 ),
                 dict(
                     args=["type", "surface"],
                     label="04_Kln_S1.jpg",
-                    method="restyle"
+                    method="update"
                 ),
                 dict(
                     args=["type", "surface"],
                     label="05_Frankfurt_S1.jpg",
-                    method="restyle"
+                    method="update"
                 ),
                 dict(
                     args=["type", "surface"],
                     label="06_Hamburg_S1.jpg",
-                    method="restyle"
+                    method="update"
                 ),
                 dict(
                     args=["type", "surface"],
                     label="07_Moskau_S1.jpg",
-                    method="restyle"
+                    method="update"
                 ),
             ]),
             direction="down",
