@@ -58,7 +58,7 @@ def home(request):
     # create a new plot with a title and axis labels (by Fanni)
     p = figure(plot_width=800, plot_height=600, x_range=(0, 1651), y_range=(0, 1200),
                title="Gaze plot of Hamburg of users", x_axis_label='Mapped Fixation Point X',
-               y_axis_label='Mapped Fixation Point Y')
+               y_axis_label='Mapped Fixation Point Y', tools="box_select, wheel_zoom, pan, reset, save, hover")
     # background
     p.image_url(url=[
         'https://i.ibb.co/VQSkMnN/06-Hamburg-S1.jpg'], x=0, y=1200, w=1651, h=1200)
