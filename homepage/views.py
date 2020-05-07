@@ -11,7 +11,7 @@ webpages = [
         'url': '/import'
     },
     {
-        'title': 'Visualization Boxplot',
+        'title': 'Visualization Heatmap (contour map)',
         'url': '/boxplot'
     },
     {
@@ -19,11 +19,11 @@ webpages = [
         'url': '/linechart'
     },
     {
-        'title': 'Visualization Scatterplot',
+        'title': 'Visualization Barchart',
         'url': '/scatterplot'
     },
     {
-        'title': 'Visualization Starplot',
+        'title': 'Visualization Gazeplot',
         'url': '/starplot'
     }
 ]
