@@ -34,7 +34,7 @@ def home(request):
     # create a new plot with a title and axis labels
     p1 = figure(plot_width=600, plot_height=400, x_range=(38000, 43000), y_range=(100, 700),
                 title="Fixation Duration per point for color", x_axis_label='Timestamp',
-                y_axis_label='FixationDuration')
+                y_axis_label='FixationDuration', tools="box_select, wheel_zoom, pan, reset, save, hover")
 
     # add a line renderer with legend and line thickness
     p1.line(x, y, legend_label="P1.", line_width=2, color="red")
@@ -57,7 +57,7 @@ def home(request):
     # create a new plot with a title and axis labels
     p2 = figure(plot_width=600, plot_height=400, x_range=(190000, 202000), y_range=(100, 700),
                 title="Fixation Duration per point for gray", x_axis_label='Timestamp',
-                y_axis_label='FixationDuration')
+                y_axis_label='FixationDuration', tools="box_select, wheel_zoom, pan, reset, save, hover")
 
     # add a line renderer with legend and line thickness
     p2.line(a, b, legend_label="P9.", line_width=2, color="red")
