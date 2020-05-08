@@ -25,6 +25,10 @@ webpages = [
     {
         'title': 'Visualization Gazeplot',
         'url': '/starplot'
+    },
+    {
+        'title': 'Visualization Synchronized',
+        'url': '/synchronized'
     }
 ]
 
