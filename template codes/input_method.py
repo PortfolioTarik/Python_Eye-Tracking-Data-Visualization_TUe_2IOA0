@@ -1,11 +1,14 @@
 
+# will need to find and note application name and table name in order for those to properly work 
+
+
 #overall input query
 for i in FixationData.objects.raw(''' SELECT StimuliName, FixationIndex, FixationDuration,
                                         MappedFixationPointX, MappedFixationPointY, user
-                                        FROM Fixation_data  ''')
+                                        FROM TABLE_NAME  ''')
 
 #Stimuli name query
-for s in FixationData.objects.raw(''' SELECT StimuliName FROM Fixation_data ''')
+for s in FixationData.objects.raw(''' SELECT StimuliName FROM TABLE_NAME ''')
 
 #user centered query
 # u and s will be defined in their dropdown options beforehand
@@ -14,5 +17,6 @@ for s in FixationData.objects.raw(''' SELECT StimuliName FROM Fixation_data ''')
 # then concatenate the data
 data_for_viz = FixationData.objects.raw(''' SELECT FixationIndex, FixationDuration, 
                                             MappedFixationPointX, MappedFixationPointY 
+                                            FROM TABLE_NAME
                                             WHERE user = u AND StimuliName = s''')
 
