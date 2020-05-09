@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class VisualizationBoxplotConfig(AppConfig):
-    name = 'visualization_boxplot'
+    name = 'visualization_heatmap'
