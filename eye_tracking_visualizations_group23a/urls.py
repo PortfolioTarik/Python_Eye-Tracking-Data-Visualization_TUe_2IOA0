@@ -25,4 +25,5 @@ urlpatterns = [
     path('linechart/', include('visualization_linechart.urls')),
     path('scatterplot/', include('visualization_scatterplot.urls')),
     path('starplot/', include('visualization_starplot.urls')),
+    path('synchronized/', include('visualization_synchronized.urls')),
 ]

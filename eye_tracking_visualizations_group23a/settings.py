@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'visualization_linechart.apps.VisualizationLinechartConfig',
     'visualization_scatterplot.apps.VisualizationScatterplotConfig',
     'visualization_starplot.apps.VisualizationStarplotConfig',
+    'visualization_synchronized.apps.VisualizationSynchronizedConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
