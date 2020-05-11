@@ -38,7 +38,7 @@ def home(request):
     img = Image.open(workpath + '/06_Hamburg_S1.jpg')
 
     layout = go.Layout(
-        title='Heatmap',
+        title='My title',
         autosize=False,
         width=750,
         height=500,
@@ -46,12 +46,12 @@ def home(request):
             source='https://i.ibb.co/VQSkMnN/06-Hamburg-S1.jpg',
             xref="x",
             yref="y",
-            x=-210,
-            y=1110,
-            sizex=1950,
-            sizey=815,
+            x=0,
+            y=1200,
+            sizex=1651,
+            sizey=1200,
             sizing="stretch",
-            opacity=0.6,
+            opacity=0.7,
             layer="above")])
 
     fig = go.Figure(go.Histogram2dContour(
@@ -119,10 +119,10 @@ def home(request):
         ]
     )
 
-    #fig.update_layout(
-    #    autosize=False,
-    #    width=700,
-    #    height=600,
+    # fig.update_layout(
+    #     autosize=False,
+    #     width=700,
+    #     height=600,
     #     #  margin=dict(
     #     #      l=50,
     #     #      r=50,
@@ -187,8 +187,8 @@ def home(request):
     fig.update_layout(template="plotly_white")
     graph = fig.to_html(
         full_html=False, default_height=500, default_width=1000)
-    '''graph2 = fig2.to_html(
-        full_html=False, default_height=500, default_width=1000)'''
+    graph2 = fig2.to_html(
+        full_html=False, default_height=500, default_width=1000)
     script = ""
 
     return render(request, 'website_boxplot.html',
