@@ -57,8 +57,9 @@ def home(request):
     fig = go.Figure(go.Histogram2dContour(
         x=x,
         y=y,
-        colorscale='Blues'
+        colorscale= 'Blues'
     ), layout)
+
 
     fig.update_layout(
         updatemenus=[
@@ -103,21 +104,67 @@ def home(request):
                 direction="down",
                 pad={"r": 10, "t": 10},
                 showactive=True,
-                x=0.18,
+                x=0.5,
                 xanchor="left",
                 y=1.14,
                 yanchor="top"
             ),
+
+            dict(
+                buttons=list([
+                    dict(
+                        args=["colorscale", "Blues"],
+                        label="Blue",
+                        method= "restyle"
+                    ),
+                    dict(
+                        args=["colorscale", "Greys"],
+                        label="Grey",
+                        method="restyle"
+                    ),
+                    dict(
+                        args=["colorscale", "Hot"],
+                        label="Orange",
+                        method="restyle"
+                    ),
+                    dict(
+                        args=["colorscale", "Greens"],
+                        label="Green",
+                        method="restyle"
+                    ),
+                ]),
+
+                direction="down",
+                pad={"r": 10, "t": 10},
+                showactive=True,
+                x= 0.12,
+                xanchor="left",
+                y=1.14,
+                yanchor="top"
+            ),
+
+
         ]
     )
 
-# Add annotation
     fig.update_layout(
         annotations=[
-            dict(text="Stimuli:", showarrow=False,
-            x=0, y=1.085, yref="paper", align="left")
-        ]
-    )
+            dict(text="Stimuli", x=0, xref="paper", y=1.06,
+                 yref="paper", showarrow=False),
+            dict(text="Colorscale", x=0.4, xref="paper", y=1.06, yref="paper",
+                 showarrow=False)
+        ])
+# # Add annotation
+#     fig.update_layout(
+#         annotations=[
+#             dict(text="Stimuli:", showarrow=False,
+#             x=0, y=1.085, yref="paper", align="left"),
+#             dict(text="Color:", showarrow=False,
+#                  x=0, y=1.085, yref="paper", align="right")
+#         ]
+#     )
+
+
 
     # fig.update_layout(
     #     autosize=False,
@@ -147,11 +194,11 @@ def home(request):
     #         layer="above")
     # )
 
-    fig2 = go.Figure(go.Histogram2dContour(
-        x=z,
-        y=w,
-        colorscale='Blues'
-    ), layout)
+    # fig2 = go.Figure(go.Histogram2dContour(
+    #     x=z,
+    #     y=w,
+    #     colorscale='Blues'
+    # ), layout)
 
     # fig2.update_layout(
     #     autosize=False,
@@ -187,9 +234,9 @@ def home(request):
     fig.update_layout(template="plotly_white")
     graph = fig.to_html(
         full_html=False, default_height=500, default_width=1000)
-    graph2 = fig2.to_html(
-        full_html=False, default_height=500, default_width=1000)
+    # graph2 = fig2.to_html(
+    #     full_html=False, default_height=500, default_width=1000)
     script = ""
 
     return render(request, 'website_boxplot.html',
-                  {'script': script, 'div': graph, 'div2': graph2})
+                  {'script': script, 'div': graph, 'div2': graph})
