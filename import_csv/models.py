@@ -26,3 +26,9 @@ class FixationData(models.Model):
     def __str__(self):
         # return self.StimuliName
         return str(self.Timestamp) + ', ' + str(self.MappedFixationPointX) + ', ' + str(self.MappedFixationPointY)
+
+    def get_Timestamp(self):
+        return self.Timestamp
+
+    def get_FixationDuration(self):
+        return self.FixationDuration
