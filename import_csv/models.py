@@ -8,6 +8,8 @@ def stimuli_path():
 
 
 class FixationData(models.Model):
+    list_display = ('Timestamp', 'StimuliName', 'FixationIndex', 'FixationDuration',
+                    'MappedFixationPointX', 'MappedFixationPointY', 'user', 'desription')
     Timestamp = models.IntegerField()
     StimuliName = models.FilePathField(path=stimuli_path)
     FixationIndex = models.IntegerField()

@@ -38,17 +38,19 @@ def upload_csv(request):
     for i in range(len(df_eye)):
         rows.append(
             FixationData(
-            Timestamp=df_eye.iloc[i][0],
-            StimuliName=df_eye.iloc[i][1],
-            FixationIndex=df_eye.iloc[i][2],
-            FixationDuration=df_eye.iloc[i][3],
-            MappedFixationPointX=df_eye.iloc[i][4],
-            MappedFixationPointY=df_eye.iloc[i][5],
-            user=df_eye.iloc[i][6],
-            description=df_eye.iloc[i][7],
+                Timestamp=df_eye.iloc[i][0],
+                StimuliName=df_eye.iloc[i][1],
+                FixationIndex=df_eye.iloc[i][2],
+                FixationDuration=df_eye.iloc[i][3],
+                MappedFixationPointX=df_eye.iloc[i][4],
+                MappedFixationPointY=df_eye.iloc[i][5],
+                user=df_eye.iloc[i][6],
+                description=df_eye.iloc[i][7],
+            )
         )
 
-    FixationData.objects.bulk_create(rows)
+    print(rows)
+    # FixationData.objects.bulk_create(rows)
 
     # dataset = csvfile.read().decode('UTF-8', 'replace')
 
@@ -66,6 +68,6 @@ def upload_csv(request):
     #         description = column[7]
     #     )
 
-    context={}
+    context = {}
 
     return render(request, template, context)

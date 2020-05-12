@@ -15,13 +15,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='FixationData',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('timestamp', models.IntegerField()),
-                ('stimuli_name', models.FilePathField(path=import_csv.models.stimuli_path)),
-                ('fixation_index', models.IntegerField()),
-                ('fixation_duration', models.IntegerField()),
-                ('mapped_fixation_point_X', models.IntegerField()),
-                ('mapped_fixation_point_Y', models.IntegerField()),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
+                ('Timestamp', models.IntegerField()),
+                ('StimuliName', models.FilePathField(
+                    path=import_csv.models.stimuli_path)),
+                ('FixationIndex', models.IntegerField()),
+                ('FixationDuration', models.IntegerField()),
+                ('MappedFixationPointX', models.IntegerField()),
+                ('MappedFixationPointY', models.IntegerField()),
                 ('user', models.CharField(max_length=5)),
                 ('description', models.CharField(max_length=100)),
             ],
