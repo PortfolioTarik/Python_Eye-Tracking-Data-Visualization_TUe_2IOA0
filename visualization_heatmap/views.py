@@ -57,7 +57,7 @@ def home(request):
     fig = go.Figure(go.Histogram2dContour(
         x=x,
         y=y,
-        colorscale= 'Blues'
+        colorscale= 'Blues',
     ), layout)
 
 
