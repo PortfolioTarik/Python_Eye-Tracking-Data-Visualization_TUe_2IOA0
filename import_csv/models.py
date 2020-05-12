@@ -24,5 +24,5 @@ class FixationData(models.Model):
         db_table = 'Fixation_data'
 
     def __str__(self):
-        return self.StimuliName
-        # return self.Timestamp + ' ' + self.MappedFixationPointX + ' ' + self.MappedFixationPointY
+        # return self.StimuliName
+        return str(self.Timestamp) + ', ' + str(self.MappedFixationPointX) + ', ' + str(self.MappedFixationPointY)

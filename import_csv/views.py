@@ -51,8 +51,8 @@ def upload_csv(request):
         if ((i % 10000) == 0):
             print(str(i))
 
-    print(rows)
-    # FixationData.objects.bulk_create(rows)
+    # print(rows)
+    FixationData.objects.bulk_create(rows)
 
     # dataset = csvfile.read().decode('UTF-8', 'replace')
 
