@@ -116,8 +116,8 @@ def home(request):
             dict(
                 buttons=list([
                     dict(
-                        args=["colorscale", "Blues"],
-                        label="Blue",
+                        args=["colorscale", "Hot"],
+                        label="Orange",
                         method="restyle"
                     ),
                     dict(
@@ -125,13 +125,7 @@ def home(request):
                         label="Grey",
                         method="restyle"
                     ),
-                    dict(
-                        dict(
-                            args=["colorscale", "Hot"],
-                            label="Orange",
-                            method="restyle"
-                        )
-                    ),
+
                     dict(
                         args=["colorscale", "Greens"],
                         label="Green",
@@ -153,9 +147,9 @@ def home(request):
 
     fig.update_layout(
         annotations=[
-            dict(text="Stimuli", x=0, xref="paper", y=1.06,
+            dict(text="Colorscale", x=0, xref="paper", y=1.06,
                  yref="paper", showarrow=False),
-            dict(text="Colorscale", x=0.4, xref="paper", y=1.06, yref="paper",
+            dict(text="Stimuli", x=0.4, xref="paper", y=1.06, yref="paper",
                  showarrow=False)
         ])
 # # Add annotation
