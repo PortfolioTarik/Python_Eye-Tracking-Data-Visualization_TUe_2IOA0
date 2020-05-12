@@ -57,9 +57,8 @@ def home(request):
     fig = go.Figure(go.Histogram2dContour(
         x=x,
         y=y,
-        colorscale= 'Blues'
+        colorscale='Blues'
     ), layout)
-
 
     fig.update_layout(
         updatemenus=[
@@ -115,7 +114,7 @@ def home(request):
                     dict(
                         args=["colorscale", "Blues"],
                         label="Blue",
-                        method= "restyle"
+                        method="restyle"
                     ),
                     dict(
                         args=["colorscale", "Greys"],
@@ -123,9 +122,11 @@ def home(request):
                         method="restyle"
                     ),
                     dict(
-                        args=["colorscale", "Hot"],
-                        label="Orange",
-                        method="restyle"
+                        dict(
+                            args=["colorscale", "Hot"],
+                            label="Orange",
+                            method="restyle"
+                        )
                     ),
                     dict(
                         args=["colorscale", "Greens"],
@@ -134,16 +135,29 @@ def home(request):
                     ),
                 ]),
 
+
                 direction="down",
                 pad={"r": 10, "t": 10},
                 showactive=True,
-                x= 0.12,
+                x=0.12,
                 xanchor="left",
                 y=1.14,
                 yanchor="top"
             ),
-
-
+            dict(
+                buttons=list([
+                    dict(
+                        args=["reversescale", False],
+                        label="False",
+                        method="restyle"
+                    ),
+                    dict(
+                        args=["reversescale", True],
+                        label="True",
+                        method="restyle"
+                    )
+                ]),
+            )
         ]
     )
 
@@ -163,8 +177,6 @@ def home(request):
 #                  x=0, y=1.085, yref="paper", align="right")
 #         ]
 #     )
-
-
 
     # fig.update_layout(
     #     autosize=False,
@@ -232,6 +244,13 @@ def home(request):
     # show the results
     # fig.show()
     fig.update_layout(template="plotly_white")
+    # fig.update_layout(colorscale='Greens')
+
+    # fig.update_layout(
+    #     annotations=[
+    #         dict(text="colorscale", ),
+    #     ]
+    # )
     graph = fig.to_html(
         full_html=False, default_height=500, default_width=1000)
     # graph2 = fig2.to_html(
