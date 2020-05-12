@@ -48,6 +48,8 @@ def upload_csv(request):
                 description=df_eye.iloc[i][7],
             )
         )
+        if ((i % 10000) == 0):
+            print(str(i))
 
     print(rows)
     # FixationData.objects.bulk_create(rows)
