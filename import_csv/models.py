@@ -2,16 +2,20 @@ from django.db import models
 import os
 from django.conf import settings
 
+
 def stimuli_path():
     return os.path.join(settings.BASE_DIR, 'stimuli/')
 
+
 class FixationData(models.Model):
-    timestamp = models.IntegerField()
-    stimuli_name = models.FilePathField(path=stimuli_path)
-    fixation_index = models.IntegerField()
-    fixation_duration = models.IntegerField()
-    mapped_fixation_point_X = models.IntegerField()
-    mapped_fixation_point_Y = models.IntegerField()
+    list_display = ('Timestamp', 'StimuliName', 'FixationIndex', 'FixationDuration',
+                    'MappedFixationPointX', 'MappedFixationPointY', 'user', 'desription')
+    Timestamp = models.IntegerField()
+    StimuliName = models.FilePathField(path=stimuli_path)
+    FixationIndex = models.IntegerField()
+    FixationDuration = models.IntegerField()
+    MappedFixationPointX = models.IntegerField()
+    MappedFixationPointY = models.IntegerField()
     user = models.CharField(max_length=5)
     description = models.CharField(max_length=100)
 
@@ -20,4 +24,11 @@ class FixationData(models.Model):
         db_table = 'Fixation_data'
 
     def __str__(self):
-        return self.stimuli_name
+        # return self.StimuliName
+        return str(self.Timestamp) + ', ' + str(self.MappedFixationPointX) + ', ' + str(self.MappedFixationPointY)
+
+    def get_Timestamp(self):
+        return self.Timestamp
+
+    def get_FixationDuration(self):
+        return self.FixationDuration
