@@ -58,7 +58,9 @@ def home(request):
         x=x,
         y=y,
 
-        colorscale= 'Blues',
+
+        colorscale='Hot',
+        reversescale=True,
 
     ), layout)
 
@@ -146,20 +148,6 @@ def home(request):
                 y=1.14,
                 yanchor="top"
             ),
-            dict(
-                buttons=list([
-                    dict(
-                        args=["reversescale", False],
-                        label="False",
-                        method="restyle"
-                    ),
-                    dict(
-                        args=["reversescale", True],
-                        label="True",
-                        method="restyle"
-                    )
-                ]),
-            )
         ]
     )
 
