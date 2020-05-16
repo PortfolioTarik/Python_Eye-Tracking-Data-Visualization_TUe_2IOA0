@@ -28,7 +28,7 @@ def addUserToGraph(userDataOriginal, p, color):
     # source = ColumnDataSource(data=dict(x_coordinates=x_coordinates,
     #                                    y_coordinates=y_coordinates))
     p.vbar(x=x_coordinates, top=y_coordinates,
-           width=0.05, color=color, legend_label="p1")
+           width=0.05, color=color, legend_label=user)
 
     return
 
