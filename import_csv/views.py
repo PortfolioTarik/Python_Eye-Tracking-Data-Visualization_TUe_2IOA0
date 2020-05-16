@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-import csv
-import io
+#import csv
+#import io
 from django.contrib import messages
 from import_csv.models import FixationData
 import pandas as pd
@@ -12,9 +12,9 @@ import pandas as pd
 
 def upload_csv(request):
     template = "website_import.html"
-    data = FixationData.objects.all()
+    #data = FixationData.objects.all()
 
-    prompt = {'profiles': data}
+    prompt = {'profiles': 'data'}
 
     if request.method == "GET":
         return render(request, template, prompt)
