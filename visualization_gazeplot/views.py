@@ -40,46 +40,46 @@ def addUserToGraph(userDataOriginal, p, color):
 
 
 def home(request):
-    columns = ['ID', 'Timestamp', 'StimuliName', 'FixationIndex', 'FixationDuration',
-               'MappedFixationPointX', 'MappedFixationPointY', 'user', 'description']
-    columns_sql = ', '.join(columns)
-    print('test: ' + columns_sql)
-    mapName = '06_Hamburg_S1.jpg'
-    queryset_userOne = FixationData.objects.raw(
-        "SELECT " + columns_sql + " FROM Fixation_data WHERE user = 'p1' AND StimuliName LIKE '%" + mapName + "' ")
-    queryset_userTwo = FixationData.objects.raw(
-        "SELECT " + columns_sql + " FROM Fixation_data WHERE user = 'p16' AND StimuliName LIKE '%" + mapName + "' ")
+    # columns = ['ID', 'Timestamp', 'StimuliName', 'FixationIndex', 'FixationDuration',
+    #            'MappedFixationPointX', 'MappedFixationPointY', 'user', 'description']
+    # columns_sql = ', '.join(columns)
+    # print('test: ' + columns_sql)
+    # mapName = '06_Hamburg_S1.jpg'
+    # queryset_userOne = FixationData.objects.raw(
+    #     "SELECT " + columns_sql + " FROM Fixation_data WHERE user = 'p1' AND StimuliName LIKE '%" + mapName + "' ")
+    # queryset_userTwo = FixationData.objects.raw(
+    #     "SELECT " + columns_sql + " FROM Fixation_data WHERE user = 'p16' AND StimuliName LIKE '%" + mapName + "' ")
 
-    userOne = pd.DataFrame(list(queryset_userOne))
-    userTwo = pd.DataFrame(list(queryset_userTwo))
-    print(userOne)
-    print('-------------------------')
-    print(userTwo)
-    print(userOne.describe())
-    print(list(userOne.columns))
-    print(userOne.head())
-    print('---------------------------')
+    # userOne = pd.DataFrame(list(queryset_userOne))
+    # userTwo = pd.DataFrame(list(queryset_userTwo))
+    # print(userOne)
+    # print('-------------------------')
+    # print(userTwo)
+    # print(userOne.describe())
+    # print(list(userOne.columns))
+    # print(userOne.head())
+    # print('---------------------------')
 
-    userOne_new = FixationData.objects.filter(user='p1', StimuliName=mapName)
-    # query = FixationData.objects.raw(
-    #     "SELECT " + columns_sql + " FROM Fixation_data WHERE user = 'p1' AND StimuliName LIKE '%" + mapName + "' ").query
-    # userOne_new = pd.read_sql_query(query, connection)
-    userOne_new = pd.DataFrame(list(userOne_new))
-    print(userOne_new)
-    print(userOne_new.describe())
-    print(userOne_new.head())
+    # userOne_new = FixationData.objects.filter(user='p1', StimuliName=mapName)
+    # # query = FixationData.objects.raw(
+    # #     "SELECT " + columns_sql + " FROM Fixation_data WHERE user = 'p1' AND StimuliName LIKE '%" + mapName + "' ").query
+    # # userOne_new = pd.read_sql_query(query, connection)
+    # userOne_new = pd.DataFrame(list(userOne_new))
+    # print(userOne_new)
+    # print(userOne_new.describe())
+    # print(userOne_new.head())
 
     # df_test.head()
 
-    # workpath = os.path.dirname(os.path.abspath(__file__))
-    # df = pd.read_csv(workpath +
-    #                  '/all_fixation_data_cleaned_up.csv', encoding='unicode_escape', sep="\t")
-    # # copy dataset with specialized columns (By Fanni)
-    # test = df[['user', 'StimuliName']].copy()
-    # userOne = df[(test['StimuliName'] == '06_Hamburg_S1.jpg')
-    #               & (test['user'] == 'p1')]
-    # userTwo = df[(test['StimuliName'] == '06_Hamburg_S1.jpg')
-    #                & (test['user'] == 'p16')]
+    workpath = os.path.dirname(os.path.abspath(__file__))
+    df = pd.read_csv(workpath +
+                     '/all_fixation_data_cleaned_up.csv', encoding='unicode_escape', sep="\t")
+    # copy dataset with specialized columns (By Fanni)
+    test = df[['user', 'StimuliName']].copy()
+    userOne = df[(test['StimuliName'] == '06_Hamburg_S1.jpg')
+                 & (test['user'] == 'p1')]
+    userTwo = df[(test['StimuliName'] == '06_Hamburg_S1.jpg')
+                 & (test['user'] == 'p16')]
     # create a new plot with a title and axis labels (by Fanni)
     p = figure(plot_width=800, plot_height=600, x_range=(0, 1651), y_range=(0, 1200),
                title="Gaze plot of Hamburg of users", x_axis_label='Mapped Fixation Point X',
@@ -89,8 +89,8 @@ def home(request):
         'https://i.ibb.co/VQSkMnN/06-Hamburg-S1.jpg'], x=0, y=1200, w=1651, h=1200)
 
     # adding users to the graoh
-    #addUserToGraph(userOne, p, 'red')
-    #addUserToGraph(userTwo, p, 'yellow')
+    addUserToGraph(userOne, p, 'red')
+    addUserToGraph(userTwo, p, 'yellow')
     # show the results
     script, div = components(p)
     return render(request, 'website_starplot.html',
