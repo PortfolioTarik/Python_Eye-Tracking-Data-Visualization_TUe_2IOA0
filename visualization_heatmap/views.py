@@ -57,7 +57,11 @@ def home(request):
     fig = go.Figure(go.Histogram2dContour(
         x=x,
         y=y,
-        colorscale='Blues'
+
+
+        colorscale='Hot',
+        reversescale=True,
+
     ), layout)
 
     fig.update_layout(
@@ -108,16 +112,56 @@ def home(request):
                 y=1.14,
                 yanchor="top"
             ),
+
+            dict(
+                buttons=list([
+                    dict(
+                        args=["colorscale", "Hot"],
+                        label="Orange",
+                        method="restyle"
+                    ),
+                    dict(
+                        args=["colorscale", "Greys"],
+                        label="Grey",
+                        method="restyle"
+                    ),
+
+                    dict(
+                        args=["colorscale", "Greens"],
+                        label="Green",
+                        method="restyle"
+                    ),
+                ]),
+
+
+                direction="down",
+                pad={"r": 10, "t": 10},
+                showactive=True,
+                x=0.12,
+                xanchor="left",
+                y=1.14,
+                yanchor="top"
+            ),
         ]
     )
 
 # Add annotation
     fig.update_layout(
         annotations=[
-            dict(text="Stimuli:", showarrow=False,
-            x=0, y=1.085, yref="paper", align="left")
-        ]
-    )
+            dict(text="Colorscale", x=0, xref="paper", y=1.06,
+                 yref="paper", showarrow=False),
+            dict(text="Stimuli", x=0.4, xref="paper", y=1.06, yref="paper",
+                 showarrow=False)
+        ])
+# # Add annotation
+#     fig.update_layout(
+#         annotations=[
+#             dict(text="Stimuli:", showarrow=False,
+#             x=0, y=1.085, yref="paper", align="left"),
+#             dict(text="Color:", showarrow=False,
+#                  x=0, y=1.085, yref="paper", align="right")
+#         ]
+#     )
 
     # fig.update_layout(
     #     autosize=False,
@@ -185,6 +229,13 @@ def home(request):
     # show the results
     # fig.show()
     fig.update_layout(template="plotly_white")
+    # fig.update_layout(colorscale='Greens')
+
+    # fig.update_layout(
+    #     annotations=[
+    #         dict(text="colorscale", ),
+    #     ]
+    # )
     graph = fig.to_html(
         full_html=False, default_height=500, default_width=1000)
     graph2 = fig2.to_html(
