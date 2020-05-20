@@ -1,12 +1,22 @@
-<!--Generated en coded by Tarik Hacialiogullari !-->
+<!-- Coded by Youssef and Omar-->
 <!DOCTYPE html>
 <html>
-<body>
-<h1>[2IOA0 Group 23A] <br> Welcome to our eye-tracking-software :)! </h1>
-{% for webpage in webpages %}
-        <div>
-        <h2> <a href="{{ webpage.url }}">{{ webpage.title }}</a></h2>
-        </div>
-{% endfor %}
-</body>
+        <head>
+                <title>Eye Tracking Visualisations</title>
+        </head>
+        <body>
+                <style>
+                        body{
+                                background-image:url('https://tobii.imagevault.media/publishedmedia/l3htgh2pqa2y2ynalu1f/CU_eye_with_tech_drawing_overlay_3_1.jpg');
+                                background-repeat: no-repeat;
+                        }
+                </style>
+                
+                <h1><center><font color="000000"><strong> Eye Tracking Visualisations Software</strong></font></center></h1>
+        {% for webpage in webpages %}
+                <div>
+                         <h2> <a href="{{ webpage.url }}">{{ webpage.title }}</a></h2>
+                </div>
+        {% endfor %}
+        </body>
 </html>
