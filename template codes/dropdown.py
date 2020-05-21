@@ -76,3 +76,76 @@ fig.update_layout(
 )
 
 #fig.show()
+
+
+# with query input
+columns = ['ID', 'Timestamp', 'StimuliName', 'FixationIndex', 'FixationDuration',
+               'MappedFixationPointX', 'MappedFixationPointY', 'user', 'description']
+
+    columns_sql = ', '.join(columns)
+    query_maps = FixationData.objects.raw(
+        "SELECT DISTINCT StimuliName, 1 as id FROM Fixation_data ")
+
+    stimuli_list = ["StimuliName:"]
+
+    for stimulidata in query_maps: 
+        stimuli_list.append(stimulidata.StimuliName)
+
+for i in len(stimuli_list):
+    fig.add_trace(
+        go.Scatter( x = ''' SELECT  ''',
+               y=list(df.High),
+               name="High",
+               line=dict(color="#33CFA5")))
+
+
+fig.update_layout(
+    updatemenus=[
+        dict(
+            buttons=list([
+                dict(
+                    args=["type", "surface"],
+                    label=stimuli_list[1],
+                    method="update"
+                ),
+                dict(
+                    args=["type", "surface"],
+                    label=stimuli_list[2],
+                    method="update"
+                ),
+                dict(
+                    args=["type", "surface"],
+                    label=stimuli_list[3],
+                    method="update"
+                ),
+                dict(
+                    args=["type", "surface"],
+                    label=stimuli_list[4],
+                    method="update"
+                ),
+                dict(
+                    args=["type", "surface"],
+                    label="05_Frankfurt_S1.jpg",
+                    method="update"
+                ),
+                dict(
+                    args=["type", "surface"],
+                    label="06_Hamburg_S1.jpg",
+                    method="update"
+                ),
+                dict(
+                    args=["type", "surface"],
+                    label="07_Moskau_S1.jpg",
+                    method="update"
+                ),
+            ]),
+            direction="down",
+            pad={"r": 10, "t": 10},
+            showactive=True,
+            x=0.1,
+            xanchor="left",
+            y=1.1,
+            yanchor="top"
+        ),
+    ]
+)

@@ -33,3 +33,19 @@ viz_data = FixationData.objects.raw('''SELECT FixationDuration, User
 
     x_value2 = viz_data[(viz_data['user'] == 'p9')]['MappedFixationPointX']
     y_value2 = viz_data[(viz_data['user'] == 'p9')]['MappedFixationPointY']
+
+
+
+
+# 
+columns = ['ID', 'Timestamp', 'StimuliName', 'FixationIndex', 'FixationDuration',
+               'MappedFixationPointX', 'MappedFixationPointY', 'user', 'description']
+
+    columns_sql = ', '.join(columns)
+    query_maps = FixationData.objects.raw(
+        "SELECT DISTINCT StimuliName, 1 as id FROM Fixation_data ")
+    
+    for stimulidata in query_maps: 
+        stimuli_list.append(stimulidata.StimuliName)
+
+    
