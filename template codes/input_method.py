@@ -5,18 +5,31 @@
 #overall input query
 for i in FixationData.objects.raw(''' SELECT StimuliName, FixationIndex, FixationDuration,
                                         MappedFixationPointX, MappedFixationPointY, user
-                                        FROM TABLE_NAME  ''')
+                                        FROM data  ''')
 
 #Stimuli name query
-for s in FixationData.objects.raw(''' SELECT StimuliName FROM TABLE_NAME ''')
+for s in FixationData.objects.raw(''' SELECT StimuliName FROM data ''')
 
 #user centered query
 # u and s will be defined in their dropdown options beforehand
 #(e.g. user dropdown set to '1', stimuli dropdown set to '02_Berlin_S1.jpg')
 # for 2 or more users on the same graph do the amount of queries separate per user 
 # then concatenate the data
-data_for_viz = FixationData.objects.raw(''' SELECT FixationIndex, FixationDuration, 
+viz_data = FixationData.objects.raw(''' SELECT FixationIndex, FixationDuration, 
                                             MappedFixationPointX, MappedFixationPointY 
-                                            FROM TABLE_NAME
+                                            FROM Fixation datas
                                             WHERE user = u AND StimuliName = s''')
 
+#index lookups
+viz_data = FixationData.objects.raw('SELECT FixationDuration, MappedFixationPointX, MappedFixationPointY FROM myapp')[0]
+
+
+
+viz_data = FixationData.objects.raw('''SELECT FixationDuration, User
+                                    MappedFixationPointX, MappedFixationPointY
+                                    FROM Fixation_data''')
+    x_value1 = viz_data[(viz_data['user'] == 'p1')]['MappedFixationPointX']
+    y_value1 = viz_data[(viz_data['user'] == 'p1')]['MappedFixationPointY']
+
+    x_value2 = viz_data[(viz_data['user'] == 'p9')]['MappedFixationPointX']
+    y_value2 = viz_data[(viz_data['user'] == 'p9')]['MappedFixationPointY']
