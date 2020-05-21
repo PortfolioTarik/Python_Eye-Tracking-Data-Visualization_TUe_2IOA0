@@ -13,29 +13,56 @@ import os
 import plotly.graph_objects as go
 import plotly.offline as offline
 from PIL import Image
+from import_csv.models import FixationData
+
+
+def getUserData(user, mapName):
+    columns = ['ID', 'Timestamp', 'StimuliName', 'FixationIndex', 'FixationDuration',
+               'MappedFixationPointX', 'MappedFixationPointY', 'user', 'description']
+    columns_sql = ', '.join(columns)
+    queryset_userData = FixationData.objects.raw(
+        "SELECT " + columns_sql + " FROM Fixation_data WHERE user = '" + user + "' AND StimuliName LIKE '%" + mapName + "' ")
+    return querySetToPandas(queryset_userData)
+
+
+def querySetToPandas(queryset_userData):
+    dtypes = np.dtype([
+        ('Timestamp', int),
+        ('StimuliName', str),
+        ('FixationIndex', int),
+        ('FixationDuration', int),
+        ('MappedFixationPointX', int),
+        ('MappedFixationPointY', int),
+        ('user', str),
+        ('description', str)
+        ])
+    data = np.empty(0, dtype=dtypes)
+    userData = pd.DataFrame(data)
+
+    for fixatData in queryset_userData: 
+        dics = dict(
+                        Timestamp = fixatData.Timestamp, 
+                        StimuliName = str(fixatData.StimuliName), 
+                        FixationIndex = fixatData.FixationIndex, 
+                        FixationDuration = fixatData.FixationDuration, 
+                        MappedFixationPointX = fixatData.MappedFixationPointX, 
+                        MappedFixationPointY = fixatData.MappedFixationPointY, 
+                        user = str(fixatData.user), 
+                        description = str(fixatData.description)
+                    )
+        userData = userData.append(dics, ignore_index=True)
+    return userData
+
 
 
 def home(request):
 
-    workpath = os.path.dirname(os.path.abspath(__file__))
-    path = '/csv/all_fixation_data_cleaned_up.csv'
-    df = pd.read_csv(workpath +
-                     '/all_fixation_data_cleaned_up.csv', encoding='unicode_escape', sep="\t")
-
-    # copy dataset with specialized columns (just for testing something)
-    test = df[['user', 'StimuliName']].copy()
-    # prepare some data 3 criteria
-    x = df[(test['StimuliName'] == '06_Hamburg_S1.jpg') &
-           (test['user'] == 'p1')]["MappedFixationPointX"]
-    y = df[(test['StimuliName'] == '06_Hamburg_S1.jpg') &
-           (test['user'] == 'p1')]["MappedFixationPointY"]
-
-    z = df[(test['StimuliName'] == '06b_Hamburg_S2.jpg') &
-           (test['user'] == 'p16')]["MappedFixationPointX"]
-    w = df[(test['StimuliName'] == '06b_Hamburg_S2.jpg') &
-           (test['user'] == 'p16')]["MappedFixationPointY"]
-
-    img = Image.open(workpath + '/06_Hamburg_S1.jpg')
+    df_user = getUserData('p1', '06_Hamburg_S1.jpg')
+    x = df_user[(df_user['StimuliName'] == '06_Hamburg_S1.jpg') &
+           (df_user['user'] == 'p1')]["MappedFixationPointX"]
+    y = df_user[(df_user['StimuliName'] == '06_Hamburg_S1.jpg') &
+           (df_user['user'] == 'p1')]["MappedFixationPointY"]
+    # img = Image.open(workpath + '/06_Hamburg_S1.jpg')
 
     layout = go.Layout(
         title='My title',
@@ -226,17 +253,9 @@ def home(request):
     # show the results
     # fig.show()
     fig.update_layout(template="plotly_white")
-    # fig.update_layout(colorscale='Greens')
-
-    # fig.update_layout(
-    #     annotations=[
-    #         dict(text="colorscale", ),
-    #     ]
-    # )
     graph = fig.to_html(
         full_html=False, default_height=500, default_width=1000)
-    # graph2 = fig2.to_html(
-    #     full_html=False, default_height=500, default_width=1000)
+
     script = ""
 
     return render(request, 'website_boxplot.html',
