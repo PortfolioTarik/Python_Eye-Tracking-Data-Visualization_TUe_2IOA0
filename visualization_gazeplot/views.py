@@ -40,18 +40,27 @@ def addUserToGraph(userDataOriginal, p, color):
 
 
 def home(request):
-    # columns = ['ID', 'Timestamp', 'StimuliName', 'FixationIndex', 'FixationDuration',
-    #            'MappedFixationPointX', 'MappedFixationPointY', 'user', 'description']
-    # columns_sql = ', '.join(columns)
-    # print('test: ' + columns_sql)
-    # mapName = '06_Hamburg_S1.jpg'
-    # queryset_userOne = FixationData.objects.raw(
-    #     "SELECT " + columns_sql + " FROM Fixation_data WHERE user = 'p1' AND StimuliName LIKE '%" + mapName + "' ")
-    # queryset_userTwo = FixationData.objects.raw(
-    #     "SELECT " + columns_sql + " FROM Fixation_data WHERE user = 'p16' AND StimuliName LIKE '%" + mapName + "' ")
+    columns = ['ID', 'Timestamp', 'StimuliName', 'FixationIndex', 'FixationDuration',
+               'MappedFixationPointX', 'MappedFixationPointY', 'user', 'description']
 
-    # userOne = pd.DataFrame(list(queryset_userOne))
-    # userTwo = pd.DataFrame(list(queryset_userTwo))
+    columns_sql = ', '.join(columns)
+    print('test: ' + columns_sql)
+    mapName = '06_Hamburg_S1.jpg'
+    queryset_userOne = FixationData.objects.raw(
+        "SELECT DISTINCT StimuliName, 1 as id FROM Fixation_data ")
+
+    queryset_userTwo = FixationData.objects.raw(
+        "SELECT DISTINCT user, 1 as id FROM Fixation_data WHERE StimuliName LIKE '%" + mapName + "' ")
+
+    for fixatData in queryset_userOne: 
+        print(fixatData.StimuliName)
+
+    for fixatData in queryset_userTwo: 
+        print(fixatData.user)
+
+
+    userOne = pd.DataFrame(list(queryset_userOne))
+    userTwo = pd.DataFrame(list(queryset_userTwo))
     # print(userOne)
     # print('-------------------------')
     # print(userTwo)
