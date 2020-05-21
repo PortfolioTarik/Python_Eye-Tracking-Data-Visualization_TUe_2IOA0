@@ -57,12 +57,11 @@ def home(request):
     fig = go.Figure(go.Histogram2dContour(
         x=x,
         y=y,
-
-
         colorscale='Hot',
         reversescale=True,
 
-    ), layout)
+ ), layout)
+
 
     fig.update_layout(
         updatemenus=[
@@ -107,7 +106,7 @@ def home(request):
                 direction="down",
                 pad={"r": 10, "t": 10},
                 showactive=True,
-                x=0.18,
+                x=0.5,
                 xanchor="left",
                 y=1.14,
                 yanchor="top"
@@ -125,7 +124,6 @@ def home(request):
                         label="Grey",
                         method="restyle"
                     ),
-
                     dict(
                         args=["colorscale", "Greens"],
                         label="Green",
@@ -145,7 +143,6 @@ def home(request):
         ]
     )
 
-# Add annotation
     fig.update_layout(
         annotations=[
             dict(text="Colorscale", x=0, xref="paper", y=1.06,
@@ -191,11 +188,11 @@ def home(request):
     #         layer="above")
     # )
 
-    fig2 = go.Figure(go.Histogram2dContour(
-        x=z,
-        y=w,
-        colorscale='Blues'
-    ), layout)
+    # fig2 = go.Figure(go.Histogram2dContour(
+    #     x=z,
+    #     y=w,
+    #     colorscale='Blues'
+    # ), layout)
 
     # fig2.update_layout(
     #     autosize=False,
@@ -238,9 +235,9 @@ def home(request):
     # )
     graph = fig.to_html(
         full_html=False, default_height=500, default_width=1000)
-    graph2 = fig2.to_html(
-        full_html=False, default_height=500, default_width=1000)
+    # graph2 = fig2.to_html(
+    #     full_html=False, default_height=500, default_width=1000)
     script = ""
 
     return render(request, 'website_boxplot.html',
-                  {'script': script, 'div': graph, 'div2': graph2})
+                  {'script': script, 'div': graph, 'div2': graph})
