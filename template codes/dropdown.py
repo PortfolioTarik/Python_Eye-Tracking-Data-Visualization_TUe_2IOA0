@@ -91,12 +91,16 @@ columns = ['ID', 'Timestamp', 'StimuliName', 'FixationIndex', 'FixationDuration'
     for stimulidata in query_maps: 
         stimuli_list.append(stimulidata.StimuliName)
 
+
 for i in len(stimuli_list):
-    fig.add_trace(
-        go.Scatter( x = ''' SELECT  ''',
-               y=list(df.High),
-               name="High",
-               line=dict(color="#33CFA5")))
+    if i != "StimuliName:":
+        fig.add_trace(
+            go.Scatter( x = ''' SELECT MappedFixationPointX FROM Fixation_data WHERE 'StimuliName' = i ''',
+                y=''' SELECT MappedFixationPointY FROM Fixation_data WHERE 'StimuliName' = i ''',
+                name = stimuli_list[i],
+                if i>1: visible=False ))
+                
+    
 
 
 fig.update_layout(
@@ -104,38 +108,38 @@ fig.update_layout(
         dict(
             buttons=list([
                 dict(
-                    args=["type", "surface"],
+                    args={"visible": [True, False, False, False, False, False, False]},
                     label=stimuli_list[1],
                     method="update"
                 ),
                 dict(
-                    args=["type", "surface"],
+                    args={"visible": [False, True, False, False, False, False, False]},
                     label=stimuli_list[2],
                     method="update"
                 ),
                 dict(
-                    args=["type", "surface"],
+                    args={"visible": [False, False, True, False, False, False, False]},
                     label=stimuli_list[3],
                     method="update"
                 ),
                 dict(
-                    args=["type", "surface"],
+                    args={"visible": [False, False, False, True, False, False, False]},
                     label=stimuli_list[4],
                     method="update"
                 ),
                 dict(
                     args=["type", "surface"],
-                    label="05_Frankfurt_S1.jpg",
+                    label=stimuli_list[5],
                     method="update"
                 ),
                 dict(
                     args=["type", "surface"],
-                    label="06_Hamburg_S1.jpg",
+                    label=stimuli_list[6],
                     method="update"
                 ),
                 dict(
                     args=["type", "surface"],
-                    label="07_Moskau_S1.jpg",
+                    label=stimuli_list[7],
                     method="update"
                 ),
             ]),
