@@ -65,7 +65,7 @@ def home(request):
     # img = Image.open(workpath + '/06_Hamburg_S1.jpg')
 
     layout = go.Layout(
-        title='My title',
+        title='Contourplot area of interest',
         autosize=False,
         width=750,
         height=500,
@@ -96,37 +96,37 @@ def home(request):
                 buttons=list([
                     dict(
                         args=["type", "heatmap"],
-                        label="01_Antwerpen_S1.jpg",
+                        label="Antwerpen",
                         method="update"
                     ),
                     dict(
                         args=["type", "heatmap"],
-                        label="02_Berlin_S1.jpg",
+                        label="Berlin",
                         method="update"
                     ),
                     dict(
                         args=["type", "heatmap"],
-                        label="03_Bordeaux_S1.jpg",
+                        label="Bordeaux",
                         method="update"
                     ),
                     dict(
                         args=["type", "heatmap"],
-                        label="04_Kln_S1.jpg",
+                        label="Köln",
                         method="update"
                     ),
                     dict(
                         args=["type", "heatmap"],
-                        label="05_Frankfurt_S1.jpg",
+                        label="Frankfurt",
                         method="update"
                     ),
                     dict(
                         args=["type", "heatmap"],
-                        label="06_Hamburg_S1.jpg",
+                        label="Hamburg",
                         method="update"
                     ),
                     dict(
                         args=["type", "heatmap"],
-                        label="07_Moskau_S1.jpg",
+                        label="Moskau",
                         method="update"
                     ),
                 ]),
@@ -138,7 +138,7 @@ def home(request):
                 y=1.14,
                 yanchor="top"
             ),
-
+            #Dropdown colorscale by Fanni Egresits
             dict(
                 buttons=list([
                     dict(

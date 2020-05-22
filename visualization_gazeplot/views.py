@@ -1,4 +1,6 @@
-# Coded by Tarik Hacialiogullari unless when stated
+# Idea & Implementation Tarik & Fanni
+# First template by Fanni Egresits
+# Updated plot and connected query data set by Tarik Hacialiogullari
 from django.shortcuts import render
 
 # Create your views here.
