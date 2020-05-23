@@ -1,14 +1,9 @@
 from django.shortcuts import render
 
-#import csv
-#import io
+# Coded by Laura except when noted.
 from django.contrib import messages
 from import_csv.models import FixationData
 import pandas as pd
-
-# full file written by Laura 1385739
-# Create your views here.
-
 
 def upload_csv(request):
     template = "website_import.html"
@@ -31,6 +26,7 @@ def upload_csv(request):
         messages.add_message(request, messages.INFO,
                              'csv file succesfully uploaded')
 
+    #---Start Coding by Tarik Hacialiogullari
     df_eye = pd.read_csv(csvfile, encoding='unicode_escape', sep="\t")
     print(df_eye.info())
 
@@ -69,6 +65,7 @@ def upload_csv(request):
     #         user = column[6],
     #         description = column[7]
     #     )
+    #---End Coding by Tarik Hacialiogullari
 
     context = {}
 
