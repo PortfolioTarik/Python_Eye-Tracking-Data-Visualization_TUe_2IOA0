@@ -25,8 +25,8 @@ def getGraph(df_user):
     layout = go.Layout(
         title='Contourplot area of interest',
         autosize=False,
-        width=750,
-        height=500,
+        width=700,
+        height=350,
         images=[dict(
             source='https://i.ibb.co/VQSkMnN/06-Hamburg-S1.jpg',
             xref="x",
