@@ -1,7 +1,5 @@
-# Generated and coded by Tarik Hacialiogullari except when noted.
+# THIS PAGE WILL BE DELETED SO NO COMMENTS.
 from django.shortcuts import render
-
-# Create your views here.
 from django.http import HttpResponse
 from bokeh.plotting import figure, output_file, show
 from bokeh.models import ColumnDataSource, Label, LabelSet, Range1d

@@ -1,5 +1,5 @@
 # Generated and coded by Tarik Hacialiogullari except when noted.
-# By Tarik Hacialiogullari & Fanni
+
 from django.shortcuts import render
 
 # Create your views here.
@@ -17,13 +17,10 @@ from import_csv.models import FixationData
 from homepage.models import getUserData
 
 
-# 
 
 def getGraph(df_user):
-    x = df_user[(df_user['StimuliName'] == '06_Hamburg_S1.jpg') &
-           (df_user['user'] == 'p1')]["MappedFixationPointX"]
-    y = df_user[(df_user['StimuliName'] == '06_Hamburg_S1.jpg') &
-           (df_user['user'] == 'p1')]["MappedFixationPointY"]
+    x = df_user["MappedFixationPointX"]
+    y = df_user["MappedFixationPointY"]
 
     layout = go.Layout(
         title='Contourplot area of interest',
@@ -50,7 +47,7 @@ def getGraph(df_user):
 
  ), layout)
 
-
+#---Start Coding by Andrada
     fig.update_layout(
         updatemenus=[
             dict(
@@ -99,7 +96,8 @@ def getGraph(df_user):
                 y=1.14,
                 yanchor="top"
             ),
-            #Dropdown colorscale by Fanni Egresits
+            #---End Coding by Andrada
+            #---Start Coding by Fanni Egresits
             dict(
                 buttons=list([
                     dict(
@@ -140,6 +138,7 @@ def getGraph(df_user):
         ])
 
     fig.update_layout(template="plotly_white")
+    #---End Coding by Fanni Egresits
     graph = fig.to_html(
         full_html=False, default_height=500, default_width=1000)
 

@@ -48,7 +48,7 @@ def getGraph(toolbar, end):
 
     #---Start Coding by Youssef Selim
     p = figure(
-        plot_height=300, plot_width=800, title="Bar chart of hamburg for user 1(color)", x_axis_label='Number of the fixation', y_axis_label='Fixation Duration',
+        plot_height=300, plot_width=800, title="Bar chart of hamburg for user 1(color)", x_axis_label='Timestamp', y_axis_label='Fixation Duration',
         toolbar_location="right", tools=toolbar,  x_range=text_x_axis)
     p.xgrid.grid_line_color = None
     p.y_range.start = 0
@@ -56,15 +56,14 @@ def getGraph(toolbar, end):
 
     return p
 
-
-#this will be removed
 def home(request):
+    toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
     df_userOne = getUserData('p1', '06_Hamburg_S1.jpg')
     df_userTwo = getUserData('p16', '06_Hamburg_S1.jpg')
     df_userThree = getUserData('p12', '06_Hamburg_S1.jpg')
 
     end = len(df_userOne.index) + 10 + len(df_userTwo.index) + 10 + 1000
-    p = getGraph(end)
+    p = getGraph(toolbar, end)
     addUserToGraph(df_userOne, p, 'red', 0)
     addUserToGraph(df_userTwo, p, 'yellow', len(df_userOne.index) + 10)
     addUserToGraph(df_userThree, p, 'blue', len(df_userOne.index) + 10 + len(df_userTwo.index) + 10)
