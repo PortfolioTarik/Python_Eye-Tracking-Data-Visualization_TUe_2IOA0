@@ -1,8 +1,23 @@
-# Generated en coded by Tarik Hacialiogullari
+# Generated en coded by Tarik Hacialiogullari except when noted.
 from django.shortcuts import render
 
-# Create your views here.
 from django.http import HttpResponse
+
+from bokeh.embed import components
+from bokeh.layouts import row, gridplot
+
+from homepage.models import getUserData
+
+from visualization_heatmap.views import getGraph as getGraphContour
+
+from visualization_gazeplot.views import getGraph as getGraphGaze
+from visualization_gazeplot.views import addUserToGraph as addUserToGraphGaze
+
+from visualization_barchart.views import getGraph as getGraphBar
+from visualization_barchart.views import addUserToGraph as addUserToGraphBar
+
+from visualization_linechart.views import getGraph as getGraphLine
+from visualization_linechart.views import addUserToGraph as addUserToGraphLine
 
 
 webpages = [
@@ -10,34 +25,66 @@ webpages = [
         'title': 'Import_csv',
         'url': '/import'
     },
-    {
-        'title': 'Visualization Heatmap (contour map)',
-        'url': '/boxplot'
-    },
-    {
-        'title': 'Visualization Linechart',
-        'url': '/linechart'
-    },
-    {
-        'title': 'Visualization Barchart',
-        'url': '/scatterplot'
-    },
-    {
-        'title': 'Visualization Gazeplot',
-        'url': '/starplot'
-    },
-    {
-        'title': 'Visualization Synchronized',
-        'url': '/synchronized'
-    }
+    # {
+    #     'title': 'Visualization Heatmap (contour map)',
+    #     'url': '/boxplot'
+    # },
+    # {
+    #     'title': 'Visualization Linechart',
+    #     'url': '/linechart'
+    # },
+    # {
+    #     'title': 'Visualization Barchart',
+    #     'url': '/scatterplot'
+    # },
+    # {
+    #     'title': 'Visualization Gazeplot',
+    #     'url': '/starplot'
+    # },
+    # {
+    #     'title': 'Visualization Synchronized',
+    #     'url': '/synchronized'
+    # }
 ]
 
 
 def home(request):
+    toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
+
+    #getData
+    df_userOne = getUserData('p1', '06_Hamburg_S1.jpg')
+    df_userTwo = getUserData('p16', '06_Hamburg_S1.jpg')
+    df_userThree = getUserData('p12', '06_Hamburg_S1.jpg')
+
+    #BOKEH
+        #Get Gaze graph
+    graph_gaze = getGraphGaze(toolbar)
+    addUserToGraphGaze(df_userOne, graph_gaze, 'red')
+    addUserToGraphGaze(df_userTwo, graph_gaze, 'yellow')
+    addUserToGraphGaze(df_userThree, graph_gaze, 'blue')
+
+        #Get Bar graph
+    end = len(df_userOne.index) + 10 + len(df_userTwo.index) + 10 + 1000
+    graph_bar = getGraphBar(toolbar, end)
+    addUserToGraphBar(df_userOne, graph_bar, 'red', 0)
+    addUserToGraphBar(df_userTwo, graph_bar, 'yellow', len(df_userOne.index) + 10)
+    addUserToGraphBar(df_userThree, graph_bar, 'blue', len(df_userOne.index) + 10 + len(df_userTwo.index) + 10)
+        #Get Line graph
+    graph_line = getGraphLine(toolbar)
+    addUserToGraphLine(df_userOne, graph_line, 'red')
+    addUserToGraphLine(df_userTwo, graph_line, 'yellow')
+    addUserToGraphLine(df_userThree, graph_line, 'blue')
+    
+        #Convert to HTML
+    script_bokeh, graphs_bokeh = components(gridplot([graph_line, graph_bar, graph_gaze], ncols=2, plot_width=700, plot_height=350))
+    
+    #PLOTLY
+    graphs_plotly = getGraphContour(df_userOne)
+
     context = {
-        'webpages': webpages
+        'webpages': webpages,
+        'graphs_plotly': graphs_plotly,
+        'graphs_bokeh': graphs_bokeh,
+        'script_bokeh' : script_bokeh
     }
     return render(request, 'home.html', context)
-
-# def home(request):
-#     return HttpResponse('<h1>[2IOA0 Group 23A] <br> Welcome to our eye-tracking-software :)! </h1> <h3>Navigation <br> (yeah it is ugly but better than nothing, atleast it works :D)</h3> <br> <a href="/import">import_csv</a> <br> <a href="/boxplot">vizualization_boxplot</a> <br> <a href="/linechart">vizualization_linechart</a> <br> <a href="/scatterplot">vizualization_scatterplot</a> <br> <a href="/starplot">vizualization_starplot</a>')
