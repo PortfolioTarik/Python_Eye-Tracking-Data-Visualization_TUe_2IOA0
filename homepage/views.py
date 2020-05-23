@@ -19,34 +19,12 @@ from visualization_barchart.views import addUserToGraph as addUserToGraphBar
 from visualization_linechart.views import getGraph as getGraphLine
 from visualization_linechart.views import addUserToGraph as addUserToGraphLine
 
-
 webpages = [
     {
         'title': 'Import_csv',
         'url': '/import'
     },
-    # {
-    #     'title': 'Visualization Heatmap (contour map)',
-    #     'url': '/boxplot'
-    # },
-    # {
-    #     'title': 'Visualization Linechart',
-    #     'url': '/linechart'
-    # },
-    # {
-    #     'title': 'Visualization Barchart',
-    #     'url': '/scatterplot'
-    # },
-    # {
-    #     'title': 'Visualization Gazeplot',
-    #     'url': '/starplot'
-    # },
-    # {
-    #     'title': 'Visualization Synchronized',
-    #     'url': '/synchronized'
-    # }
 ]
-
 
 def home(request):
     toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
@@ -70,14 +48,14 @@ def home(request):
     addUserToGraphLine(df_userTwo, graph_line, 'yellow')
     addUserToGraphLine(df_userThree, graph_line, 'blue')
     
-    #Get Gaze graph
+        #Get Gaze graph
     graph_gaze = getGraphGaze(toolbar)
     addUserToGraphGaze(df_userOne, graph_gaze, 'red')
     addUserToGraphGaze(df_userTwo, graph_gaze, 'yellow')
     addUserToGraphGaze(df_userThree, graph_gaze, 'blue')
 
-     #Convert to HTML
-    script_bokeh, graphs_bokeh = components(gridplot([graph_line, graph_bar, graph_gaze], ncols=1, plot_width=1100, plot_height=500))
+        #Convert to HTML
+    script_bokeh, graphs_bokeh = components(gridplot([graph_line, graph_bar, graph_gaze], ncols=1))
 
     #PLOTLY
     graphs_plotly = getGraphContour(df_userOne)
