@@ -28,7 +28,7 @@ def addUserToGraph(userDataOriginal, p, color, start_index):
 
     #---Start Coding by Youssef Selim
     p.vbar(x=amount_of_fixations, top=y_coordinates,
-           width=0.05, color=color, legend_label=user)
+           width=0.25, color=color, legend_label=user)
     #---End Coding by Youssef Selim
 
     if(start_index == 0):
@@ -48,9 +48,10 @@ def getGraph(toolbar, end):
 
     #---Start Coding by Youssef Selim
     p = figure(
-        plot_height=300, plot_width=800, title="Bar chart of hamburg for user 1(color)", x_axis_label='Timestamp', y_axis_label='Fixation Duration',
+        plot_height=300, plot_width=1500, title="Bar chart of hamburg for user 1(color)", x_axis_label='Timestamp', y_axis_label='Fixation Duration',
         toolbar_location="right", tools=toolbar,  x_range=text_x_axis)
     p.xgrid.grid_line_color = None
+    p.xaxis.major_label_orientation = 1
     p.y_range.start = 0
     #---End Coding by Youssef Selim
 
