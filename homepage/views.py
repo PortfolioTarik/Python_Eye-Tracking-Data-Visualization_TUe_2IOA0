@@ -59,11 +59,11 @@ def home(request):
     #BOKEH
 
         #Get Bar graph
-    end = len(df_userOne.index) + 10 + len(df_userTwo.index) + 10 + 1000
+    end = len(df_userOne.index) + len(df_userTwo.index)+ 1000
     graph_bar = getGraphBar(toolbar, end)
     addUserToGraphBar(df_userOne, graph_bar, 'red', 0)
-    addUserToGraphBar(df_userTwo, graph_bar, 'yellow', len(df_userOne.index) + 10)
-    addUserToGraphBar(df_userThree, graph_bar, 'blue', len(df_userOne.index) + 10 + len(df_userTwo.index) + 10)
+    addUserToGraphBar(df_userTwo, graph_bar, 'yellow', len(df_userOne.index))
+    addUserToGraphBar(df_userThree, graph_bar, 'blue', len(df_userOne.index) + len(df_userTwo.index))
         #Get Line graph
     graph_line = getGraphLine(toolbar)
     addUserToGraphLine(df_userOne, graph_line, 'red')
@@ -77,7 +77,7 @@ def home(request):
     addUserToGraphGaze(df_userThree, graph_gaze, 'blue')
 
      #Convert to HTML
-    script_bokeh, graphs_bokeh = components(gridplot([graph_line, graph_bar, graph_gaze], ncols=2, plot_width=700, plot_height=350))
+    script_bokeh, graphs_bokeh = components(gridplot([graph_line, graph_bar, graph_gaze], ncols=1, plot_width=1100, plot_height=500))
 
     #PLOTLY
     graphs_plotly = getGraphContour(df_userOne)

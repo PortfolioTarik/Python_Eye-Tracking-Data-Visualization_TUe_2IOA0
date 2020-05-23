@@ -35,7 +35,6 @@ def addUserToGraph(userDataOriginal, p, color, start_index):
         p.x_range.factors = list(userData["Timestamp"].astype(str).to_numpy())
     else:
         p.x_range.factors = list(p.x_range.factors) + \
-            list(["gap" + str(start_index + x) for x in range(10)]) + \
             list(userData["Timestamp"].astype(str).to_numpy())
 
     return
@@ -52,6 +51,7 @@ def getGraph(toolbar, end):
         toolbar_location="right", tools=toolbar,  x_range=text_x_axis)
     p.xgrid.grid_line_color = None
     p.xaxis.major_label_orientation = 1
+    p.xaxis.major_label_text_font_size = "6pt"
     p.y_range.start = 0
     #---End Coding by Youssef Selim
 
@@ -63,11 +63,11 @@ def home(request):
     df_userTwo = getUserData('p16', '06_Hamburg_S1.jpg')
     df_userThree = getUserData('p12', '06_Hamburg_S1.jpg')
 
-    end = len(df_userOne.index) + 10 + len(df_userTwo.index) + 10 + 1000
+    end = len(df_userOne.index) + len(df_userTwo.index) + 1000
     p = getGraph(toolbar, end)
     addUserToGraph(df_userOne, p, 'red', 0)
-    addUserToGraph(df_userTwo, p, 'yellow', len(df_userOne.index) + 10)
-    addUserToGraph(df_userThree, p, 'blue', len(df_userOne.index) + 10 + len(df_userTwo.index) + 10)
+    addUserToGraph(df_userTwo, p, 'yellow', len(df_userOne.index))
+    addUserToGraph(df_userThree, p, 'blue', len(df_userOne.index) + len(df_userTwo.index))
 
     # show the results
     script, div = components(p)
