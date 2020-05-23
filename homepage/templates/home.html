@@ -15,6 +15,37 @@
             </button>
         </div>
     </body>
+    <head>
+        <title>Eye Tracking Visualisations (old homepage)</title>
+</head>
+<body>
+        <style>
+                body{
+                        background-image:url('https://assets.awwwards.com/awards/images/2015/04/pattern.jpg');
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                }
+        </style>
+        
+        <h1><center><font color="000000"><strong> Eye Tracking Visualisations Software</strong></font></center></h1>
+<!-- {% for webpage in webpages %}
+        <div>
+                 <h2> <a href="{{ webpage.url }}">{{ webpage.title }}</a></h2>
+        </div>
+{% endfor %} -->
+
+<br>
+<title>Eye Tracking Visualisations (new homepage)</title>
+<h1> BOKEH PLOTS</h1>
+{{ graphs_bokeh | safe }}
+<h1> PLOTLY PLOTS</h1>
+{{ graphs_plotly | safe }}
+</body>
+{{ script_bokeh | safe }}
+<script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script>
+
+
+
 <style>
 *{
 	margin:0;

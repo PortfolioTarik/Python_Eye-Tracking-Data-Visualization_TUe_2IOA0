@@ -21,9 +21,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('homepage.urls')),
     path('import/', include('import_csv.urls')),
-    path('boxplot/', include('visualization_heatmap.urls')),
+    path('heatmap/', include('visualization_heatmap.urls')),
     path('linechart/', include('visualization_linechart.urls')),
-    path('scatterplot/', include('visualization_barchart.urls')),
-    path('starplot/', include('visualization_gazeplot.urls')),
+    path('barchart/', include('visualization_barchart.urls')),
+    path('gazeplot/', include('visualization_gazeplot.urls')),
     path('synchronized/', include('visualization_synchronized.urls')),
 ]
