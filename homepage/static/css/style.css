@@ -1,21 +1,3 @@
-<!-- Coded by Omar-->
-<!DOCTYPE html>
-{% load static %} 
-<html>
-    <head>
-        <title>Eye tracking visualizations</title>
-<!--<link href="{% static 'style/css.css' %}" rel="stylesheet" type="text/css" > ---> 
-    </head>
-    <body>
-        <div class="heading">
-            <span class="Main_title">Visualizations made according to eye tracking terminology</span>
-            <span class="Sub_upload">To upload your own database click the button below</span>
-            <button class="Upload">
-                Upload
-            </button>
-        </div>
-    </body>
-<style>
 *{
 	margin:0;
 	padding:0;
@@ -25,7 +7,7 @@ html, body{
 }
 
 body{background-color:#0c0129;
-     background-image:url(blue.jpg);
+     background-image:url(blue1.jpg);
      background-position:center;
      background-size:cover;
      background-blend-mode:soft-light;
@@ -75,5 +57,5 @@ body{background-color:#0c0129;
 
 	transition: background-color 1000ms, color 1000ms;
 }
-</style>
-</html>
+
+
