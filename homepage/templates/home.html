@@ -26,9 +26,11 @@
 				</div>
 				<span class = "dropdowns">Stimuli User Color</span>
             <h1 style="color:yellowgreen;">Bokeh's Gaze plot, Line chart and Bar chart:</h1>
-{{ graphs_bokeh | safe }}
+{{ graph_bar | safe }}
+{{ graph_line | safe }}
+{{ graph_gaze | safe }}
 <h1 style="color:yellowgreen;">Plotly's Contour map:</h1>
-{{ graphs_plotly | safe }}
+{{ graph_contour | safe }}
             </h1>
         </div>
     </body>

@@ -42,27 +42,35 @@ def home(request):
     addUserToGraphBar(df_userOne, graph_bar, 'red', 0)
     addUserToGraphBar(df_userTwo, graph_bar, 'yellow', len(df_userOne.index))
     addUserToGraphBar(df_userThree, graph_bar, 'blue', len(df_userOne.index) + len(df_userTwo.index))
+    script_bar, graph_bar = components(graph_bar)
+
         #Get Line graph
     graph_line = getGraphLine(toolbar)
     addUserToGraphLine(df_userOne, graph_line, 'red')
     addUserToGraphLine(df_userTwo, graph_line, 'yellow')
     addUserToGraphLine(df_userThree, graph_line, 'blue')
+    script_line, graph_line = components(graph_line)
     
         #Get Gaze graph
     graph_gaze = getGraphGaze(toolbar)
     addUserToGraphGaze(df_userOne, graph_gaze, 'red')
     addUserToGraphGaze(df_userTwo, graph_gaze, 'yellow')
     addUserToGraphGaze(df_userThree, graph_gaze, 'blue')
+    script_gaze, graph_gaze = components(graph_gaze)
+
+    script_bokeh = script_bar + script_line + script_gaze
 
         #Convert to HTML
-    script_bokeh, graphs_bokeh = components(gridplot([graph_line,  graph_gaze, graph_bar],ncols=2, sizing_mode="scale_both"))
+    #script_bokeh, graphs_bokeh = components(gridplot([graph_line,  graph_gaze, graph_bar],ncols=2, sizing_mode="scale_both"))
     #PLOTLY
-    graphs_plotly = getGraphContour(df_userOne)
+    graph_contour = getGraphContour(df_userOne)
 
     context = {
         'webpages': webpages,
-        'graphs_plotly': graphs_plotly,
-        'graphs_bokeh': graphs_bokeh,
+        'graph_contour': graph_contour,
+        'graph_bar': graph_bar,
+        'graph_line': graph_line,
+        'graph_gaze': graph_gaze,
         'script_bokeh' : script_bokeh
     }
-    return render(request, 'color.html', context)
+    return render(request, 'home.html', context)
