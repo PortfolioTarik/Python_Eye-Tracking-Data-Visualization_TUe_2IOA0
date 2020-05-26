@@ -55,8 +55,7 @@ def home(request):
     addUserToGraphGaze(df_userThree, graph_gaze, 'blue')
 
         #Convert to HTML
-    script_bokeh, graphs_bokeh = components(gridplot([graph_line, graph_bar, graph_gaze], ncols=2, sizing_mode="scale_both"))
-
+    script_bokeh, graphs_bokeh = components(gridplot([graph_line,  graph_gaze, graph_bar],ncols=2, sizing_mode="scale_both"))
     #PLOTLY
     graphs_plotly = getGraphContour(df_userOne)
 
