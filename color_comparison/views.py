@@ -77,4 +77,4 @@ def home(request):
         'script_bokeh' : script_bokeh,
         'script_bar' : script_bar
     }
-    return render(request, 'home.html', context)
+    return render(request, 'color.html', context)
