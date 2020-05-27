@@ -27,7 +27,7 @@ def addUserToGraph(userData, p, color):
 
 def getGraph(toolbar):
     #---Start Coding by Omar Salim & Updated by Tarik Hacialiogullari
-    p = figure(plot_width=600, plot_height=450, x_range=(38000, 43000), y_range=(100, 700),
+    p = figure(plot_width=600, plot_height=400, x_range=(38000, 43000), y_range=(100, 700),
                 title="Fixation Duration per point for color", x_axis_label='Timestamp',
                 y_axis_label='FixationDuration', tools=toolbar)
     #---End Coding by Omar Salim & Updated by Tarik Hacialiogullari

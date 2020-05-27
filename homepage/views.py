@@ -69,25 +69,16 @@ def home(request):
     #addUserToGraphGaze(df_userTwo, graph_gaze, 'yellow')
     #addUserToGraphGaze(df_userThree, graph_gaze, 'blue')
 
-    
-
         #Convert to HTML
-    script_bokeh, graphs_bokeh = components(gridplot([graph_line,  graph_gaze],ncols=2, sizing_mode="scale_both"))
-    #script_bars = script_bar
-    script_bar, graph_bar = components(graph_bar)
-    #script_gaze, script_line, graph_gaze, graph_line = components(gridplot([graph_line, graph_gaze], ncols=2, sizing_mode="scale_both"))
-    
+    script_bokeh, graphs_bokeh = components(gridplot([graph_line, graph_bar, graph_gaze], ncols=2, sizing_mode="scale_both"))
+
     #PLOTLY
-    graph_contour = getGraphContour(df_userOne)
+    graphs_plotly = getGraphContour(df_userOne)
 
     context = {
         'webpages': webpages,
-        'graph_contour': graph_contour,
+        'graphs_plotly': graphs_plotly,
         'graphs_bokeh': graphs_bokeh,
-        'graph_bar': graph_bar,
-        'graph_line': graph_line,
-        'graph_gaze': graph_gaze,
-        'script_bokeh' : script_bokeh,
-        'script_bar' : script_bar
+        'script_bokeh' : script_bokeh
     }
     return render(request, 'home.html', context)

@@ -1,4 +1,4 @@
-# Coded by Laura updated by Tarik Hacialiogullari
+#---Coded by Laura updated by Tarik Hacialiogullari
 from django.db import models
 import os
 from django.conf import settings

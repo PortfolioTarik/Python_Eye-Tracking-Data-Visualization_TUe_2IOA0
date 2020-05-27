@@ -20,7 +20,6 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('homepage.urls')),
-    path('color/', include('color_comparison.urls')),
     path('import/', include('import_csv.urls')),
     path('heatmap/', include('visualization_heatmap.urls')),
     path('linechart/', include('visualization_linechart.urls')),
