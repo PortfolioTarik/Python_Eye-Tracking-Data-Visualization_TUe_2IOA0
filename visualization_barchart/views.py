@@ -47,7 +47,7 @@ def getGraph(toolbar, end):
 
     #---Start Coding by Youssef Selim
     p = figure(
-        plot_height=300, plot_width=1100, title="Bar chart of hamburg for users", x_axis_label='Timestamp', y_axis_label='Fixation Duration',
+        plot_height=300, plot_width=1500, title="Bar chart of hamburg for users", x_axis_label='Timestamp', y_axis_label='Fixation Duration',
         toolbar_location="right", tools=toolbar,  x_range=text_x_axis)
     p.xgrid.grid_line_color = None
     p.xaxis.major_label_orientation = 1
