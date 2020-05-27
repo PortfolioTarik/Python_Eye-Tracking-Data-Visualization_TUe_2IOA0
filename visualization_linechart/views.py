@@ -36,9 +36,9 @@ def getGraph(toolbar):
 def home(request):
     toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
     p = getGraph(toolbar)
-    addUserToGraph(getUserData('p1', '06_Hamburg_S1.jpg'), p, 'red')
-    addUserToGraph(getUserData('p16', '06_Hamburg_S1.jpg'), p, 'yellow')
-    addUserToGraph(getUserData('p12', '06_Hamburg_S1.jpg'), p, 'blue')
+    addUserToGraph(getUserData('p1', '06_Hamburg_S1.jpg', 'color'), p, 'red')
+    addUserToGraph(getUserData('p16', '06_Hamburg_S1.jpg', 'color'), p, 'yellow')
+    addUserToGraph(getUserData('p12', '06_Hamburg_S1.jpg', 'color'), p, 'blue')
 
     script, div = components(row(p))
     return render(request, 'website_starplot.html',

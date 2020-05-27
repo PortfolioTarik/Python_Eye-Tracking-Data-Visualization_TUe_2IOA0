@@ -34,10 +34,11 @@ def querySetToPandas(queryset_userData):
     return userData
 
 #Get all the data of the user for a particular map.
-def getUserData(user, mapName):
+def getUserData(user, mapName, color):
     columns = ['ID', 'Timestamp', 'StimuliName', 'FixationIndex', 'FixationDuration',
                'MappedFixationPointX', 'MappedFixationPointY', 'user', 'description']
     columns_sql = ', '.join(columns)
-    queryset_userData = FixationData.objects.raw(
-        "SELECT " + columns_sql + " FROM Fixation_data WHERE user = '" + user + "' AND StimuliName LIKE '%" + mapName + "' ")
+    query = "SELECT " + columns_sql + " FROM Fixation_data WHERE user = '" + user + "' AND StimuliName LIKE '%" + mapName.split('_')[1] + "%' AND description = '" + color + "'"
+    print('query sent:' + query)
+    queryset_userData = FixationData.objects.raw(query)
     return querySetToPandas(queryset_userData)

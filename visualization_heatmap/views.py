@@ -147,7 +147,7 @@ def getGraph(df_user):
 
 def home(request):
 
-    df_user = getUserData('p1', '06_Hamburg_S1.jpg')
+    df_user = getUserData('p1', '06_Hamburg_S1.jpg', 'color')
     graph = getGraph(df_user)
 
     script = ""

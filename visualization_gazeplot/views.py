@@ -66,9 +66,9 @@ def getGraph(toolbar):
 
 def home(request):
     toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
-    df_userOne = getUserData('p1', '06_Hamburg_S1.jpg')
-    df_userTwo = getUserData('p16', '06_Hamburg_S1.jpg')
-    df_userThree = getUserData('p12', '06_Hamburg_S1.jpg')
+    df_userOne = getUserData('p1', '06_Hamburg_S1.jpg', 'color')
+    df_userTwo = getUserData('p16', '06_Hamburg_S1.jpg', 'color')
+    df_userThree = getUserData('p12', '06_Hamburg_S1.jpg', 'color')
 
     p = getGraph(toolbar)
     addUserToGraph(df_userOne, p, 'red')

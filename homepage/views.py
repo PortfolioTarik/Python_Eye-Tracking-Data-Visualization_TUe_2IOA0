@@ -31,6 +31,7 @@ def home(request):
 
     stimuli = '06_Hamburg_S1.jpg'
     user = 'p1'
+    color = 'color'
 
     if request.GET.get('stimuli') is not None:
         stimuli = request.GET['stimuli']
@@ -40,9 +41,13 @@ def home(request):
         user = request.GET['user']
         print('USER IS RECEIVED:' + user)
 
+    if request.GET.get('color') is not None:
+        color = request.GET['color']
+        print('COLOR IS RECEIVED:' + color)
+
 
     #getData
-    df_userOne = getUserData(user, stimuli)
+    df_userOne = getUserData(user, stimuli, color)
     #df_userTwo = getUserData('p16', stimuliMap)
     #df_userThree = getUserData('p12', stimuliMap)
 

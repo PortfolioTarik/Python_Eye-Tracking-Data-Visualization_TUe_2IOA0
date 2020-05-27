@@ -25,7 +25,7 @@
 					</button></a>
 				</div>
 				<span class = "dropdowns">
-					Select a Stimuli:
+					Select a stimuli:
 					<select onchange="changeStimuli(this.value)">
 						<option value="Choose" selected="selected">Choose</option>
 						<option value="06_Hamburg_S1.jpg">06_Hamburg_S1.jpg</option>
@@ -39,7 +39,13 @@
 						<option value="p12">p12</option>
 						<option value="p16">p16</option>
 					</select>
-					 Color</span>
+					Select the color:
+					<select onchange="changeColor(this.value)">
+						<option value="Choose" selected="selected">Choose</option>
+						<option value="color">Color</option>
+						<option value="gray">Gray</option>
+					</select>
+				</span>
 				
 					<h1 style="color:yellowgreen;">Gaze plot and Line chart:</h1>
 					{{ graphs_bokeh | safe }}
@@ -66,6 +72,13 @@
 		{
 			var url = new window.URL(document.location);
 			url.searchParams.set("user", user);
+			window.location.href = url.toString();
+		}
+
+		function changeColor(color)
+		{
+			var url = new window.URL(document.location);
+			url.searchParams.set("color", color);
 			window.location.href = url.toString();
 		}
 		
