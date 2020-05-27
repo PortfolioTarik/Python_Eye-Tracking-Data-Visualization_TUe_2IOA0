@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Generated en coded by Tarik Hacialiogullari
 INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
+    'color_comparison.apps.ColorComparisonConfig',
     'import_csv.apps.ImportCsvConfig',
     'visualization_heatmap.apps.VisualizationBoxplotConfig',
     'visualization_linechart.apps.VisualizationLinechartConfig',
