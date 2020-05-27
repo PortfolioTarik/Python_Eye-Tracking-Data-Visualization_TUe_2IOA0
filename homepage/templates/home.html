@@ -1,4 +1,4 @@
-<!-- Coded by Omar and Youssef-->
+<!-- Coded by Omar-->
 <!DOCTYPE html>
 {% load static %} 
 <html>
@@ -8,39 +8,59 @@
     </head>
     <body>
         <div class="heading">
-			<span class="Main_title">Visualizations made according to eye tracking terminology</span>
-			<span class="Sub_introduction">Introduction:</span>
-				<div class = "Buttons">
-					<a href="/import"><button class="Upload">
-						Upload
-					</button></a>
-					<a href="/#"><button class="User_comparison">
-						User Comparison
-					</button></a>
-					<a href="/color"><button class="Color_comparison">
-						Color Comparison
-					</button></a>
-					<a href="/#"><button class="Manual_comparison">
-						Manual Comparison
-					</button></a>
-				</div>
-				<span class = "dropdowns">Stimuli User Color</span>
-				
-					<h1 style="color:yellowgreen;">Gaze plot and Line chart:</h1>
-					{{ graphs_bokeh | safe }}
-					<h1 style="color:yellowgreen;">Bar chart:</h1>
-					{{ graph_bar | safe }}
-				
-				
-
+            <span class="Main_title">Visualizations made according to eye tracking terminology</span>
+            <span class="Sub_upload">To upload your own database click the button below</span>
+            <a href="/import"><button class="Upload">
+                Upload
+            </button></a>
+            <h1 style="color:yellowgreen;">Bokeh's Gaze plot, Line chart and Bar chart:</h1>
+{{ graphs_bokeh | safe }}
 <h1 style="color:yellowgreen;">Plotly's Contour map:</h1>
-{{ graph_contour | safe }}
-
+{{ graphs_plotly | safe }}
+            </h1>
+        </div>
     </body>
-	{{ script_bokeh | safe }}
-	{{ script_bar | safe }}
-	
+    {{ script_bokeh | safe }}
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script>
+
+<!--    <head>
+        <title>Eye Tracking Visualisations (old homepage)</title>
+</head>
+<body>
+        <style>
+                body{
+                        background-image:url('https://assets.awwwards.com/awards/images/2015/04/pattern.jpg');
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                }
+        </style>
+        
+        <h1><center><font color="000000"><strong> Eye Tracking Visualisations Software</strong></font></center></h1> 
+ {% for webpage in webpages %}
+        <div>
+                 <h2> <a href="{{ webpage.url }}">{{ webpage.title }}</a></h2>
+        </div>
+{% endfor %} -->
+
+<!-- <body>
+<br>
+<title>Eye Tracking Visualisations (new homepage)</title>
+<h1> BOKEH PLOTS</h1>
+{{ graphs_bokeh | safe }}
+<h1> PLOTLY PLOTS</h1>
+{{ graphs_plotly | safe }}
+</body>
+{{ script_bokeh | safe }}
+<script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script> -->
+
+<!-- <div class="graphs_bokeh">
+    {{ graphs_bokeh | safe }}
+</div>
+<div class="graphs_plotly">
+    {{ graphs_plotly | safe }}
+</div>
+{{ script_bokeh | safe }}
+<script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script> -->
 
 <style>
 *{
@@ -72,7 +92,7 @@ body{background-color:#0c0129;
 	font-size:38pt;
 	font-family:big john;
 }
-.Sub_introduction{
+.Sub_upload{
 	display:block;
 	margin-top:15px;
 	text-align: center;
@@ -80,34 +100,10 @@ body{background-color:#0c0129;
 	font-size:14pt;
 	font-family:serif;
 }
-.Buttons{
-	text-align: center;
-}
+
 .Upload{
     text-align: center;
-	display: inline-block;
-	margin: 20px auto;
-	width:180px;
-	height:50px;
-	border:3px solid white;
-	background-color:rgba(255,255,255,0);
-	color: white;
-	font-family:sans-serif;
-	font-weight:bold;
-	border-radius: 5px;
-
-	transition: background-color 1000ms, color 1000ms;
-}
-.dropdowns{
 	display:block;
-	margin-top:15px;
-	text-align: center;
-	color:white;
-	font-size:14pt;
-	font-family:serif;
-}
-.User_comparison{
-	text-align: center;
 	margin: 20px auto;
 	width:180px;
 	height:50px;
@@ -117,42 +113,9 @@ body{background-color:#0c0129;
 	font-family:sans-serif;
 	font-weight:bold;
 	border-radius: 5px;
-    display: inline-block;
 
 	transition: background-color 1000ms, color 1000ms;
 }
-
-.Color_comparison{
-	text-align: center;
-	margin: 20px auto;
-	width:180px;
-	height:50px;
-	border:3px solid white;
-	background-color:rgba(255,255,255,0);
-	color: white;
-	font-family:sans-serif;
-	font-weight:bold;
-	border-radius: 5px;
-    display: inline-block;
-
-	transition: background-color 1000ms, color 1000ms;
-}
-.Manual_comparison{
-	text-align: center;
-	margin: 20px auto;
-	width:180px;
-	height:50px;
-	border:3px solid white;
-	background-color:rgba(255,255,255,0);
-	color: white;
-	font-family:sans-serif;
-	font-weight:bold;
-	border-radius: 5px;
-    display: inline-block;
-
-	transition: background-color 1000ms, color 1000ms;
-}
-
 .Upload:hover{
 	background-color:rgba(255,255,255,1);
 	color:#222;

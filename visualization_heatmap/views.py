@@ -1,4 +1,4 @@
-# Generated and coded by Tarik Hacialiogullari except where noted.
+# Generated and coded by Tarik Hacialiogullari except when noted.
 
 from django.shortcuts import render
 

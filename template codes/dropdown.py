@@ -82,26 +82,23 @@ fig.update_layout(
 columns = ['ID', 'Timestamp', 'StimuliName', 'FixationIndex', 'FixationDuration',
                'MappedFixationPointX', 'MappedFixationPointY', 'user', 'description']
 
-    columns_sql = ', '.join(columns)
-    query_maps = FixationData.objects.raw(
-        "SELECT DISTINCT StimuliName, 1 as id FROM Fixation_data ")
+columns_sql = ', '.join(columns)
+query_maps = FixationData.objects.raw(
+    "SELECT DISTINCT StimuliName, 1 as id FROM Fixation_data ")
 
-    stimuli_list = ["StimuliName:"]
+stimuli_list = ["StimuliName:"]
 
-    for stimulidata in query_maps: 
-        stimuli_list.append(stimulidata.StimuliName)
+for stimulidata in query_maps: 
+    stimuli_list.append(stimulidata.StimuliName)
 
 
 for i in len(stimuli_list):
     if i != "StimuliName:":
         fig.add_trace(
-            go.Scatter( x = ''' SELECT MappedFixationPointX FROM Fixation_data WHERE 'StimuliName' = i ''',
+            go.Histogram2dContour( x = ''' SELECT MappedFixationPointX FROM Fixation_data WHERE 'StimuliName' = i ''',
                 y=''' SELECT MappedFixationPointY FROM Fixation_data WHERE 'StimuliName' = i ''',
-                name = stimuli_list[i],
-                if i>1: visible=False ))
-                
-    
-
+                name = i,
+                if i!= stimuli_list[1] : visible=False ))
 
 fig.update_layout(
     updatemenus=[
@@ -128,17 +125,17 @@ fig.update_layout(
                     method="update"
                 ),
                 dict(
-                    args=["type", "surface"],
+                    args={"visible": [False, False, False, False, True, False, False]},
                     label=stimuli_list[5],
                     method="update"
                 ),
                 dict(
-                    args=["type", "surface"],
+                    args={"visible": [False, False, False, False, False, True, False]},
                     label=stimuli_list[6],
                     method="update"
                 ),
                 dict(
-                    args=["type", "surface"],
+                    args={"visible": [False, False, False, False, False, False, True]},
                     label=stimuli_list[7],
                     method="update"
                 ),
@@ -146,9 +143,9 @@ fig.update_layout(
             direction="down",
             pad={"r": 10, "t": 10},
             showactive=True,
-            x=0.1,
+            x=0.5,
             xanchor="left",
-            y=1.1,
+            y=1.14,
             yanchor="top"
         ),
     ]
