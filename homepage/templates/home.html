@@ -25,12 +25,18 @@
 					</button></a>
 				</div>
 				<span class = "dropdowns">Stimuli User Color</span>
-            <h1 style="color:yellowgreen;">Bokeh's Gaze plot, Line chart and Bar chart:</h1>
-{{ graph_bar | safe }}
-{{ graph_line | safe }}
-{{ graph_gaze | safe }}
+				
+					<h1 style="color:yellowgreen;">Gaze plot and Line chart:</h1>
+					{{ graphs_bokeh | safe }}
+					<h1 style="color:yellowgreen;">Bar:</h1>
+				
+				
+				
+
 <h1 style="color:yellowgreen;">Plotly's Contour map:</h1>
+{{ graph_bar | safe }}
 {{ graph_contour | safe }}
+
             </h1>
         </div>
     </body>
@@ -147,6 +153,7 @@ body{background-color:#0c0129;
 
 	transition: background-color 1000ms, color 1000ms;
 }
+
 .Upload:hover{
 	background-color:rgba(255,255,255,1);
 	color:#222;
