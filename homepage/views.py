@@ -74,6 +74,7 @@ def home(request):
         'graph_bar': graph_bar,
         'graph_line': graph_line,
         'graph_gaze': graph_gaze,
-        'script_bokeh' : script_bokeh
+        'script_bokeh' : script_bokeh,
+        'script_bar' : script_bar
     }
     return render(request, 'home.html', context)
