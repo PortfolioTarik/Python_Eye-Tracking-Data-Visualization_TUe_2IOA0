@@ -18,7 +18,8 @@ from homepage.models import getUserData
 
 
 
-def getGraph(df_user):
+def getGraph(cnt):
+    cnt = 1
     #x = df_user["MappedFixationPointX"]
     #y = df_user["MappedFixationPointY"]
 
@@ -31,90 +32,96 @@ def getGraph(df_user):
             source='https://i.ibb.co/VQSkMnN/06-Hamburg-S1.jpg',
             xref="x",
             yref="y",
-            x=0,
-            y=1200,
-            sizex=1651,
-            sizey=1200,
-            sizing="stretch",
-            opacity=0.7,
+            x=-210,
+            y=1250,
+            sizex=1950,
+            sizey=1500,
+            sizing="fill",
+            opacity=0.6,
             layer="above")])
 
-    fig = go.Figure()
+    fig = go.Figure( layout = layout )
 
     #---Start Coding by Andrada
     query_maps = FixationData.objects.raw(
         "SELECT DISTINCT StimuliName, 1 as id FROM Fixation_data ")
 
+    query_users = FixationData.objects.raw(
+        "SELECT DISTINCT user, 1 as id FROM Fixation_data ")
+
     stimuli_list = ["StimuliName:"]
+    user_list = ['User:']
 
     for stimulidata in query_maps: 
         stimuli_list.append(stimulidata.StimuliName)
+    
+    for userdata in query_users: 
+        user_list.append(userdata.user)
 
-    for i in range(len(stimuli_list)):
-        if stimuli_list[i] != "StimuliName:":
-            bool_visibile = True
-            if i != 1:
-                bool_visibile = False
-            fig.add_trace(
-                go.Histogram2dContour( x = ''' SELECT MappedFixationPointX FROM Fixation_data WHERE 'StimuliName' = i ''',
-                    y=''' SELECT MappedFixationPointY FROM Fixation_data WHERE 'StimuliName' = i ''',
-                    name = stimuli_list[i], visible=bool_visibile ))
+    for i in range(1,len(user_list)):
+        #if stimuli_list[i] != "StimuliName:":
+        bool_visible = False
+        if i == 1:
+            bool_visible = True
+        fig.add_trace(
+            go.Histogram2dContour( x = getUserData(user_list[i], stimuli_list[i])["MappedFixationPointX"] ,
+                y = getUserData(user_list[i], stimuli_list[i])["MappedFixationPointY"],
+                name = stimuli_list[i], visible = bool_visible ))
 
-
-        fig.update_layout(
-            updatemenus=[
-                dict(
-                    buttons=list([
-                        dict(
-                            args=[{"visible": [True, False, False, False, False, False, False]},
-                            {"title": stimuli_list[1],
-                            "annotations": []}],
-                            label=stimuli_list[1],
-                            method="update"
-                        ),
-                        dict(
+    fig.update_layout(
+        updatemenus=[
+            dict(
+                buttons=list([
+                    dict(
+                        args=[{"visible": [True, False, False, False, False, False, False]},
+                        {"title": stimuli_list[1],
+                        "annotations": []}],
+                        label=stimuli_list[1],
+                        method="update"
+                    ),
+                    dict(
                             args=[{"visible": [False, True, False, False, False, False, False]},
                             {"title": stimuli_list[2],
                             "annotations": []}],
                             label=stimuli_list[2],
                             method="update"
-                        ),
-                        dict(
+                    ),
+                    dict(
                             args=[{"visible": [False, False, True, False, False, False, False]},
                             {"title": stimuli_list[3],
                             "annotations": []}],
                             label=stimuli_list[3],
                             method="update"
-                        ),
-                        dict(
+                    ),
+                    dict(
                             args=[{"visible": [False, False, False, True, False, False, False]},
                             {"title": stimuli_list[4],
                             "annotations": []}],
                             label=stimuli_list[4],
                             method="update"
-                        ),
-                        dict(
+                    ),
+                    dict(
                             args=[{"visible": [False, False, False, False, True, False, False]},
                             {"title": stimuli_list[5],
                             "annotations": []}],
                             label=stimuli_list[5],
                             method="update"
-                        ),
-                        dict(
+                    ),
+                    dict(
                             args=[{"visible": [False, False, False, False, False, True, False]},
                             {"title": stimuli_list[6],
                             "annotations": []}],
                             label=stimuli_list[6],
                             method="update"
-                        ),
-                        dict(
+                    ),
+                    dict(
                             args=[{"visible": [False, False, False, False, False, False, True]},
                             {"title": stimuli_list[7],
                             "annotations": []}],
                             label=stimuli_list[7],
                             method="update"
                         ),
-                    ]),
+                ]),
                     direction="down",
                     pad={"r": 10, "t": 10},
                     showactive=True,
@@ -122,7 +129,7 @@ def getGraph(df_user):
                     xanchor="left",
                     y=1.14,
                     yanchor="top"
-                ),
+            ),
                 #---End Coding by Andrada
                 #---Start Coding by Fanni Egresits
                 dict(
@@ -154,28 +161,28 @@ def getGraph(df_user):
                     yanchor="top"
                 ),
             ]
-        )
+        )#---End Coding by Andrada Pancu
 
-        fig.update_layout(
-            annotations=[
-                dict(text="Colorscale", x=0, xref="paper", y=1.06,
-                    yref="paper", showarrow=False),
-                dict(text="Stimuli", x=0.4, xref="paper", y=1.06, yref="paper",
-                    showarrow=False)
+    fig.update_layout(
+        annotations=[
+            dict(text="Colorscale", x=0, xref="paper", y=1.06,
+                yref="paper", showarrow=False),
+            dict(text="Stimuli", x=0.4, xref="paper", y=1.06, yref="paper",
+                showarrow=False)
             ])
 
-        fig.update_layout(template="plotly_white")
-        #---End Coding by Fanni Egresits
-        graph = fig.to_html(
-            full_html=False, default_height=500, default_width=1000)
+    fig.update_layout(template="plotly_white")
+    #---End Coding by Fanni Egresits
+    graph = fig.to_html(
+        full_html=False, default_height=500, default_width=1000)
 
-        return graph
+    return graph
 
 
 def home(request):
 
-    df_user = getUserData('p1', '06_Hamburg_S1.jpg')
-    graph = getGraph(df_user)
+    #df_user = getUserData('p1', '06_Hamburg_S1.jpg')
+    graph = getGraph(cnt)
 
     script = ""
 
