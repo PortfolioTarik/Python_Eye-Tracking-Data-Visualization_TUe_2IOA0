@@ -3,15 +3,17 @@
 {% load static %} 
 <html>
     <head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
+		<link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
         <title>Eye tracking visualizations</title>
 <!--<link href="{% static 'style/css.css' %}" rel="stylesheet" type="text/css" > ---> 
-    
-    
+    </head>
+    <body>
         <div class="heading">
+			<span class="Main_title">Visualizations made according to eye tracking terminology</span>
+			<span class="Sub_introduction">Introduction:</span>
 				<div class = "Buttons">
-					<a href="/"><button class="Home">
-						Home
-					</button></a>
 					<a href="/import"><button class="Upload">
 						Upload
 					</button></a>
@@ -25,11 +27,7 @@
 						Manual Comparison
 					</button></a>
 				</div>
-				</head>
-				<body>
-				<span class="Main_title">Color Comparison</span>
 				<span class = "dropdowns">
-					<!-- Start Coding Tarik Hacialiogullari -->
 					Select a stimuli:
 					<select onchange="changeStimuli(this.value)">
 						<option value="Choose" selected="selected">Choose</option>
@@ -38,18 +36,24 @@
 						<option value="02_Berlin_S1.jpg">02_Berlin_S1.jpg</option>
 					</select>
 					Select an user:
-					<select onchange="changeUser(this.value)">
-						<option value="Choose" selected="selected">Choose</option>
+					<select id="users" style="width:150px;" data-placeholder="Begin typing a name to filter..." multiple class="chosen-select" name="test">
+						<option value=""></option>
 						<option value="p1">p1</option>
 						<option value="p12">p12</option>
 						<option value="p16">p16</option>
+					  </select>
+					  <button onclick="changeUsers()">Apply Users</button>
+					Select the color:
+					<select onchange="changeColor(this.value)">
+						<option value="Choose" selected="selected">Choose</option>
+						<option value="color">Color</option>
+						<option value="gray">Gray</option>
 					</select>
-					<!-- End Coding Tarik Hacialiogullari -->
 				</span>
 				
 					<h1 style="color:yellowgreen;">Gaze plot and Line chart:</h1>
 					{{ graphs_bokeh | safe }}
-					<h1 style="color:yellowgreen;">Bar:</h1>
+					<h1 style="color:yellowgreen;">Bar chart:</h1>
 					{{ graph_bar | safe }}
 				
 				
@@ -57,30 +61,52 @@
 <h1 style="color:yellowgreen;">Plotly's Contour map:</h1>
 {{ graph_contour | safe }}
 
-            </h1>
-        </div>
     </body>
 	{{ script_bokeh | safe }}
 	{{ script_bar | safe }}
-	<!-- Start Coding Tarik Hacialiogullari -->
+
 	<script>
 		function changeStimuli(stimuli) 
 		{
 			var url = new window.URL(document.location);
 			url.searchParams.set("stimuli", stimuli);
 			window.location.href = url.toString();
+			// + '&user=' + 'p1';
 		}
 
-		function changeUser(user)
+		function changeUsers()
 		{
 			var url = new window.URL(document.location);
-			url.searchParams.set("user", user);
+			//var selected = [];
+			for (var option of document.getElementById('users').options) {
+    			if (option.selected) {
+					//selected.push(option.value);
+					url.searchParams.append("user", option.value);
+				}
+			}
+  			//alert(selected);
+			// var url = new window.URL(document.location);
+			// url.searchParams.set("user", params);
 			window.location.href = url.toString();
 		}
-	</script>
-	<!-- End Coding Tarik Hacialiogullari -->
 
-    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script>
+		function changeColor(color)
+		{
+			var url = new window.URL(document.location);
+			url.searchParams.set("color", color);
+			window.location.href = url.toString();
+		}
+
+		$( document ).ready(function() {
+			$(".chosen-select").chosen({
+  				no_results_text: "Oops, nothing found!"
+			})
+		});
+		
+	</script>
+	
+	<script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script>
+
 
 <style>
 *{
@@ -122,21 +148,6 @@ body{background-color:#0c0129;
 }
 .Buttons{
 	text-align: center;
-}
-.Home{
-	text-align: center;
-	display: inline-block;
-	margin: 20px auto;
-	width:180px;
-	height:50px;
-	border:3px solid white;
-	background-color:rgba(255,255,255,0);
-	color: white;
-	font-family:sans-serif;
-	font-weight:bold;
-	border-radius: 5px;
-
-	transition: background-color 1000ms, color 1000ms;
 }
 .Upload{
     text-align: center;

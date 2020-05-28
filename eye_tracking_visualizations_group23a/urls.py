@@ -21,6 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('homepage.urls')),
     path('color/', include('color_comparison.urls')),
+    path('user/', include('user_comparison.urls')),
+    path('manual/', include('manual_comparison.urls')),
     path('import/', include('import_csv.urls')),
     path('heatmap/', include('visualization_heatmap.urls')),
     path('linechart/', include('visualization_linechart.urls')),

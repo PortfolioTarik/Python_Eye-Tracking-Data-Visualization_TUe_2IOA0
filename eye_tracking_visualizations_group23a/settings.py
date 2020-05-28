@@ -34,6 +34,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
     'color_comparison.apps.ColorComparisonConfig',
+    'user_comparison.apps.UserComparisonConfig',
+    'manual_comparison.apps.ManualComparisonConfig',
     'import_csv.apps.ImportCsvConfig',
     'visualization_heatmap.apps.VisualizationBoxplotConfig',
     'visualization_linechart.apps.VisualizationLinechartConfig',

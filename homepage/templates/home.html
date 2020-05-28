@@ -14,17 +14,18 @@
 					<a href="/import"><button class="Upload">
 						Upload
 					</button></a>
-					<a href="/#"><button class="User_comparison">
+					<a href="/user"><button class="User_comparison">
 						User Comparison
 					</button></a>
 					<a href="/color"><button class="Color_comparison">
 						Color Comparison
 					</button></a>
-					<a href="/#"><button class="Manual_comparison">
+					<a href="/manual"><button class="Manual_comparison">
 						Manual Comparison
 					</button></a>
 				</div>
 				<span class = "dropdowns">
+					<!-- Start Coding Tarik Hacialiogullari -->
 					Select a stimuli:
 					<select onchange="changeStimuli(this.value)">
 						<option value="Choose" selected="selected">Choose</option>
@@ -45,6 +46,7 @@
 						<option value="color">Color</option>
 						<option value="gray">Gray</option>
 					</select>
+					<!-- End Coding Tarik Hacialiogullari -->
 				</span>
 				
 					<h1 style="color:yellowgreen;">Gaze plot and Line chart:</h1>
@@ -61,13 +63,13 @@
 	{{ script_bokeh | safe }}
 	{{ script_bar | safe }}
 
+	<!-- Start Coding Tarik Hacialiogullari -->
 	<script>
 		function changeStimuli(stimuli) 
 		{
 			var url = new window.URL(document.location);
 			url.searchParams.set("stimuli", stimuli);
 			window.location.href = url.toString();
-			// + '&user=' + 'p1';
 		}
 
 		function changeUser(user)
@@ -85,6 +87,7 @@
 		}
 		
 	</script>
+	<!-- End Coding Tarik Hacialiogullari -->
 	
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script>
 
