@@ -9,7 +9,7 @@
     
         <div class="heading">
 				<div class = "Buttons">
-					<a href="/import_csv_home"><button class="Home">
+					<a href="/"><button class="Home">
 						Home
 					</button></a>
 					<a href="/import"><button class="Upload">
@@ -28,7 +28,22 @@
 				</head>
 				<body>
 				<span class="Main_title">Color Comparison</span>
-				<span class = "dropdowns">Stimuli User Color</span>
+				<span class = "dropdowns">
+					Select a stimuli:
+					<select onchange="changeStimuli(this.value)">
+						<option value="Choose" selected="selected">Choose</option>
+						<option value="06_Hamburg_S1.jpg">06_Hamburg_S1.jpg</option>
+						<option value="01_Antwerpen_S1.jpg">01_Antwerpen_S1.jpg</option>
+						<option value="02_Berlin_S1.jpg">02_Berlin_S1.jpg</option>
+					</select>
+					Select an user:
+					<select onchange="changeUser(this.value)">
+						<option value="Choose" selected="selected">Choose</option>
+						<option value="p1">p1</option>
+						<option value="p12">p12</option>
+						<option value="p16">p16</option>
+					</select>
+				</span>
 				
 					<h1 style="color:yellowgreen;">Gaze plot and Line chart:</h1>
 					{{ graphs_bokeh | safe }}
@@ -45,6 +60,23 @@
     </body>
 	{{ script_bokeh | safe }}
 	{{ script_bar | safe }}
+	<script>
+		function changeStimuli(stimuli) 
+		{
+			var url = new window.URL(document.location);
+			url.searchParams.set("stimuli", stimuli);
+			window.location.href = url.toString();
+			// + '&user=' + 'p1';
+		}
+
+		function changeUser(user)
+		{
+			var url = new window.URL(document.location);
+			url.searchParams.set("user", user);
+			window.location.href = url.toString();
+		}
+	</script>
+
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script>
 
 <style>

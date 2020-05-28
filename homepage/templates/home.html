@@ -64,7 +64,9 @@
 	<script>
 		function changeStimuli(stimuli) 
 		{
-			window.location.href = "http://127.0.0.1:8000?stimuli=" + stimuli;
+			var url = new window.URL(document.location);
+			url.searchParams.set("stimuli", stimuli);
+			window.location.href = url.toString();
 			// + '&user=' + 'p1';
 		}
 
