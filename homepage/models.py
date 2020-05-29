@@ -42,3 +42,11 @@ def getUserData(user, mapName, color):
     print('query sent:' + query)
     queryset_userData = FixationData.objects.raw(query)
     return querySetToPandas(queryset_userData)
+
+def getAllStimulisDataQuery():
+    query_maps = FixationData.objects.raw("SELECT DISTINCT StimuliName, 1 as id FROM Fixation_data ")
+    return query_maps
+
+def getAllUsersByStimuliDataQuery(stimuli):
+    query_maps = FixationData.objects.raw("SELECT DISTINCT user, 1 as id FROM Fixation_data WHERE StimuliName LIKE '%" + stimuli.split('_')[1] + "%'")
+    return query_maps

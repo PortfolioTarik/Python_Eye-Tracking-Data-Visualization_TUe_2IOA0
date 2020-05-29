@@ -1,4 +1,4 @@
-# Generated en coded by Tarik Hacialiogullari except when noted.
+# Generated en coded by Tarik Hacialiogullari except where noted.
 from django.shortcuts import render
 
 from django.http import HttpResponse
@@ -68,7 +68,6 @@ def home(request):
     #BOKEH
 
         #Get Bar graph
-    
     end = len(df_userOne.index) + 1000
     if boolUserThree:
         end = len(df_userOne.index) + len(df_userTwo.index)+ 1000

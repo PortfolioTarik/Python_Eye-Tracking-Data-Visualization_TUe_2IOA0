@@ -1,4 +1,4 @@
-# Generated en coded by Tarik Hacialiogullari except when noted.
+# Generated en coded by Tarik Hacialiogullari except where noted.
 from django.shortcuts import render
 
 from django.http import HttpResponse
@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from bokeh.embed import components
 from bokeh.layouts import row, gridplot
 
-from homepage.models import getUserData
+from homepage.models import getUserData, getAllStimulisDataQuery, getAllUsersByStimuliDataQuery
 
 from visualization_heatmap.views import getGraph as getGraphContour
 
@@ -19,12 +19,6 @@ from visualization_barchart.views import addUserToGraph as addUserToGraphBar
 from visualization_linechart.views import getGraph as getGraphLine
 from visualization_linechart.views import addUserToGraph as addUserToGraphLine
 
-webpages = [
-    {
-        'title': 'Import_csv',
-        'url': '/import'
-    },
-]
 
 def home(request):
     toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
@@ -85,8 +79,30 @@ def home(request):
     #PLOTLY
     graph_contour = getGraphContour(df_userOne)
 
+    #Stimuli dropdown
+    
+
+    query_maps = getAllStimulisDataQuery()
+    stimuli_list = []
+    for stimulidata in query_maps: 
+        stimuli_list.append(stimulidata.StimuliName)
+
+    query_users = getAllUsersByStimuliDataQuery(stimuli)
+    user_list = []
+    for userEach in query_users: 
+        user_list.append(userEach.user)
+
+    # for i in len(stimuli_list):
+    #     i + ''
+
+
+
     context = {
-        'webpages': webpages,
+        'selected_stimuli': stimuli,
+        'selected_user': user,
+        'selected_color': color,
+        'stimuli_list': stimuli_list,
+        'user_list': user_list,
         'graph_contour': graph_contour,
         'graphs_bokeh': graphs_bokeh,
         'graph_bar': graph_bar,
