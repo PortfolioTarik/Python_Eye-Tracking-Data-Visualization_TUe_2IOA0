@@ -12,7 +12,7 @@
     <body>
         <div class="heading">
 				<div class = "Buttons">
-					<a href="/home"><button class="Home">
+					<a href="/"><button class="Home">
 						Home
 					</button></a>
 					<a href="/import"><button class="Upload">
@@ -28,7 +28,15 @@
 						Manual Comparison
 					</button></a>
 				</div>
-				<span class="Main_title">User Comparison</span>
+				</head>
+				<body>
+					<div class="Main_tool">
+						<div class="tooltip">
+							<span class="Main_title">User Comparison</span>
+							?
+							<span class="tooltiptext">To use this page, make sure to first select the map you want to inspect more carefully, next select the version of the map, either grayscale or colored. This can be done using the drop down menus at the top of the page. The selection of different users is done at the side of the page, where multiple users can be selected at once. Keep in mind that not every user has looked at each map, so some combinations may result in empty graphs. The visualizations are generated. For the contour plot only one version can be shown at a time, you can switch between different users using the dropdown menu at the top of the visualization. To view a contour plot for two users at the same time use the “Manual comparison” page and select the contour plot twice with the same map and two different users.</span>
+						</div>
+					</div>
 				<span class = "dropdowns">
 					Select a stimuli:
 					<select onchange="changeStimuli(this.value)">
@@ -134,8 +142,11 @@ body{
      position:absolute;
      top:0px; bottom:0px; right:0px; left:0px;
 }
+.Main_tool{
+	text-align: center;
+}
 .Main_title{
-	display: block;
+	display: inline-block;
 	text-align: center;
 	color:white;
 	font-size:38pt;
@@ -148,6 +159,36 @@ body{
 	color:white;
 	font-size:14pt;
 	font-family:serif;
+}
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  color: white;
+  font-size: 30pt;
+  text-align: center;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 400px;
+  background-color: black;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px 0;
+  font-size: 12pt;
+  
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
 .Buttons{
 	text-align: center;
@@ -182,6 +223,51 @@ body{
 
 	transition: background-color 1000ms, color 1000ms;
 }
+.User_comparison{
+	text-align: center;
+	display: inline-block;
+	margin: 20px auto;
+	width:180px;
+	height:50px;
+	border:3px solid white;
+	background-color:rgba(255,255,255,0);
+	color: white;
+	font-family:sans-serif;
+	font-weight:bold;
+	border-radius: 5px;
+
+	transition: background-color 1000ms, color 1000ms;
+}
+.Color_comparison{
+	text-align: center;
+	display: inline-block;
+	margin: 20px auto;
+	width:180px;
+	height:50px;
+	border:3px solid white;
+	background-color:rgba(255,255,255,0);
+	color: white;
+	font-family:sans-serif;
+	font-weight:bold;
+	border-radius: 5px;
+
+	transition: background-color 1000ms, color 1000ms;
+}
+.Manual_comparison{
+	text-align: center;
+	display: inline-block;
+	margin: 20px auto;
+	width:180px;
+	height:50px;
+	border:3px solid white;
+	background-color:rgba(255,255,255,0);
+	color: white;
+	font-family:sans-serif;
+	font-weight:bold;
+	border-radius: 5px;
+
+	transition: background-color 1000ms, color 1000ms;
+}
 .dropdowns{
 	display:block;
 	margin-top:15px;
@@ -190,54 +276,91 @@ body{
 	font-size:14pt;
 	font-family:serif;
 }
-.User_comparison{
-	text-align: center;
-	margin: 20px auto;
-	width:180px;
-	height:50px;
-	border:3px solid white;
-	background-color:rgba(255,255,255,0);
-	color: white;
-	font-family:sans-serif;
-	font-weight:bold;
-	border-radius: 5px;
-    display: inline-block;
-
-	transition: background-color 1000ms, color 1000ms;
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #2c3e50;
+  background-image: none;
 }
 
-.Color_comparison{
-	text-align: center;
-	margin: 20px auto;
-	width:180px;
-	height:50px;
-	border:3px solid white;
-	background-color:rgba(255,255,255,0);
-	color: white;
-	font-family:sans-serif;
-	font-weight:bold;
-	border-radius: 5px;
-    display: inline-block;
-
-	transition: background-color 1000ms, color 1000ms;
-}
-.Manual_comparison{
-	text-align: center;
-	margin: 20px auto;
-	width:180px;
-	height:50px;
-	border:3px solid white;
-	background-color:rgba(255,255,255,0);
-	color: white;
-	font-family:sans-serif;
-	font-weight:bold;
-	border-radius: 5px;
-    display: inline-block;
-
-	transition: background-color 1000ms, color 1000ms;
+select::-ms-expand {
+  display: none;
 }
 
+.select {
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  line-height: 3;
+  background: #2c3e50;
+  overflow: hidden;
+  border-radius: .25em;
+}
+select {
+  flex: 1;
+  padding: 0 .5em;
+  color: #fff;
+  cursor: pointer;
+}
+
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #34495e;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+.select:hover::after {
+  color: #f39c12;
+}
 .Upload:hover{
+	background-color:rgba(255,255,255,1);
+	color:#222;
+	cursor:pointer;
+
+	transition: background-color 1000ms, color 1000ms;
+}
+.Home:hover{
+	background-color:rgba(255,255,255,1);
+	color:#222;
+	cursor:pointer;
+
+	transition: background-color 1000ms, color 1000ms;
+}
+.Upload:hover{
+	background-color:rgba(255,255,255,1);
+	color:#222;
+	cursor:pointer;
+
+	transition: background-color 1000ms, color 1000ms;
+}
+.User_comparison:hover{
+	background-color:rgba(255,255,255,1);
+	color:#222;
+	cursor:pointer;
+
+	transition: background-color 1000ms, color 1000ms;
+}
+.Color_comparison:hover{
+	background-color:rgba(255,255,255,1);
+	color:#222;
+	cursor:pointer;
+
+	transition: background-color 1000ms, color 1000ms;
+}
+.Manual_comparison:hover{
 	background-color:rgba(255,255,255,1);
 	color:#222;
 	cursor:pointer;

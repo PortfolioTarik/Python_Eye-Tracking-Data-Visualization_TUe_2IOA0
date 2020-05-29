@@ -5,8 +5,6 @@
     <head>
         <title>Eye tracking visualizations</title>
 <!--<link href="{% static 'style/css.css' %}" rel="stylesheet" type="text/css" > ---> 
-    
-    
         <div class="heading">
 				<div class = "Buttons">
 					<a href="/"><button class="Home">
@@ -27,10 +25,13 @@
 				</div>
 				</head>
 				<body>
-				<span class="Main_title">Color Comparison</span>
-				<div class="box">
-					<a href="#" class="btn btn-white btn-animation-1">Hover Over Me</a> 
-				</div>
+					<div class="Main_tool">
+						<div class="tooltip">
+							<span class="Main_title">Color Comparison</span>
+							?
+							<span class="tooltiptext">To use this page, make sure to first select the map you want to inspect more carefully, next select a user who has looked at this map so that his graphs for both the colored, and the grayscale version are generated. This can be done using the drop down menus at the top of the page. The visualizations are generated. For the contour plot only one version can be shown at a time, you can switch between the colored or the grayscale version of the map at the dropdown menu at the top of the contour plot. To view both versions at the same time in a contour plot use the “Manual comparison” page, select the contour plot twice and use the same map and user and pick the different versions.</span>
+						</div>
+					</div>
 				<span class = "dropdowns">
 					<!-- Start Coding Tarik Hacialiogullari -->
 					Select a stimuli:
@@ -108,8 +109,11 @@ body{background-color:#0c0129;
      position:absolute;
      top:0px; bottom:0px; right:0px; left:0px;
 }
+.Main_tool{
+	text-align: center;
+}
 .Main_title{
-	display: block;
+	display: inline-block;
 	text-align: center;
 	color:white;
 	font-size:38pt;
@@ -123,78 +127,34 @@ body{background-color:#0c0129;
 	font-size:14pt;
 	font-family:serif;
 }
-.box{
-  position:absolute;
-  top:50%;
-  left:50%;
-  transform : translate(-50% ,-50%);
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  color: white;
+  font-size: 30pt;
+  text-align: center;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 400px;
+  background-color: black;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px 0;
+  font-size: 12pt;
+  
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
 }
 
-.btn:link,
-.btn:visited{
-  text-decoration: none;
-  text-transform:uppercase;
-  position:relative;
-  top:0;
-  left:0;
-  padding:20px 40px;
-  border-radius:100px;
-  display:inline-block;
-  transition: all .5s;
-}
-
-.btn-white{
-  background:#fff;
-  color:#000;
-}
-
-.btn:hover{
-   box-shadow:0px 10px 10px rgba(0,0,0,0.2);
-   transform : translateY(-3px);
-}
-
-.btn:active{
-  box-shadow:0px 5px 10px rgba(0,0,0,0.2);
-  transform:translateY(-1px);
-}
-
-.btn-bottom-animation-1{
-  animation:comeFromBottom 1s ease-out .8s;
-}
-
-.btn::after{
-  content:"";
-  text-decoration: none;
-  text-transform:uppercase;
-  position:absolute;
-  width:100%;
-  height:100%;
-  top:0;
-  left:0;
-  border-radius:100px;
-  display:inline-block;
-  z-index:-1;
-  transition: all .5s;
-}
-
-.btn-white::after {
-    background: #fff;
-}
-
-.btn-animation-1:hover::after {
-    transform: scaleX(1.4) scaleY(1.6);
-    opacity: 0;
-}
-
-@keyframes comeFromBottom{
-  0%{
-    opacity:0;
-    transform:translateY(40px);
-  } 
-  100%{
-    opacity:1;
-    transform:translateY(0);
-  }
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
 .Buttons{
 	text-align: center;
@@ -229,14 +189,6 @@ body{background-color:#0c0129;
 
 	transition: background-color 1000ms, color 1000ms;
 }
-.dropdowns{
-	display:block;
-	margin-top:15px;
-	text-align: center;
-	color:white;
-	font-size:14pt;
-	font-family:serif;
-}
 .User_comparison{
 	text-align: center;
 	margin: 20px auto;
@@ -252,7 +204,6 @@ body{background-color:#0c0129;
 
 	transition: background-color 1000ms, color 1000ms;
 }
-
 .Color_comparison{
 	text-align: center;
 	margin: 20px auto;
@@ -283,8 +234,89 @@ body{background-color:#0c0129;
 
 	transition: background-color 1000ms, color 1000ms;
 }
-
+.dropdowns{
+	display:block;
+	margin-top:15px;
+	text-align: center;
+	color:white;
+	font-size:14pt;
+	font-family:serif;
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #2c3e50;
+  background-image: none;
+}
+select::-ms-expand {
+  display: none;
+}
+.select {
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  line-height: 3;
+  background: #2c3e50;
+  overflow: hidden;
+  border-radius: .25em;
+}
+select {
+  flex: 1;
+  padding: 0 .5em;
+  color: #fff;
+  cursor: pointer;
+}
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #34495e;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+.select:hover::after {
+  color: #f39c12;
+}
 .Upload:hover{
+	background-color:rgba(255,255,255,1);
+	color:#222;
+	cursor:pointer;
+
+	transition: background-color 1000ms, color 1000ms;
+}
+.Home:hover{
+	background-color:rgba(255,255,255,1);
+	color:#222;
+	cursor:pointer;
+
+	transition: background-color 1000ms, color 1000ms;
+}
+.User_comparison:hover{
+	background-color:rgba(255,255,255,1);
+	color:#222;
+	cursor:pointer;
+
+	transition: background-color 1000ms, color 1000ms;
+}
+.Color_comparison:hover{
+	background-color:rgba(255,255,255,1);
+	color:#222;
+	cursor:pointer;
+
+	transition: background-color 1000ms, color 1000ms;
+}
+.Manual_comparison:hover{
 	background-color:rgba(255,255,255,1);
 	color:#222;
 	cursor:pointer;

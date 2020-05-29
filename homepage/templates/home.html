@@ -9,7 +9,12 @@
     <body>
         <div class="heading">
 			<span class="Main_title">Visualizations made according to eye tracking terminology</span>
-			<span class="Sub_introduction">Introduction:</span>
+			<span class="Sub_introduction">Welcome to our eye tracking visualization page. Here you will find all the tools you need to get a better visual representation of your eye tracking data. The eye tracking data currently in the site is from a research regarding train maps. On this page you will find each of the four visualizations, you can select which map you want to look at and which user looking at that map. Another element of the data is the version of the map, the options are grayscale or colored, this setting can also be selected. This way you can find details of a user looking at a specified map.
+				If you want to know more about the differences in the grayscale and colored version of one map, go to the page “Color comparison”. On that page you will see the same four visualizations, with in each graph 2 data groups, one for the colored map and one for the greyscale map of the same user. Here you can select which map and which user you want to view.
+				If you want to know more about differences amongst different users for a map, find the page for user comparison. Here you will see those same visualizations, with the option to add multiple users to each graph to compare them to each other. This page allows you to choose which map, and which, as well as how many, users you are looking at. You can decide whether to view the differences between users on the colored or grayscale version of a map.
+				Lastly if you want to compare two users, graphs or visualizations more extensively find the page “Manual comparison”. Here you can select two visualizations and their contents, the user, the map and its version. This way you can compare two contour plots of different users or map versions, or any other combination of graphs useful for your specific research.
+				To upload your own dataset of your eye-tracking research, find the upload button of the menu bar, where you can select a csv file and upload it to the website. Important is the ordering of the columns: “Timestamp”, “Stimuli name”, “Fixation index”, “Fixation duration”, “Mapped fixation point X”, “Mapped fixation point Y”, “User”, “Description”, as well as the fact that they are separated using a tab.
+				</span>
 				<div class = "Buttons">
 					<a href="/import"><button class="Upload">
 						Upload
@@ -161,6 +166,51 @@ body{background-color:#0c0129;
 
 	transition: background-color 1000ms, color 1000ms;
 }
+.User_comparison{
+	text-align: center;
+	display: inline-block;
+	margin: 20px auto;
+	width:180px;
+	height:50px;
+	border:3px solid white;
+	background-color:rgba(255,255,255,0);
+	color: white;
+	font-family:sans-serif;
+	font-weight:bold;
+	border-radius: 5px;
+
+	transition: background-color 1000ms, color 1000ms;
+}
+.Color_comparison{
+	text-align: center;
+	display: inline-block;
+	margin: 20px auto;
+	width:180px;
+	height:50px;
+	border:3px solid white;
+	background-color:rgba(255,255,255,0);
+	color: white;
+	font-family:sans-serif;
+	font-weight:bold;
+	border-radius: 5px;
+
+	transition: background-color 1000ms, color 1000ms;
+}
+.Manual_comparison{
+	text-align: center;
+	display: inline-block;
+	margin: 20px auto;
+	width:180px;
+	height:50px;
+	border:3px solid white;
+	background-color:rgba(255,255,255,0);
+	color: white;
+	font-family:sans-serif;
+	font-weight:bold;
+	border-radius: 5px;
+
+	transition: background-color 1000ms, color 1000ms;
+}
 .dropdowns{
 	display:block;
 	margin-top:15px;
@@ -168,6 +218,52 @@ body{background-color:#0c0129;
 	color:white;
 	font-size:14pt;
 	font-family:serif;
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #34495e;
+  background-image: none;
+}
+select::-ms-expand {
+  display: none;
+}
+.select {
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  line-height: 3;
+  background: #34495e;
+  overflow: hidden;
+  border-radius: .25em;
+}
+select {
+  flex: 1;
+  padding: 0 .5em;
+  color: white;
+  cursor: pointer;
+}
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #34495e;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+.select:hover::after {
+  color: #f39c12;
 }
 .User_comparison{
 	text-align: center;
@@ -185,38 +281,28 @@ body{background-color:#0c0129;
 	transition: background-color 1000ms, color 1000ms;
 }
 
-.Color_comparison{
-	text-align: center;
-	margin: 20px auto;
-	width:180px;
-	height:50px;
-	border:3px solid white;
-	background-color:rgba(255,255,255,0);
-	color: white;
-	font-family:sans-serif;
-	font-weight:bold;
-	border-radius: 5px;
-    display: inline-block;
-
-	transition: background-color 1000ms, color 1000ms;
-}
-.Manual_comparison{
-	text-align: center;
-	margin: 20px auto;
-	width:180px;
-	height:50px;
-	border:3px solid white;
-	background-color:rgba(255,255,255,0);
-	color: white;
-	font-family:sans-serif;
-	font-weight:bold;
-	border-radius: 5px;
-    display: inline-block;
-
-	transition: background-color 1000ms, color 1000ms;
-}
-
 .Upload:hover{
+	background-color:rgba(255,255,255,1);
+	color:#222;
+	cursor:pointer;
+
+	transition: background-color 1000ms, color 1000ms;
+}
+.User_comparison:hover{
+	background-color:rgba(255,255,255,1);
+	color:#222;
+	cursor:pointer;
+
+	transition: background-color 1000ms, color 1000ms;
+}
+.Color_comparison:hover{
+	background-color:rgba(255,255,255,1);
+	color:#222;
+	cursor:pointer;
+
+	transition: background-color 1000ms, color 1000ms;
+}
+.Manual_comparison:hover{
 	background-color:rgba(255,255,255,1);
 	color:#222;
 	cursor:pointer;
