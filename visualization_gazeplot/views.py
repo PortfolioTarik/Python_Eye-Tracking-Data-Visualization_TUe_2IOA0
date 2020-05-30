@@ -4,6 +4,7 @@
 # First template by Fanni Egresits
 # Updated plot and connected query data set by Tarik Hacialiogullari
 from django.shortcuts import render
+
 from django.http import HttpResponse
 from bokeh.models import ColumnDataSource, Label, LabelSet, Range1d
 from bokeh.plotting import figure, output_file, show
@@ -13,6 +14,12 @@ import pandas as pd
 from bokeh.plotting import figure, show, output_file
 from import_csv.models import FixationData
 from homepage.models import getUserData
+import eye_tracking_visualizations_group23a.settings
+from PIL import Image
+import requests
+from io import BytesIO
+from django.contrib.staticfiles.storage import staticfiles_storage
+
 
 # Add userdata with custom color to the graph and send new graph with userdata in it back.
 def addUserToGraph(userData, p, color):
@@ -27,7 +34,7 @@ def addUserToGraph(userData, p, color):
                                         y_coordinates=y_coordinates,
                                         texts=texts,
                                         sizes=sizes))
-    #---Start Coding by Fanni Egresits & Tarik Hacialiogullari
+    # ---Start Coding by Fanni Egresits & Tarik Hacialiogullari
     # line
     p.line(x_coordinates, y_coordinates,
            legend_label=user, line_width=2, color=color)
@@ -37,34 +44,43 @@ def addUserToGraph(userData, p, color):
     # texts
     p.add_layout(LabelSet(x='x_coordinates', y='y_coordinates', text='texts', level='overlay',
                           x_offset=5, y_offset=5, text_color=color, source=source, render_mode='canvas'))
-    #---End Coding by Fanni Egresits & Tarik Hacialiogullari
+    # ---End Coding by Fanni Egresits & Tarik Hacialiogullari
     return
 
-#generate graph with background and return it.
-def getGraph(toolbar, stimuli):
-    #---Start Coding by Fanni Egresits
-    p = figure(plot_width=800, plot_height=600, x_range=(0, 1651), y_range=(0, 1200),
+# ---Start Coding by Fanni Egresits
+# generate graph with background and return it.
+def getGraph(toolbar, stimuli, request):
+    #Load local stimuli
+    url = '/static/stimuli/{}'.format(stimuli)
+    img_url = "http://" + request.get_host() + url
+
+    #Get the parameters of map (width, height)
+    response = requests.get(img_url)
+    w, h = Image.open(BytesIO(response.content)).size
+
+    #Create plot
+    p = figure(plot_width=800, plot_height=600, x_range=(0, w), y_range=(0, h),
                title="Gaze Plot of Fixation Duration per Timestamp", x_axis_label='Mapped Fixation Point X',
                y_axis_label='Mapped Fixation Point Y', tools=toolbar)
-    #---End Coding by Fanni Egresits
-    # Background
-    # inside variable 'stimuli' there is the String like '06-Hamburg-S1.jpg'.
-    p.image_url(url=[
-        'https://i.ibb.co/VQSkMnN/06-Hamburg-S1.jpg'], x=0, y=1200, w=1651, h=1200)
+
+    #Set Background
+    p.image_url(url=[url], x=0, y=h, w=w, h=h)
     return p
 
-#home is is not in use. just if someone wants to use this for now.
+# ---End Coding by Fanni Egresits
+
+
+# home is is not in use. just if someone wants to use this for now.
 def home(request):
     toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
     df_userOne = getUserData('p1', '06_Hamburg_S1.jpg', 'color')
     df_userTwo = getUserData('p16', '06_Hamburg_S1.jpg', 'color')
     df_userThree = getUserData('p12', '06_Hamburg_S1.jpg', 'color')
 
-    p = getGraph(toolbar, '06_Hamburg_S1.jpg')
+    p = getGraph(toolbar, '06_Hamburg_S1.jpg', request)
     addUserToGraph(df_userOne, p, 'red')
     addUserToGraph(df_userTwo, p, 'yellow')
     addUserToGraph(df_userThree, p, 'blue')
-
 
     script, div = components(p)
     return render(request, 'website_starplot.html',

@@ -63,7 +63,7 @@ def home(request):
     
         #Get Gaze graph
     #Get the gaze graph figure from visualization_gazeplot/views.py also send the current stimuli which is selected, so it generate this graph with this background.
-    graph_gaze = getGraphGaze(toolbar, stimuli)
+    graph_gaze = getGraphGaze(toolbar, stimuli, request)
     addUserToGraphGaze(df_userOne, graph_gaze, 'red')
 
         #Convert the BAR, LINE, GAZE plot to HTML (So only the Bokeh plots)
