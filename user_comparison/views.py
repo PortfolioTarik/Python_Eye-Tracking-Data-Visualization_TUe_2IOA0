@@ -88,7 +88,7 @@ def home(request):
         addUserToGraphLine(df_userThree, graph_line, 'blue')
     
         #Get Gaze graph
-    graph_gaze = getGraphGaze(toolbar, stimuli)
+    graph_gaze = getGraphGaze(toolbar, stimuli, request)
     addUserToGraphGaze(df_userOne, graph_gaze, 'red')
     if boolUserTwo:
         addUserToGraphGaze(df_userTwo, graph_gaze, 'yellow')
