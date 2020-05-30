@@ -3,12 +3,12 @@
 {% load static %} 
 <html>
     <head>
-        <title>Eye tracking visualizations</title>
-<!--<link href="{% static 'style/css.css' %}" rel="stylesheet" type="text/css" > ---> 
+        <title>Eye Tracking Visualizations</title>
+<!-- <link href="{% static 'style/css.css' %}" rel="stylesheet" type="text/css">-->
     </head>
     <body>
         <div class="heading">
-			<span class="Main_title">Visualizations made according to eye tracking terminology</span>
+			<span class="Main_title">Visualizations Made According to Eye Tracking Terminology</span>
 			<span class="Sub_introduction">Welcome to our eye tracking visualization page. Here you will find all the tools you need to get a better visual representation of your eye tracking data. The eye tracking data currently in the site is from a research regarding train maps. On this page you will find each of the four visualizations, you can select which map you want to look at and which user looking at that map. Another element of the data is the version of the map, the options are grayscale or colored, this setting can also be selected. This way you can find details of a user looking at a specified map.
 				If you want to know more about the differences in the grayscale and colored version of one map, go to the page “Color comparison”. On that page you will see the same four visualizations, with in each graph 2 data groups, one for the colored map and one for the greyscale map of the same user. Here you can select which map and which user you want to view.
 				If you want to know more about differences amongst different users for a map, find the page for user comparison. Here you will see those same visualizations, with the option to add multiple users to each graph to compare them to each other. This page allows you to choose which map, and which, as well as how many, users you are looking at. You can decide whether to view the differences between users on the colored or grayscale version of a map.
@@ -48,7 +48,7 @@
 						{% endfor %}
 					</select>
 					<!-- When there is selected (e.g. onchange) a different user, it calls the javascript function changeUser with the newly selected user -->
-					Select an user:
+					Select a user:
 					<select onchange="changeUser(this.value)">
 						{% for user in user_list %}
 						<div>
@@ -74,14 +74,14 @@
 					<!-- End Coding Tarik Hacialiogullari -->
 				</span>
 				
-					<h1 style="color:yellowgreen;">Gaze plot and Line chart:</h1>
+					<h1 style="color:yellowgreen;">Gaze Plot and Line Chart:</h1>
 					{{ graphs_bokeh | safe }}
-					<h1 style="color:yellowgreen;">Bar chart:</h1>
+					<h1 style="color:yellowgreen;">Bar Chart:</h1>
 					{{ graph_bar | safe }}
 				
 				
 
-<h1 style="color:yellowgreen;">Plotly's Contour map:</h1>
+<h1 style="color:yellowgreen;">Plotly's Contour Map:</h1>
 {{ graph_contour | safe }}
 
     </body>
@@ -129,7 +129,7 @@ html, body{
 }
 
 body{background-color:#0c0129;
-     background-image:url(blue.jpg);
+     background-image:url("/static/jpg/blue.jpg");
      background-position:center;
      background-size:cover;
      background-blend-mode:soft-light;

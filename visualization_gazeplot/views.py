@@ -44,7 +44,7 @@ def addUserToGraph(userData, p, color):
 def getGraph(toolbar, stimuli):
     #---Start Coding by Fanni Egresits
     p = figure(plot_width=800, plot_height=600, x_range=(0, 1651), y_range=(0, 1200),
-               title="Gaze plot of Hamburg of users", x_axis_label='Mapped Fixation Point X',
+               title="Gaze Plot of Fixation Duration per Timestamp", x_axis_label='Mapped Fixation Point X',
                y_axis_label='Mapped Fixation Point Y', tools=toolbar)
     #---End Coding by Fanni Egresits
     # Background
