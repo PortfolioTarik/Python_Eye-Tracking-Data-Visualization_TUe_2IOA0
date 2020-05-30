@@ -27,23 +27,37 @@
 				<span class = "dropdowns">
 					Select a stimuli:
 					<select onchange="changeStimuli(this.value)">
-						<option value="Choose" selected="selected">Choose</option>
-						<option value="06_Hamburg_S1.jpg">06_Hamburg_S1.jpg</option>
-						<option value="01_Antwerpen_S1.jpg">01_Antwerpen_S1.jpg</option>
-						<option value="02_Berlin_S1.jpg">02_Berlin_S1.jpg</option>
+						{% for stimuli in stimuli_list %}
+						<div>
+							{% if stimuli != selected_stimuli %}
+								<option value="{{ stimuli }}">{{ stimuli }}</option>
+							{% else %}
+								<option selected="selected" value="{{ stimuli }}">{{ stimuli }}</option>
+							{% endif %}
+						</div>
+						{% endfor %}
 					</select>
 					Select an user:
 					<select onchange="changeUser(this.value)">
-						<option value="Choose" selected="selected">Choose</option>
-						<option value="p1">p1</option>
-						<option value="p12">p12</option>
-						<option value="p16">p16</option>
+						{% for user in user_list %}
+						<div>
+							{% if user != selected_user %}
+								<option value="{{ user }}">{{ user }}</option>
+							{% else %}
+								<option selected="selected" value="{{ user }}">{{ user }}</option>
+							{% endif %}
+						</div>
+						{% endfor %}
 					</select>
 					Select the color:
 					<select onchange="changeColor(this.value)">
-						<option value="Choose" selected="selected">Choose</option>
-						<option value="color">Color</option>
+						{% if "gray" != selected_color %}
+						<option selected="selected" value="color">Color</option>
 						<option value="gray">Gray</option>
+						{% else %}
+						<option value="color">Color</option>
+						<option selected="selected" value="gray">Gray</option>
+						{% endif %}
 					</select>
 				</span>
 				

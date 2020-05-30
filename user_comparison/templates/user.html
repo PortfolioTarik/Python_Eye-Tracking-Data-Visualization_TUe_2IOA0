@@ -40,24 +40,38 @@
 				<span class = "dropdowns">
 					Select a stimuli:
 					<select onchange="changeStimuli(this.value)">
-						<option value="Choose" selected="selected">Choose</option>
-						<option value="06_Hamburg_S1.jpg">06_Hamburg_S1.jpg</option>
-						<option value="01_Antwerpen_S1.jpg">01_Antwerpen_S1.jpg</option>
-						<option value="02_Berlin_S1.jpg">02_Berlin_S1.jpg</option>
+						{% for stimuli in stimuli_list %}
+						<div>
+							{% if stimuli != selected_stimuli %}
+								<option value="{{ stimuli }}">{{ stimuli }}</option>
+							{% else %}
+								<option selected="selected" value="{{ stimuli }}">{{ stimuli }}</option>
+							{% endif %}
+						</div>
+						{% endfor %}
 					</select>
 					Select an user:
 					<select id="users" style="width:150px;" data-placeholder="Begin typing a name to filter..." multiple class="chosen-select" name="test">
-						<option value=""></option>
-						<option value="p1">p1</option>
-						<option value="p12">p12</option>
-						<option value="p16">p16</option>
+						{% for user in user_list %}
+						<div>
+							{% if user in selected_users %}
+								<option class="result-selected" value="{{ user }}">{{ user }}</option>
+							{% else %}
+								<option value="{{ user }}">{{ user }}</option>
+							{% endif %}
+						</div>
+						{% endfor %}
 					  </select>
 					  <button onclick="changeUsers()">Apply Users</button>
 					Select the color:
 					<select onchange="changeColor(this.value)">
-						<option value="Choose" selected="selected">Choose</option>
-						<option value="color">Color</option>
+						{% if "gray" != selected_color %}
+						<option selected="selected" value="color">Color</option>
 						<option value="gray">Gray</option>
+						{% else %}
+						<option value="color">Color</option>
+						<option selected="selected" value="gray">Gray</option>
+						{% endif %}
 					</select>
 				</span>
 				
@@ -88,16 +102,22 @@
 		{
 			var url = new window.URL(document.location);
 			//var selected = [];
+			let params = new URLSearchParams(url.search);
+			let stimuli = params.get('stimuli')
+			let color = params.get('color')
+
+			var url_new = new window.URL(window.location.protocol + "//" + window.location.host + window.location.pathname);
+			
 			for (var option of document.getElementById('users').options) {
     			if (option.selected) {
 					//selected.push(option.value);
-					url.searchParams.append("user", option.value);
+					url_new.searchParams.append("user", option.value);
 				}
 			}
   			//alert(selected);
 			// var url = new window.URL(document.location);
 			// url.searchParams.set("user", params);
-			window.location.href = url.toString();
+			window.location.href = url_new.toString();
 		}
 
 		function changeColor(color)
