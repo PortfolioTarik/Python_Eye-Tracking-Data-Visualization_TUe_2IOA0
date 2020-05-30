@@ -14,7 +14,7 @@ from bokeh.plotting import figure, show, output_file
 from import_csv.models import FixationData
 from homepage.models import getUserData
 
-
+# Add userdata with custom color to the graph and send new graph with userdata in it back.
 def addUserToGraph(userData, p, color):
     user = userData['user'].iloc[0]
     sizePath = len(userData.index)
@@ -40,37 +40,27 @@ def addUserToGraph(userData, p, color):
     #---End Coding by Fanni Egresits & Tarik Hacialiogullari
     return
 
-
-def getGraph(toolbar):
+#generate graph with background and return it.
+def getGraph(toolbar, stimuli):
     #---Start Coding by Fanni Egresits
     p = figure(plot_width=800, plot_height=600, x_range=(0, 1651), y_range=(0, 1200),
                title="Gaze plot of Hamburg of users", x_axis_label='Mapped Fixation Point X',
                y_axis_label='Mapped Fixation Point Y', tools=toolbar)
     #---End Coding by Fanni Egresits
-    # background
+    # Background
+    # inside variable 'stimuli' there is the String like '06-Hamburg-S1.jpg'.
     p.image_url(url=[
         'https://i.ibb.co/VQSkMnN/06-Hamburg-S1.jpg'], x=0, y=1200, w=1651, h=1200)
-
-    # counter = 0
-    # color = 'red'
-    # for userData in usersData:
-    #     if(counter == 1):
-    #         color = 'yellow'
-    #     if(counter == 2):
-    #         color = 'blue'
-    #     addUserToGraph(userData, p, color)
-    #     counter = counter + 1
-
     return p
 
-
+#home is is not in use. just if someone wants to use this for now.
 def home(request):
     toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
     df_userOne = getUserData('p1', '06_Hamburg_S1.jpg', 'color')
     df_userTwo = getUserData('p16', '06_Hamburg_S1.jpg', 'color')
     df_userThree = getUserData('p12', '06_Hamburg_S1.jpg', 'color')
 
-    p = getGraph(toolbar)
+    p = getGraph(toolbar, '06_Hamburg_S1.jpg')
     addUserToGraph(df_userOne, p, 'red')
     addUserToGraph(df_userTwo, p, 'yellow')
     addUserToGraph(df_userThree, p, 'blue')

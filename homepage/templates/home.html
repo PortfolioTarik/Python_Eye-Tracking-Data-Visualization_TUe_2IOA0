@@ -32,17 +32,22 @@
 				<span class = "dropdowns">
 					<!-- Start Coding Tarik Hacialiogullari -->
 					Select a stimuli:
+					<!-- When there is selected (e.g. onchange) a different stimuli, it calls the javascript function changeStimuli with the newly selected stimuli -->
 					<select onchange="changeStimuli(this.value)">
+						<!-- Loop through every stimuli in the stimuli_list variable -->
 						{% for stimuli in stimuli_list %}
 						<div>
+							<!-- If the stimuli is not selected just put it as dropdown option-->
 							{% if stimuli != selected_stimuli %}
 								<option value="{{ stimuli }}">{{ stimuli }}</option>
+							<!-- else the stimuli is selected then put it in the dropdownlist and select it.-->
 							{% else %}
 								<option selected="selected" value="{{ stimuli }}">{{ stimuli }}</option>
 							{% endif %}
 						</div>
 						{% endfor %}
 					</select>
+					<!-- When there is selected (e.g. onchange) a different user, it calls the javascript function changeUser with the newly selected user -->
 					Select an user:
 					<select onchange="changeUser(this.value)">
 						{% for user in user_list %}
@@ -56,6 +61,7 @@
 						{% endfor %}
 					</select>
 					Select the color:
+					<!-- When there is selected (e.g. onchange) a different color, it calls the javascript function changeColor with the newly selected color -->
 					<select onchange="changeColor(this.value)">
 						{% if "gray" != selected_color %}
 						<option selected="selected" value="color">Color</option>
@@ -84,10 +90,13 @@
 
 	<!-- Start Coding Tarik Hacialiogullari -->
 	<script>
+		// This changes the URL paramater like '?stimuli=01_Mecca_s1.jpg' and reloads the page with the new param.
 		function changeStimuli(stimuli) 
 		{
 			var url = new window.URL(document.location);
+			//change the current stimuli paramater to this new value
 			url.searchParams.set("stimuli", stimuli);
+			//reload page with this newly URL.
 			window.location.href = url.toString();
 		}
 

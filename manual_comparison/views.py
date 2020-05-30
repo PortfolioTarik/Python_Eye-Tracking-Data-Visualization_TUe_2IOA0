@@ -19,7 +19,7 @@ from visualization_barchart.views import addUserToGraph as addUserToGraphBar
 from visualization_linechart.views import getGraph as getGraphLine
 from visualization_linechart.views import addUserToGraph as addUserToGraphLine
 
-
+#SEE homepage/views.py for the comments
 def home(request):
     toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
 
@@ -63,7 +63,7 @@ def home(request):
     #addUserToGraphLine(df_userThree, graph_line, 'blue')
     
         #Get Gaze graph
-    graph_gaze = getGraphGaze(toolbar)
+    graph_gaze = getGraphGaze(toolbar, stimuli)
     addUserToGraphGaze(df_userOne, graph_gaze, 'red')
     #addUserToGraphGaze(df_userTwo, graph_gaze, 'yellow')
     #addUserToGraphGaze(df_userThree, graph_gaze, 'blue')

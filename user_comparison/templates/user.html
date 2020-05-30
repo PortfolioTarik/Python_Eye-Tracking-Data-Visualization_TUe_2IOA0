@@ -38,6 +38,7 @@
 						</div>
 					</div>
 				<span class = "dropdowns">
+					<!-- SEE homepage/templates/home.HTML for the comments -->
 					Select a stimuli:
 					<select onchange="changeStimuli(this.value)">
 						{% for stimuli in stimuli_list %}
@@ -90,6 +91,7 @@
 	{{ script_bar | safe }}
 
 	<script>
+		// <!-- SEE homepage/templates/home.HTML for the comments -->
 		function changeStimuli(stimuli) 
 		{
 			var url = new window.URL(document.location);
