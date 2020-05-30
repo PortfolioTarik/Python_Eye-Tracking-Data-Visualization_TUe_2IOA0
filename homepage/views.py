@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from bokeh.embed import components
 from bokeh.layouts import row, gridplot
 
-from homepage.models import getUserData, getAllStimulisDataQuery, getAllUsersByStimuliDataQuery
+from homepage.models import getUserData, getAllStimulis, getAllUsersByStimuli
 
 from visualization_heatmap.views import getGraph as getGraphContour
 
@@ -80,21 +80,8 @@ def home(request):
     graph_contour = getGraphContour(df_userOne)
 
     #Stimuli dropdown
-    
-
-    query_maps = getAllStimulisDataQuery()
-    stimuli_list = []
-    for stimulidata in query_maps: 
-        stimuli_list.append(stimulidata.StimuliName)
-
-    query_users = getAllUsersByStimuliDataQuery(stimuli)
-    user_list = []
-    for userEach in query_users: 
-        user_list.append(userEach.user)
-
-    # for i in len(stimuli_list):
-    #     i + ''
-
+    stimuli_list = getAllStimulis()
+    user_list = getAllUsersByStimuli(stimuli)
 
 
     context = {
