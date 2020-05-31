@@ -7,7 +7,7 @@ from django.conf import settings
 def stimuli_path():
     return os.path.join(settings.BASE_DIR, 'stimuli/')
 
-
+# Creation of class of the data, with the specification for each column content
 class FixationData(models.Model):
     list_display = ('Timestamp', 'StimuliName', 'FixationIndex', 'FixationDuration',
                     'MappedFixationPointX', 'MappedFixationPointY', 'user', 'desription')
@@ -24,6 +24,7 @@ class FixationData(models.Model):
         managed = True
         db_table = 'Fixation_data'
 
+# functions for retrieving specific data information
     def __str__(self):
         # return self.StimuliName
         return str(self.Timestamp) + ', ' + str(self.MappedFixationPointX) + ', ' + str(self.MappedFixationPointY)

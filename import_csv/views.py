@@ -14,13 +14,16 @@ def upload_csv(request):
     if request.method == "GET":
         return render(request, template, prompt)
 
+    # save the uploaded file as csvfile
     csvfile = request.FILES['file']
 
+    # check whether the file is of the correct type
     if not csvfile.name.endswith('.csv'):
         list(messages.get_messages(request))
         messages.add_message(request, messages.INFO, 'This is not a csv file')
         return render(request, template, prompt)
 
+    # Give an update to the website user that a file has been uploaded
     if csvfile.name.endswith('csv'):
         list(messages.get_messages(request))
         messages.add_message(request, messages.INFO,
@@ -30,6 +33,7 @@ def upload_csv(request):
     df_eye = pd.read_csv(csvfile, encoding='unicode_escape', sep="\t")
     print(df_eye.info())
 
+    #fill the dataset using the uploaded file
     rows = []
     for i in range(len(df_eye)):
         rows.append(
@@ -49,7 +53,9 @@ def upload_csv(request):
 
     # print(rows)
     FixationData.objects.bulk_create(rows)
+    #---End Coding by Tarik Hacialiogullari
 
+# The initial coding by Laura to upload a dataset, updated due to loadingtime issues
     # dataset = csvfile.read().decode('UTF-8', 'replace')
 
     # io_string = io.StringIO(dataset)
@@ -65,7 +71,6 @@ def upload_csv(request):
     #         user = column[6],
     #         description = column[7]
     #     )
-    #---End Coding by Tarik Hacialiogullari
 
     context = {}
 
