@@ -51,7 +51,7 @@ def getAllStimulis():
     return stimuli_list
 
 def getAllUsersByStimuli(stimuli):
-    query_users = FixationData.objects.raw("SELECT DISTINCT user, 1 as id FROM Fixation_data WHERE StimuliName LIKE '%" + stimuli.split('_')[1] + "%'")
+    query_users = FixationData.objects.raw("SELECT DISTINCT user, 1 as id FROM Fixation_data WHERE StimuliName LIKE '%" + stimuli.split('_')[1] + "%' ORDER BY CAST(substr(user, 2, length(user)) as integer) ASC;")
     user_list = []
     for userEach in query_users: 
         user_list.append(userEach.user)
