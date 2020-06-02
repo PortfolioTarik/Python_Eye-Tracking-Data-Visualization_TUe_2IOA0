@@ -6,7 +6,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 		<script src="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.jquery.min.js"></script>
 		<link href="https://cdn.rawgit.com/harvesthq/chosen/gh-pages/chosen.min.css" rel="stylesheet"/>
-        <title>Eye Tracking Visualizations</title>
+        <title>User Comparison</title>
 <!--<link href="{% static 'style/css.css' %}" rel="stylesheet" type="text/css" > ---> 
     </head>
     <body>
@@ -28,9 +28,9 @@
 				</head>
 				<body>
 					<div class="Main_tool">
+						<span class="Main_title">User Comparison</span>
 						<div class="tooltip">
-							<span class="Main_title">User Comparison</span>
-							?
+							?/i
 							<!-- Text by Laura-->
 							<span class="tooltiptext">To use this page, make sure to first select the map you want to inspect more carefully, next select 
 								the version of the map, either grayscale or colored. This can be done using the drop down menus at the top of the page. 
@@ -144,7 +144,7 @@
 	
 	<script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script>
 
-
+<!-- css information for all classes-->
 <style>
 *{
 	margin:0;
@@ -156,7 +156,7 @@ html, body{
 
 body{
 	background-color:#0c0129;
-     background-image:url(blue.jpg);
+     background-image:url("/static/jpg/blue.jpg");
      background-position:center;
      background-size:cover;
      background-blend-mode:soft-light;
@@ -193,8 +193,9 @@ body{
   display: inline-block;
   border-bottom: 1px dotted black;
   color: white;
-  font-size: 30pt;
+  font-size: 24pt;
   text-align: center;
+  border:2px solid white;
 }
 .tooltip .tooltiptext {
   visibility: hidden;
@@ -211,7 +212,7 @@ body{
   z-index: 1;
   top: 100%;
   left: 50%;
-  margin-left: -60px;
+  margin-left: -200px;
 }
 
 .tooltip:hover .tooltiptext {

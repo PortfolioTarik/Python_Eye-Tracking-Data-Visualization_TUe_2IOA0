@@ -26,6 +26,7 @@
 					the columns: “Timestamp”, “Stimuli name”, “Fixation index”, “Fixation duration”, “Mapped fixation point X”, “Mapped fixation point Y”, “User”, “Description”, as well as the fact that they are separated using a tab.</p>
 				</span>
 				<!-- end coding (text) by Laura-->
+				<!-- all buttons for the webpage-->
 				<div class = "Buttons">
 					<a href="/import"><button class="Upload">
 						Upload
@@ -84,7 +85,7 @@
 					</select>
 					<!-- End Coding Tarik Hacialiogullari -->
 				</span>
-				
+				<!-- displaying all visualisations to the webpage-->
 					<h1 style="color:yellowgreen;">Gaze Plot and Line Chart:</h1>
 					{{ graphs_bokeh | safe }}
 					<h1 style="color:yellowgreen;">Bar Chart:</h1>
@@ -129,12 +130,13 @@
 	<!-- End Coding Tarik Hacialiogullari -->
 	
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script>
-
+<!-- css information for all classes-->
 <style>
 *{
 	margin:0;
 	padding:0;
 }
+
 html, body{
 	height:100%;
 }

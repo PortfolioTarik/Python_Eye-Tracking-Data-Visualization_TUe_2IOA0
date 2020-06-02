@@ -46,10 +46,12 @@ def getGraph(toolbar, end):
     text_x_axis = [str(x) for x in text_x_axis]
 
     #---Start Coding by Youssef Selim
+    #graph visualisation information such as width, titles etc.
     p = figure(
         plot_height=300, plot_width=1500, title="Bar Chart of Fixation Duration per Timestamp", x_axis_label='Timestamp', y_axis_label='Fixation Duration',
         toolbar_location="right", tools=toolbar,  x_range=text_x_axis)
     p.xgrid.grid_line_color = None
+    #changes x axis label size and orientation so that the numbers are visible
     p.xaxis.major_label_orientation = 1
     p.xaxis.major_label_text_font_size = "6pt"
     p.y_range.start = 0
