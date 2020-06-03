@@ -3,7 +3,7 @@
 {% load static %} 
 <html>
     <head>
-        <title>Eye Tracking Visualizations</title>
+        <title>Manual Comparison</title>
 <!--<link href="{% static 'style/css.css' %}" rel="stylesheet" type="text/css" > ---> 
     </head>
     <body>
@@ -23,10 +23,19 @@
 						Color Comparison
 					</button></a>
 				</div>
-				<span class="Main_title">Manual Comparison</span>
+				</head>
+				<body>
+					<div class="Main_tool">
+						<span class="Main_title">Manual Comparison</span>
+							<div class="tooltip">
+							?/i
+							<span class="tooltiptext">To use the manual comparison, first select which graph type you want to show on the left and right side of the page. Once the graphs are selected, you can use the drop down menu for either side of the page to select the map, user and the map version you want to be shown in each visualization. On this page only 1 user can be shown at a time per visualization.</span>
+						</div>
+        			</div>
 				<span class = "dropdowns">
+					Select graph type:
 					<!-- SEE homepage/templates/home.HTML for the comments -->
-					Select a stimuli:
+					<!--Select a stimuli:
 					<select onchange="changeStimuli(this.value)">
 						{% for stimuli in stimuli_list %}
 						<div>
@@ -60,21 +69,9 @@
 						<option selected="selected" value="gray">Gray</option>
 						{% endif %}
 					</select>
-				</span>
-				
-					<h1 style="color:yellowgreen;">Gaze plot and Line chart:</h1>
-					{{ graphs_bokeh | safe }}
-					<h1 style="color:yellowgreen;">Bar chart:</h1>
-					{{ graph_bar | safe }}
-				
-				
-
-<h1 style="color:yellowgreen;">Plotly's Contour map:</h1>
-{{ graph_contour | safe }}
-
+				</span>-->
     </body>
-	{{ script_bokeh | safe }}
-	{{ script_bar | safe }}
+	
 
 	<script>
 		// <!-- SEE homepage/templates/home.HTML for the comments -->
@@ -103,7 +100,7 @@
 	</script>
 	
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script>
-
+<!-- css information for all classes-->
 <style>
 *{
 	margin:0;
@@ -113,8 +110,9 @@ html, body{
 	height:100%;
 }
 
-body{background-color:#0c0129;
-     background-image:url(blue.jpg);
+body{
+	background-color:#0c0129;
+     background-image:url("/static/jpg/blue.jpg");	
      background-position:center;
      background-size:cover;
      background-blend-mode:soft-light;
@@ -127,8 +125,11 @@ body{background-color:#0c0129;
      position:absolute;
      top:0px; bottom:0px; right:0px; left:0px;
 }
+.Main_tool{
+	text-align: center;
+}
 .Main_title{
-	display: block;
+	display: inline-block;
 	text-align: center;
 	color:white;
 	font-size:38pt;
@@ -141,6 +142,35 @@ body{background-color:#0c0129;
 	color:white;
 	font-size:14pt;
 	font-family:serif;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+  color: white;
+  font-size: 24pt;
+  text-align: center;
+  border:2px solid white;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 400px;
+  background-color: black;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px 0;
+  font-size: 12pt;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -200px;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
 .Buttons{
 	text-align: center;

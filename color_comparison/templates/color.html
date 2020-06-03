@@ -3,7 +3,7 @@
 {% load static %} 
 <html>
     <head>
-        <title>Eye Tracking Visualizations</title>
+        <title>Color Comparison</title>
 <!--<link href="{% static 'style/css.css' %}" rel="stylesheet" type="text/css" > ---> 
         <div class="heading">
 				<div class = "Buttons">
@@ -23,10 +23,10 @@
 				</head>
 				<body>
 					<div class="Main_tool">
+						<span class="Main_title">Color Comparison</span>
 						<div class="tooltip">
-							<span class="Main_title">Color Comparison</span>
-							?
-							<span class="tooltiptext">To use this page, make sure to first select the map you want to inspect more carefully, next select a user who has looked at this map so that his graphs for both the colored, and the grayscale version are generated. This can be done using the drop down menus at the top of the page. The visualizations are generated. For the contour plot only one version can be shown at a time, you can switch between the colored or the grayscale version of the map at the dropdown menu at the top of the contour plot. To view both versions at the same time in a contour plot use the “Manual comparison” page, select the contour plot twice and use the same map and user and pick the different versions.</span>
+						?/i
+						<span class="tooltiptext">To use this page, make sure to first select the map you want to inspect more carefully, next select a user who has looked at this map so that his graphs for both the colored, and the grayscale version are generated. This can be done using the drop down menus at the top of the page. The visualizations are generated. For the contour plot only one version can be shown at a time, you can switch between the colored or the grayscale version of the map at the dropdown menu at the top of the contour plot. To view both versions at the same time in a contour plot use the “Manual comparison” page, select the contour plot twice and use the same map and user and pick the different versions.</span>
 						</div>
 					</div>
 				<span class = "dropdowns">
@@ -58,7 +58,7 @@
 					</select>
 					<!-- End Coding Tarik Hacialiogullari -->
 				</span>
-				
+				<!-- displaying all visualisations to the webpage-->
 					<h1 style="color:yellowgreen;">Gaze Plot and Line Chart:</h1>
 					{{ graphs_bokeh | safe }}
 					<h1 style="color:yellowgreen;">Bar Chart:</h1>
@@ -94,7 +94,7 @@
 	<!-- End Coding Tarik Hacialiogullari -->
 
     <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script>
-
+<!-- css information for all classes-->
 <style>
 *{
 	margin:0;
@@ -104,8 +104,9 @@ html, body{
 	height:100%;
 }
 
-body{background-color:#0c0129;
-     background-image:url(blue.jpg);
+body{
+	background-color:#0c0129;
+     background-image:url("/static/jpg/blue.jpg");
      background-position:center;
      background-size:cover;
      background-blend-mode:soft-light;
@@ -141,8 +142,9 @@ body{background-color:#0c0129;
   display: inline-block;
   border-bottom: 1px dotted black;
   color: white;
-  font-size: 30pt;
+  font-size: 24pt;
   text-align: center;
+  border:2px solid white;
 }
 .tooltip .tooltiptext {
   visibility: hidden;
@@ -153,13 +155,12 @@ body{background-color:#0c0129;
   padding: 5px 0;
   font-size: 12pt;
   
-
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
   top: 100%;
   left: 50%;
-  margin-left: -60px;
+  margin-left: -200px;
 }
 
 .tooltip:hover .tooltiptext {
