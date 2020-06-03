@@ -4,13 +4,14 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse
-from bokeh.plotting import figure, output_file, show
+from bokeh.plotting import figure, output_file, show, curdoc
 from bokeh.models import ColumnDataSource, Label, LabelSet, Range1d
-from bokeh.layouts import row
+from bokeh.layouts import row, widgetbox
 from bokeh.embed import components
 import numpy as np
 import pandas as pd
-from bokeh.models import ColumnDataSource
+from bokeh.models import ColumnDataSource, Select
+from bokeh.models.widgets import Dropdown
 from bokeh.palettes import Spectral6
 from bokeh.io import output_file, show
 from homepage.models import getUserData
@@ -47,7 +48,7 @@ def getGraph(toolbar, end):
 
     #---Start Coding by Youssef Selim
     p = figure(
-        plot_height=300, plot_width=1500, title="Bar Chart of Fixation Duration per Timestamp", x_axis_label='Timestamp', y_axis_label='Fixation Duration',
+        plot_height=300, plot_width=1500, title="Bar chart of hamburg for users", x_axis_label='Timestamp', y_axis_label='Fixation Duration',
         toolbar_location="right", tools=toolbar,  x_range=text_x_axis)
     p.xgrid.grid_line_color = None
     p.xaxis.major_label_orientation = 1
@@ -55,13 +56,30 @@ def getGraph(toolbar, end):
     p.y_range.start = 0
     #---End Coding by Youssef Selim
 
+    #Start of code by Andrada Pancu
+    # order = 'ASC'
+    # df_user = getSortedUserData('p1', '06_Hamburg_S1.jpg', 'color', order)
+
+    # menu = Select(options=['ASC','DESC'], value = 'ASC', title = 'Order')
+    # def callback(attr, old, new):
+    #     if menu.value == 'ASC' : order = 'ASC'
+    #     elif menu.value == 'DESC' : order = 'DESC' 
+    #     df_user = getSortedUserData(user, stimuli, 'color', order)
+        
+    
+    # menu.on_change('value', callback)
+    #End of code by Andrada Pancu
+
+    
+
     return p
 
 def home(request):
     toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
-    df_userOne = getUserData('p1', '06_Hamburg_S1.jpg', 'color')
-    df_userTwo = getUserData('p16', '06_Hamburg_S1.jpg', 'color')
-    df_userThree = getUserData('p12', '06_Hamburg_S1.jpg', 'color')
+
+    #df_userOne = getUserData('p1', '06_Hamburg_S1.jpg', 'color')
+    #df_userTwo = getUserData('p16', '06_Hamburg_S1.jpg', 'color')
+    #df_userThree = getUserData('p12', '06_Hamburg_S1.jpg', 'color')
 
     end = len(df_userOne.index) + len(df_userTwo.index) + 1000
     p = getGraph(toolbar, end)

@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse
+from django.contrib.staticfiles.storage import staticfiles_storage
 from bokeh.plotting import figure, output_file, show
 from bokeh.embed import components
 import numpy as np
@@ -13,31 +14,27 @@ from bokeh.layouts import row
 import plotly.graph_objects as go
 import plotly.offline as offline
 from PIL import Image
+from io import BytesIO
+import requests
 from import_csv.models import FixationData
 from homepage.models import getUserData
+import eye_tracking_visualizations_group23a.settings
+import base64
+import os
 
 
 
-def getGraph(df_user):
+def getGraph(df_user, request):
     x = df_user["MappedFixationPointX"]
     y = df_user["MappedFixationPointY"]
+    stimuli = df_user["StimuliName"][0]
 
     layout = go.Layout(
         title='Contourplot area of interest',
         autosize=False,
         width=800,
         height=600,
-        images=[dict(
-            source='https://i.ibb.co/VQSkMnN/06-Hamburg-S1.jpg',
-            xref="x",
-            yref="y",
-            x=0,
-            y=1200,
-            sizex=1651,
-            sizey=1200,
-            sizing="stretch",
-            opacity=0.7,
-            layer="above")])
+        )
 
     fig = go.Figure(go.Histogram2dContour(
         x=x,
@@ -45,61 +42,43 @@ def getGraph(df_user):
         colorscale='Hot',
         reversescale=True,
 
- ), layout)
+    ), layout)
+    
+    #---Start Coding by Andrada
+    #img_url =  '/static/stimuli/{}'.format(stimuli)
+    #encoded_image = base64.b64encode(open(stimuli, 'rb').read())
+    fig.add_layout_image(
+            #source = "http://" + request.get_host() + img_url,
+            #source = 'data:image/jpg;base64,{}'.format(encoded_image.decode()),
+            source = request.build_absolute_uri('/static/stimuli/{}'+ stimuli),
+            x = 0,
+            y = 0,
+            sizex = 1600,
+            sizey = 1200,
+            sizing = "stretch",
+            opacity = 0.7,
+            layer = "above"
 
-#---Start Coding by Andrada
+    )
+
+    # encoded_image = base64.b64encode(open(stimuli, 'rb').read())
+    # fig.update_layout(
+    #             images= [dict(
+    #                 source='data:image/png;base64,{}'.format(encoded_image.decode()),
+    #                 #xref="paper", yref="paper",
+    #                 x=0, y=1,
+    #                 sizex=0.5, sizey=0.5,
+    #                 xanchor="left",
+    #                 yanchor="top",
+    #                 #sizing="stretch",
+    #                 layer="below")])
+
     fig.update_layout(
         updatemenus=[
             dict(
                 buttons=list([
-                    dict(
-                        args=["type", "heatmap"],
-                        label="Antwerpen",
-                        method="update"
-                    ),
-                    dict(
-                        args=["type", "heatmap"],
-                        label="Berlin",
-                        method="update"
-                    ),
-                    dict(
-                        args=["type", "heatmap"],
-                        label="Bordeaux",
-                        method="update"
-                    ),
-                    dict(
-                        args=["type", "heatmap"],
-                        label="Köln",
-                        method="update"
-                    ),
-                    dict(
-                        args=["type", "heatmap"],
-                        label="Frankfurt",
-                        method="update"
-                    ),
-                    dict(
-                        args=["type", "heatmap"],
-                        label="Hamburg",
-                        method="update"
-                    ),
-                    dict(
-                        args=["type", "heatmap"],
-                        label="Moskau",
-                        method="update"
-                    ),
-                ]),
-                direction="down",
-                pad={"r": 10, "t": 10},
-                showactive=True,
-                x=0.5,
-                xanchor="left",
-                y=1.14,
-                yanchor="top"
-            ),
             #---End Coding by Andrada
             #---Start Coding by Fanni Egresits
-            dict(
-                buttons=list([
                     dict(
                         args=["colorscale", "Hot"],
                         label="Orange",
@@ -116,29 +95,27 @@ def getGraph(df_user):
                         method="restyle"
                     ),
                 ]),
-
-
+                #---End Coding by Fanni Egresits
+                #---Start Coding by Andrada Pancu
                 direction="down",
                 pad={"r": 10, "t": 10},
                 showactive=True,
                 x=0.12,
                 xanchor="left",
-                y=1.14,
+                y=1.10,
                 yanchor="top"
             ),
         ]
     )
 
     fig.update_layout(
-        annotations=[
+        annotations=[    #---End Coding by Andrada
+            #---Start Coding by Fanni Egresits
             dict(text="Colorscale", x=0, xref="paper", y=1.06,
                  yref="paper", showarrow=False),
-            dict(text="Stimuli", x=0.4, xref="paper", y=1.06, yref="paper",
-                 showarrow=False)
         ])
 
     fig.update_layout(template="plotly_white")
-    #---End Coding by Fanni Egresits
     graph = fig.to_html(
         full_html=False, default_height=500, default_width=1000)
 
