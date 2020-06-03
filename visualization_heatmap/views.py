@@ -24,7 +24,7 @@ import os
 
 
 
-def getGraph(df_user, request):
+def getGraph(df_user):
     x = df_user["MappedFixationPointX"]
     y = df_user["MappedFixationPointY"]
     stimuli = df_user["StimuliName"][0]
@@ -50,7 +50,7 @@ def getGraph(df_user, request):
     fig.add_layout_image(
             #source = "http://" + request.get_host() + img_url,
             #source = 'data:image/jpg;base64,{}'.format(encoded_image.decode()),
-            source = request.build_absolute_uri('/static/stimuli/{}'+ stimuli),
+            #source = request.build_absolute_uri('/static/stimuli/{}'+ stimuli),
             x = 0,
             y = 0,
             sizex = 1600,
