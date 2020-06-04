@@ -56,3 +56,20 @@ def getAllUsersByStimuli(stimuli):
     for userEach in query_users: 
         user_list.append(userEach.user)
     return user_list
+
+#Start of code by Andrada Pancu
+def getSortedUserData(user, mapName, color, order):
+    columns = ['ID', 'Timestamp', 'StimuliName', 'FixationIndex', 'FixationDuration',
+               'MappedFixationPointX', 'MappedFixationPointY', 'user', 'description']
+    columns_sql = ', '.join(columns)
+
+    query_asc = "SELECT " + columns_sql + " FROM Fixation_data WHERE user = '" + user + "' AND StimuliName LIKE '%" + mapName.split('_')[1] + "%' AND description = '" + color + "' ORDER BY FixationDuration "
+    query_desc = "SELECT " + columns_sql + " FROM Fixation_data WHERE user = '" + user + "' AND StimuliName LIKE '%" + mapName.split('_')[1] + "%' AND description = '" + color + "' ORDER BY FixationDuration DESC "
+
+    if order == 'ASC' :
+        queryset_userData = FixationData.objects.raw(query_asc)
+    if order == 'DESC' :
+        queryset_userData = FixationData.objects.raw(query_desc)
+    
+    return querySetToPandas(queryset_userData)
+#End of code by Andrada Pancu
