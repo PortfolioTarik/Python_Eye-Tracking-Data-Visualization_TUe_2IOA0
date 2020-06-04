@@ -59,6 +59,7 @@ def getGraph(toolbar, end):
     #---End Coding by Youssef Selim
 
     #Start of code by Andrada Pancu
+    #Get sorted user data and remake the bar chart with the new data 
     # order = 'ASC'
     # df_user = getSortedUserData('p1', '06_Hamburg_S1.jpg', 'color', order)
 
@@ -71,8 +72,6 @@ def getGraph(toolbar, end):
     
     # menu.on_change('value', callback)
     #End of code by Andrada Pancu
-
-    
 
     return p
 

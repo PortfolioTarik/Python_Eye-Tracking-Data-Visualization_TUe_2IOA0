@@ -37,7 +37,7 @@ viz_data = FixationData.objects.raw('''SELECT FixationDuration, User
 
 
 
-# 
+# Make list of distinct stimuli names
 columns = ['ID', 'Timestamp', 'StimuliName', 'FixationIndex', 'FixationDuration',
                'MappedFixationPointX', 'MappedFixationPointY', 'user', 'description']
 

@@ -102,7 +102,7 @@ for i in len(stimuli_list):
                 
     
 
-
+# Dropdown with traces, enabling them via 'visible' for their respective buttons
 fig.update_layout(
     updatemenus=[
         dict(
@@ -125,21 +125,6 @@ fig.update_layout(
                 dict(
                     args={"visible": [False, False, False, True, False, False, False]},
                     label=stimuli_list[4],
-                    method="update"
-                ),
-                dict(
-                    args=["type", "surface"],
-                    label=stimuli_list[5],
-                    method="update"
-                ),
-                dict(
-                    args=["type", "surface"],
-                    label=stimuli_list[6],
-                    method="update"
-                ),
-                dict(
-                    args=["type", "surface"],
-                    label=stimuli_list[7],
                     method="update"
                 ),
             ]),
