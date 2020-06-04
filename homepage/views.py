@@ -5,8 +5,11 @@ from django.http import HttpResponse
 
 from bokeh.embed import components
 from bokeh.layouts import row, gridplot
+from bokeh.models import Select, ColumnDataSource
+from bokeh.models.widgets import Dropdown
+from bokeh.io import output_file, show
 
-from homepage.models import getUserData, getAllStimulis, getAllUsersByStimuli
+from homepage.models import getUserData, getAllStimulis, getAllUsersByStimuli, getSortedUserData
 
 from visualization_heatmap.views import getGraph as getGraphContour
 
@@ -27,6 +30,7 @@ def home(request):
     stimuli = '06_Hamburg_S1.jpg'
     user = 'p1'
     color = 'color'
+    order = 'ASC'
 
     #If there is a stimuli in the URL like '?stimuli=istanbul.jpg' then overwrite the pre-data of above and put that in.
     if request.GET.get('stimuli') is not None:
@@ -44,6 +48,7 @@ def home(request):
 
     #Take the selected user (by stimuli and color) from the database.
     df_userOne = getUserData(user, stimuli, color)
+    df_userSorted = getSortedUserData(user, stimuli, color, order)
 
     #BOKEH
         #Get Bar graph
@@ -52,9 +57,8 @@ def home(request):
     #Get the bar graph figure from visualization_barchart/views.py
     graph_bar = getGraphBar(toolbar, end)
     #Add just one user to the bar graph with color red.
-    addUserToGraphBar(df_userOne, graph_bar, 'red', 0)
+    addUserToGraphBar(df_userSorted, graph_bar, 'red', 0, order)
     
-
         #Get Line graph
     #Get the line graph figure from visualization_linegraph/views.py
     graph_line = getGraphLine(toolbar)

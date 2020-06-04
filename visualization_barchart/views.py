@@ -5,19 +5,18 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse
 from bokeh.plotting import figure, output_file, show, curdoc
-from bokeh.models import ColumnDataSource, Label, LabelSet, Range1d
-from bokeh.layouts import row, widgetbox
+from bokeh.models import ColumnDataSource, Label, LabelSet, Range1d, Select
+from bokeh.layouts import row, widgetbox, layout
 from bokeh.embed import components
 import numpy as np
 import pandas as pd
-from bokeh.models import ColumnDataSource, Select
 from bokeh.models.widgets import Dropdown
 from bokeh.palettes import Spectral6
 from bokeh.io import output_file, show
-from homepage.models import getUserData
+from homepage.models import getUserData, getSortedUserData
 
 
-def addUserToGraph(userDataOriginal, p, color, start_index):
+def addUserToGraph(userDataOriginal, p, color, start_index, order):
     userData = userDataOriginal.copy()
     user = userData['user'].iloc[0]
     sizePath = len(userData.index) + start_index
@@ -31,6 +30,24 @@ def addUserToGraph(userDataOriginal, p, color, start_index):
     p.vbar(x=amount_of_fixations, top=y_coordinates,
            width=0.25, color=color, legend_label=user)
     #---End Coding by Youssef Selim
+
+    #Start of code by Andrada Pancu
+    #Get sorted user data and remake the bar chart with the new data 
+    menu = Select(options=['ASC','DESC'], value = 'ASC', title = 'Order')
+    def update_plot(attr, old, new):
+        if menu.value == 'ASC' : order = 'ASC'
+        elif menu.value == 'DESC' : order = 'DESC' 
+        userData = getSortedUserData(user, stimuli, color, order)
+        
+    menu.on_change('value', update_plot)
+    widgets = row(menu, sizing_mode = "fixed", height = 10, width = 12)
+    layout([
+        [widgets, p]
+    ])
+    
+    #output_file("home.html")
+    #show(widgets)
+    #End of code by Andrada Pancu
 
     if(start_index == 0):
         p.x_range.factors = list(userData["Timestamp"].astype(str).to_numpy())
@@ -57,21 +74,6 @@ def getGraph(toolbar, end):
     p.xaxis.major_label_text_font_size = "6pt"
     p.y_range.start = 0
     #---End Coding by Youssef Selim
-
-    #Start of code by Andrada Pancu
-    #Get sorted user data and remake the bar chart with the new data 
-    # order = 'ASC'
-    # df_user = getSortedUserData('p1', '06_Hamburg_S1.jpg', 'color', order)
-
-    # menu = Select(options=['ASC','DESC'], value = 'ASC', title = 'Order')
-    # def callback(attr, old, new):
-    #     if menu.value == 'ASC' : order = 'ASC'
-    #     elif menu.value == 'DESC' : order = 'DESC' 
-    #     df_user = getSortedUserData(user, stimuli, 'color', order)
-        
-    
-    # menu.on_change('value', callback)
-    #End of code by Andrada Pancu
 
     return p
 

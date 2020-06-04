@@ -25,7 +25,8 @@ pip install Django\
 pip install bokeh\
 pip install pandas\
 pip install numpy\
-pip install plotly
+pip install plotly\
+pip install requests
 
 ## Features
 After the user opens the website he/she will find a button 'upload' there they can upload their CSV dataset. Underneath, the user can see our 4 visualisation. The user will find a toolbar above the first visualisation where he/she can access various interactions. To use one of these tools they can highlight on one with the a mouse and the name of the tool will be visible next to use it the user must click on the icon. It is possible to use more than one tool at the same time as long as they do not contradict with each other.
