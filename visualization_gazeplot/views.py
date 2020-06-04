@@ -49,15 +49,7 @@ def addUserToGraph(userData, p, color):
 
 # ---Start Coding by Fanni Egresits
 # generate graph with background and return it.
-def getGraph(toolbar, stimuli, request):
-    #Load local stimuli
-    url = '/static/stimuli/{}'.format(stimuli)
-    img_url = "http://" + request.get_host() + url
-
-    #Get the parameters of map (width, height)
-    response = requests.get(img_url)
-    w, h = Image.open(BytesIO(response.content)).size
-
+def getGraph(toolbar, url, w, h):
     #Create plot
     p = figure(plot_width=800, plot_height=600, x_range=(0, w), y_range=(0, h),
                title="Gaze Plot of Fixation Duration per Timestamp", x_axis_label='Mapped Fixation Point X',
@@ -72,15 +64,16 @@ def getGraph(toolbar, stimuli, request):
 
 # home is is not in use. just if someone wants to use this for now.
 def home(request):
-    toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
-    df_userOne = getUserData('p1', '06_Hamburg_S1.jpg', 'color')
-    df_userTwo = getUserData('p16', '06_Hamburg_S1.jpg', 'color')
-    df_userThree = getUserData('p12', '06_Hamburg_S1.jpg', 'color')
+    # toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
+    # df_userOne = getUserData('p1', '06_Hamburg_S1.jpg', 'color')
+    # df_userTwo = getUserData('p16', '06_Hamburg_S1.jpg', 'color')
+    # df_userThree = getUserData('p12', '06_Hamburg_S1.jpg', 'color')
 
-    p = getGraph(toolbar, '06_Hamburg_S1.jpg', request)
-    addUserToGraph(df_userOne, p, 'red')
-    addUserToGraph(df_userTwo, p, 'yellow')
-    addUserToGraph(df_userThree, p, 'blue')
+    # p = getGraph(toolbar, '06_Hamburg_S1.jpg', request)
+    # addUserToGraph(df_userOne, p, 'red')
+    # addUserToGraph(df_userTwo, p, 'yellow')
+    # addUserToGraph(df_userThree, p, 'blue')
+    p = ''
 
     script, div = components(p)
     return render(request, 'website_starplot.html',

@@ -22,6 +22,13 @@ from visualization_barchart.views import addUserToGraph as addUserToGraphBar
 from visualization_linechart.views import getGraph as getGraphLine
 from visualization_linechart.views import addUserToGraph as addUserToGraphLine
 
+#I think background?
+import eye_tracking_visualizations_group23a.settings
+from PIL import Image
+import requests
+from io import BytesIO
+from django.contrib.staticfiles.storage import staticfiles_storage
+
 
 def home(request):
     #Standard toolbar (on the right / above) for every graph.
@@ -50,6 +57,17 @@ def home(request):
     df_userOne = getUserData(user, stimuli, color)
     df_userSorted = getSortedUserData(user, stimuli, color, order)
 
+
+    # ---Start Coding by Fanni Egresits
+    #GetBackground images
+    url = '/static/stimuli/{}'.format(stimuli)
+    img_url = "http://" + request.get_host() + url
+
+        #Get the parameters of map (width, height)
+    response = requests.get(img_url)
+    w, h = Image.open(BytesIO(response.content)).size
+    # ---End Coding by Fanni Egresits
+
     #BOKEH
         #Get Bar graph
     #Don't touch this end variable it provides the amount of label text needed on the x-axis of bar graph.
@@ -67,7 +85,7 @@ def home(request):
     
         #Get Gaze graph
     #Get the gaze graph figure from visualization_gazeplot/views.py also send the current stimuli which is selected, so it generate this graph with this background.
-    graph_gaze = getGraphGaze(toolbar, stimuli, request)
+    graph_gaze = getGraphGaze(toolbar, url, w, h)
     addUserToGraphGaze(df_userOne, graph_gaze, 'red')
 
         #Convert the BAR, LINE, GAZE plot to HTML (So only the Bokeh plots)
@@ -76,7 +94,7 @@ def home(request):
     
     #PLOTLY
     #get the contour map from 'visualization_heatmap/views.py' for the one user we have retrieved.
-    graph_contour = getGraphContour(df_userOne, stimuli, request)
+    graph_contour = getGraphContour(df_userOne, url, w, h)
 
     #Stimuli dropdown
     #Get all the stimulis in order to send it with context to the homepage.

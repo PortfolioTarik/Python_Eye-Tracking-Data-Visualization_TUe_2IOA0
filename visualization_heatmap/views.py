@@ -24,18 +24,10 @@ import os
 
 
 
-def getGraph(df_user, stimuli, request):
+def getGraph(df_user, url, w, h):
     x = df_user["MappedFixationPointX"]
     y = df_user["MappedFixationPointY"]
-    stimuli = df_user["StimuliName"][0]
-
-    #Load local stimuli
-    url = '/static/stimuli/{}'.format(stimuli)
-    img_url = "http://" + request.get_host() + url
-
-    #Get the parameters of map (width, height)
-    response = requests.get(img_url)
-    w, h = Image.open(BytesIO(response.content)).size
+    #stimuli = df_user["StimuliName"][0]
 
     layout = go.Layout(
         title='Contourplot area of interest',
@@ -152,8 +144,9 @@ def getGraph(df_user, stimuli, request):
 
 def home(request):
 
-    df_user = getUserData('p1', '06_Hamburg_S1.jpg', 'color')
-    graph = getGraph(df_user, '06_Hamburg_S1.jpg', request)
+    #df_user = getUserData('p1', '06_Hamburg_S1.jpg', 'color')
+    #graph = getGraph(df_user, '06_Hamburg_S1.jpg', request)
+    graph = ''
 
     script = ""
 
