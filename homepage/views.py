@@ -22,7 +22,7 @@ from visualization_barchart.views import addUserToGraph as addUserToGraphBar
 from visualization_linechart.views import getGraph as getGraphLine
 from visualization_linechart.views import addUserToGraph as addUserToGraphLine
 
-#I think background?
+#Some of them are for background not sure which one, just putting all in it m8.
 import eye_tracking_visualizations_group23a.settings
 from PIL import Image
 import requests
@@ -37,7 +37,7 @@ def home(request):
     stimuli = '06_Hamburg_S1.jpg'
     user = 'p1'
     color = 'color'
-    order = 'ASC'
+    brev = False
 
     #If there is a stimuli in the URL like '?stimuli=istanbul.jpg' then overwrite the pre-data of above and put that in.
     if request.GET.get('stimuli') is not None:
@@ -51,11 +51,15 @@ def home(request):
     if request.GET.get('color') is not None:
         color = request.GET['color']
         print('COLOR IS RECEIVED:' + color)
+    #same as stimuli but for barchart so that you can reverse it order.
+    if request.GET.get('brev') is not None:
+        brev = parseToBool(request.GET['brev'].lower())
+        print('BREV IS RECEIVED:' + str(brev))
 
 
     #Take the selected user (by stimuli and color) from the database.
     df_userOne = getUserData(user, stimuli, color)
-    df_userSorted = getSortedUserData(user, stimuli, color, order)
+    #df_userSorted = getSortedUserData(user, stimuli, color, order)
 
 
     # ---Start Coding by Fanni Egresits
@@ -75,7 +79,7 @@ def home(request):
     #Get the bar graph figure from visualization_barchart/views.py
     graph_bar = getGraphBar(toolbar, end)
     #Add just one user to the bar graph with color red.
-    addUserToGraphBar(df_userSorted, graph_bar, 'red', 0, order)
+    addUserToGraphBar(df_userOne, graph_bar, 'red', 0, brev)
     
         #Get Line graph
     #Get the line graph figure from visualization_linegraph/views.py
@@ -107,6 +111,7 @@ def home(request):
         'selected_stimuli': stimuli,
         'selected_user': user,
         'selected_color': color,
+        'brev': brev,
         'stimuli_list': stimuli_list,
         'user_list': user_list,
         'graph_contour': graph_contour,
@@ -119,3 +124,8 @@ def home(request):
     }
     #return the home.html to the requester with the contect array in it rendered.
     return render(request, 'home.html', context)
+
+#Function from https://stackoverflow.com/a/53287252/4641129 to convert text content to boolean type. (only changed the function name)
+def parseToBool(string):
+    d = {'true': True, 'false': False}
+    return d.get(string, string)
