@@ -102,7 +102,7 @@ def home(request):
     script_bar, graph_bar = components(graph_bar)
     
     #PLOTLY
-    graph_contour = getGraphContour(df_userOne)
+    graph_contour = getGraphContour(df_userOne, stimuli, request)
 
     #Stimuli dropdown
     stimuli_list = getAllStimulis()

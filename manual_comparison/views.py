@@ -77,7 +77,7 @@ def home(request):
     #script_gaze, script_line, graph_gaze, graph_line = components(gridplot([graph_line, graph_gaze], ncols=2, sizing_mode="scale_both"))
     
     #PLOTLY
-    graph_contour = getGraphContour(df_userOne)
+    graph_contour = getGraphContour(df_userOne, stimuli, request)
 
     #Stimuli dropdown
     stimuli_list = getAllStimulis()

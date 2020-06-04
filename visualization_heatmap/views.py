@@ -24,17 +24,44 @@ import os
 
 
 
-def getGraph(df_user):
+def getGraph(df_user, stimuli, request):
     x = df_user["MappedFixationPointX"]
     y = df_user["MappedFixationPointY"]
     stimuli = df_user["StimuliName"][0]
+
+    #Load local stimuli
+    url = '/static/stimuli/{}'.format(stimuli)
+    img_url = "http://" + request.get_host() + url
+
+    #Get the parameters of map (width, height)
+    response = requests.get(img_url)
+    w, h = Image.open(BytesIO(response.content)).size
 
     layout = go.Layout(
         title='Contourplot area of interest',
         autosize=False,
         width=800,
         height=600,
-        )
+        xaxis = dict(
+            range= (0, w),  # sets the range of xaxis
+            constrain="domain",  # meanwhile compresses the xaxis by decreasing its "domain"
+        ),
+        yaxis = dict(
+            range= (0, h),  # sets the range of xaxis
+            constrain="domain",  # meanwhile compresses the xaxis by decreasing its "domain"
+        ),
+        images=[dict(
+            source=url,
+            xref="x",
+            yref="y",
+            x=0,
+            y=h,
+            sizex=w,
+            sizey=h,
+            sizing="stretch",
+            opacity=0.7,
+            layer="above")])
+
 
     fig = go.Figure(go.Histogram2dContour(
         x=x,
@@ -44,22 +71,23 @@ def getGraph(df_user):
 
     ), layout)
     
-    #---Start Coding by Andrada
-    #img_url =  '/static/stimuli/{}'.format(stimuli)
-    #encoded_image = base64.b64encode(open(stimuli, 'rb').read())
-    fig.add_layout_image(
-            #source = "http://" + request.get_host() + img_url,
-            #source = 'data:image/jpg;base64,{}'.format(encoded_image.decode()),
-            #source = request.build_absolute_uri('/static/stimuli/{}'+ stimuli),
-            x = 0,
-            y = 0,
-            sizex = 1600,
-            sizey = 1200,
-            sizing = "stretch",
-            opacity = 0.7,
-            layer = "above"
+    # #---Start Coding by Andrada
+    # #img_url =  '/static/stimuli/{}'.format(stimuli)
+    # #encoded_image = base64.b64encode(open(stimuli, 'rb').read())
+    # fig.add_layout_image(
+    #         #source = "http://" + request.get_host() + img_url,
+    #         #source = 'data:image/jpg;base64,{}'.format(encoded_image.decode()),
+    #         #source = request.build_absolute_uri('/static/stimuli/{}'+ stimuli),
+    #         source='https://i.ibb.co/VQSkMnN/06-Hamburg-S1.jpg',
+    #         x = 0,
+    #         y = 1200,
+    #         sizex = 1600,
+    #         sizey = 1200,
+    #         sizing = "stretch",
+    #         opacity = 0.7,
+    #         layer = "above"
 
-    )
+    # )
 
     # encoded_image = base64.b64encode(open(stimuli, 'rb').read())
     # fig.update_layout(
@@ -125,7 +153,7 @@ def getGraph(df_user):
 def home(request):
 
     df_user = getUserData('p1', '06_Hamburg_S1.jpg', 'color')
-    graph = getGraph(df_user)
+    graph = getGraph(df_user, '06_Hamburg_S1.jpg', request)
 
     script = ""
 

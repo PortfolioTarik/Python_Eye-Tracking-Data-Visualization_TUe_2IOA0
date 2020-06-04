@@ -76,7 +76,7 @@ def home(request):
     
     #PLOTLY
     #get the contour map from 'visualization_heatmap/views.py' for the one user we have retrieved.
-    graph_contour = getGraphContour(df_userOne)
+    graph_contour = getGraphContour(df_userOne, stimuli, request)
 
     #Stimuli dropdown
     #Get all the stimulis in order to send it with context to the homepage.
