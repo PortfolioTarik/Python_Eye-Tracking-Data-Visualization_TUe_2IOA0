@@ -5,12 +5,17 @@
     <head>
         <title>Eye Tracking Visualizations</title>
 <!-- <link href="{% static 'style/css.css' %}" rel="stylesheet" type="text/css">-->
-    </head>
+<!-- Coded by Laura: -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	</head>
+
     <body>
         <div class="heading">
 			<span class="Main_title">Visualization of Eye Tracking Data</span>
-			<!-- Text by Laura -->
-			<span class="Sub_introduction">
+			<div id="Sub_introduction" class="collapse in">
 				<p>Welcome to our eye tracking visualization page. Here you will find all the tools you need to get a better visual representation of your eye tracking data. 
 					The eye tracking data currently in the site is from a research regarding train maps. On this page you will find each of the four visualizations, you can select which map you want to 
 					look at and which user looking at that map. Another element of the data is the version of the map, the options are grayscale or colored, this setting can also be selected. This way 
@@ -24,10 +29,13 @@
 					the map and its version. This way you can compare two contour plots of different users or map versions, or any other combination of graphs useful for your specific research.</p>
 				<p>To upload your own dataset of your eye-tracking research, find the upload button of the menu bar, where you can select a csv file and upload it to the website. Important is the ordering of 
 					the columns: “Timestamp”, “Stimuli name”, “Fixation index”, “Fixation duration”, “Mapped fixation point X”, “Mapped fixation point Y”, “User”, “Description”, as well as the fact that they are separated using a tab.</p>
-				</span>
-				<!-- end coding (text) by Laura-->
+				</div>
+				
+				
 				<!-- all buttons for the webpage-->
 				<div class = "Buttons">
+					<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#Sub_introduction">Introduction</button>
+					<!-- End code by Laura-->
 					<a href="/import"><button class="Upload">
 						Upload
 					</button></a>
