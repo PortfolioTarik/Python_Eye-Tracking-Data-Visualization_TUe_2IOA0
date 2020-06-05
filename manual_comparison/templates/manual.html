@@ -32,11 +32,17 @@
 							<span class="tooltiptext">To use the manual comparison, first select which graph type you want to show on the left and right side of the page. Once the graphs are selected, you can use the drop down menu for either side of the page to select the map, user and the map version you want to be shown in each visualization. On this page only 1 user can be shown at a time per visualization.</span>
 						</div>
         			</div>
-				<span class = "dropdowns">
-					<span class = "dropdowns2">
-					Select graph type:
+					<div class="Select_graph">
+						<span class = "left">Select graph type:</span>
+						<span class = "right">Select graph type:</span>
+					</div>
+					<div class="Select_graph">
+						<span class = "left1">Stimuli User Color:</span>
+						<span class = "right">Stimuli User Color:</span>
+					</div>
+
 					<!-- SEE homepage/templates/home.HTML for the comments -->
-					<!--Select a stimuli:
+					<!-- Select a stimuli:
 					<select onchange="changeStimuli(this.value)">
 						{% for stimuli in stimuli_list %}
 						<div>
@@ -251,13 +257,22 @@ body{
 
 	transition: background-color 1000ms, color 1000ms;
 }
-.dropdowns{
-	display:block;
-	margin-top:15px;
+.Select_graph{
 	text-align: center;
-	color:white;
-	font-size:14pt;
-	font-family:serif;
+	color: white;
+	font-size: 24px;
+}
+.left{
+	margin-right: 150px;
+	display: inline-block;
+}
+.right{
+	margin-left: 600px;
+	display: inline-block;
+}
+.left1{
+	margin-right: 150px;
+	display: inline-block;
 }
 select {
   -webkit-appearance: none;

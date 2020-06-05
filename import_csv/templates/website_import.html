@@ -50,19 +50,18 @@
                 <p>Please make sure that you dataset is tab delimited!</p>
                 <p>Your dataset should contain: Timestamp, Stimuli name, Fixation index, Fixation duration, Mapped fixation point X, Mapped fixation point Y, User, Description.</p>
 				</span>
-				<div class = "Buttons">
+                <div class = "Buttons">
                     <br>
-                    <label for="file1" class="Upload"> Select a file</label>
-                    <input type="file" id="file1" name="file" class="Upload">
+                    <input type="file" id="file1" name="file" style="color:whitesmoke">
                 </br>
-                <p style="color:whitesmoke">After selecting the upload file, click the upload button.</p>
+                <p style="color:whitesmoke; margin-top:18px;">After choosing the upload file, click the upload button.</p>
                 <p style="color:whitesmoke">You can know visualize your dataset from the options(ie user comparison) in our homepage</p>
                     <button class="Upload" type="submit">
 						Upload
-                    </button>  
+                    </button>
                     <a href="/"><button class="Home">
 						Home
-					</button></a>   
+					</button></a>
                 </div>
             </form>
             {% for profile in profiles %}
@@ -107,6 +106,11 @@ body{background-color:#0c0129;
 	color:white;
 	font-size:14pt;
 	font-family:serif;
+}
+.Choose{
+    color: white;
+    text-align: center;
+    font-size: 18pt;
 }
 .Buttons{
 	text-align: center;
