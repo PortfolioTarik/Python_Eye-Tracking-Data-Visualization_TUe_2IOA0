@@ -42,6 +42,18 @@
 					</div>
 
 					<!-- SEE homepage/templates/home.HTML for the comments -->
+					Select a graph:
+					<select onchange="changeGraph(this.value)">
+						{% for graph in graph_list %}
+						<div>
+							{% if graph != selected_graph %}
+								<option value="{{ graph }}">{{ graph }}</option>
+							{% else %}
+								<option selected="selected" value="{{ graph }}">{{ graph }}</option>
+							{% endif %}
+						</div>
+						{% endfor %}
+					</select>
 					<!-- Select a stimuli:
 					<select onchange="changeStimuli(this.value)">
 						{% for stimuli in stimuli_list %}

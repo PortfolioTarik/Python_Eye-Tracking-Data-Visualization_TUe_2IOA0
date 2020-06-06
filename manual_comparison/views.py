@@ -34,6 +34,8 @@ def home(request):
     user = 'p1'
     color = 'color'
     brev = False
+    # Functionality
+    graph = 'gaze'
 
     if request.GET.get('stimuli') is not None:
         stimuli = request.GET['stimuli']
@@ -52,6 +54,10 @@ def home(request):
         brev = parseToBool(request.GET['brev'].lower())
         print('BREV IS RECEIVED:' + str(brev))
 
+    #functionality
+    if request.GET.get('graph') is not None:
+        graph = parseToBoo(request.Get['graph'].lower())
+        print('GRAPH IS RECEIVED' +str(graph))
 
     #getData
     df_userOne = getUserData(user, stimuli, color)
@@ -68,26 +74,41 @@ def home(request):
     w, h = Image.open(BytesIO(response.content)).size
     # ---End Coding by Fanni Egresits
 
+
+    #functionality
+    if graph is gaze:
+        graph_selected = getGraphGaze(toolbar, url, w, h)
+        addUserToGraphGaze(df_userOne, graph_gaze, 'red')
+    elif graph is line:
+        graph_selected = getGraphLine(toolbar)
+        addUserToGraphLine(df_userOne, graph_line, 'red')
+    elif graph is bar:
+        end = len(df_userOne.index) + 1000
+        graph_selected = getGraphBar(toolbar, end)
+        addUserToGraphBar(df_userOne, graph_bar, 'red', 0, brev)
+    elif graph is contour:
+        graph_selected = getGraphContour(df_userOne, url, w, h)
+
     #BOKEH
 
         #Get Bar graph
     #end = len(df_userOne.index) + len(df_userTwo.index)+ 1000
-    end = len(df_userOne.index) + 1000
-    graph_bar = getGraphBar(toolbar, end)
-    addUserToGraphBar(df_userOne, graph_bar, 'red', 0, brev)
+    #end = len(df_userOne.index) + 1000
+    #graph_bar = getGraphBar(toolbar, end)
+    #addUserToGraphBar(df_userOne, graph_bar, 'red', 0, brev)
     #addUserToGraphBar(df_userTwo, graph_bar, 'yellow', len(df_userOne.index))
     #addUserToGraphBar(df_userThree, graph_bar, 'blue', len(df_userOne.index) + len(df_userTwo.index))
     
 
         #Get Line graph
-    graph_line = getGraphLine(toolbar)
-    addUserToGraphLine(df_userOne, graph_line, 'red')
+    #graph_line = getGraphLine(toolbar)
+    #addUserToGraphLine(df_userOne, graph_line, 'red')
     #addUserToGraphLine(df_userTwo, graph_line, 'yellow')
     #addUserToGraphLine(df_userThree, graph_line, 'blue')
     
         #Get Gaze graph
-    graph_gaze = getGraphGaze(toolbar, url, w, h)
-    addUserToGraphGaze(df_userOne, graph_gaze, 'red')
+    #graph_gaze = getGraphGaze(toolbar, url, w, h)
+    #addUserToGraphGaze(df_userOne, graph_gaze, 'red')
     #addUserToGraphGaze(df_userTwo, graph_gaze, 'yellow')
     #addUserToGraphGaze(df_userThree, graph_gaze, 'blue')
 
@@ -100,7 +121,7 @@ def home(request):
     #script_gaze, script_line, graph_gaze, graph_line = components(gridplot([graph_line, graph_gaze], ncols=2, sizing_mode="scale_both"))
     
     #PLOTLY
-    graph_contour = getGraphContour(df_userOne, url, w, h)
+    #graph_contour = getGraphContour(df_userOne, url, w, h)
 
     #Stimuli dropdown
     stimuli_list = getAllStimulis()
@@ -108,6 +129,7 @@ def home(request):
 
 
     context = {
+        'selected_graph' : graph_selected,
         'selected_stimuli': stimuli,
         'selected_user': user,
         'selected_color': color,
