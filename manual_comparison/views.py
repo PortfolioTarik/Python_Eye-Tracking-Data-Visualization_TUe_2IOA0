@@ -34,7 +34,6 @@ def home(request):
     user = 'p1'
     color = 'color'
     brev = False
-    # Functionality
     graph = 'gaze'
 
     if request.GET.get('stimuli') is not None:
@@ -54,10 +53,11 @@ def home(request):
         brev = parseToBool(request.GET['brev'].lower())
         print('BREV IS RECEIVED:' + str(brev))
 
-    #functionality
+    # Coded by Laura
     if request.GET.get('graph') is not None:
         graph = request.GET['graph']
         print('GRAPH IS RECEIVED' + graph)
+        # end coding Laura
 
     #getData
     df_userOne = getUserData(user, stimuli, color)
@@ -76,7 +76,7 @@ def home(request):
 
     selected_graph = 0
 
-    #functionality
+    # Coded by Fanni and Laura
     if graph == 'gaze':
         selected_graph = getGraphGaze(toolbar, url, w, h)
         addUserToGraphGaze(df_userOne, selected_graph, 'red')
@@ -93,6 +93,7 @@ def home(request):
     elif graph == 'contour':
         selected_graph = getGraphContour(df_userOne, url, w, h)
         script_graph = 0
+        #end coding Fanni and Laura
 
     #BOKEH
 
@@ -133,6 +134,7 @@ def home(request):
     user_list = getAllUsersByStimuli(stimuli)
     graph_list = {'gaze', 'contour', 'bar', 'line'}
 
+    #Updated from homepage context by Fanni and Laura
     context = {
         'graph_selected' : selected_graph,
         'selected_stimuli': stimuli,
