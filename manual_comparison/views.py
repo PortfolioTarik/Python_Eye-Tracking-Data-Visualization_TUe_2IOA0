@@ -56,7 +56,7 @@ def home(request):
 
     #functionality
     if request.GET.get('graph') is not None:
-        graph = parseToBoo(request.Get['graph'].lower())
+        graph = parseToBool(request.Get['graph'].lower())
         print('GRAPH IS RECEIVED' +str(graph))
 
     #getData
@@ -74,20 +74,25 @@ def home(request):
     w, h = Image.open(BytesIO(response.content)).size
     # ---End Coding by Fanni Egresits
 
+    selected_graph = 0
 
     #functionality
-    if graph is gaze:
-        graph_selected = getGraphGaze(toolbar, url, w, h)
-        addUserToGraphGaze(df_userOne, graph_gaze, 'red')
-    elif graph is line:
-        graph_selected = getGraphLine(toolbar)
-        addUserToGraphLine(df_userOne, graph_line, 'red')
-    elif graph is bar:
+    if graph == 'gaze':
+        selected_graph = getGraphGaze(toolbar, url, w, h)
+        addUserToGraphGaze(df_userOne, selected_graph, 'red')
+        script_graph, selected_graph = components(selected_graph)
+    elif graph == 'line':
+        selected_graph = getGraphLine(toolbar)
+        addUserToGraphLine(df_userOne, selected_graph, 'red')
+        script_graph, selected_graph = components(selected_graph)
+    elif graph == 'bar':
         end = len(df_userOne.index) + 1000
-        graph_selected = getGraphBar(toolbar, end)
-        addUserToGraphBar(df_userOne, graph_bar, 'red', 0, brev)
-    elif graph is contour:
-        graph_selected = getGraphContour(df_userOne, url, w, h)
+        selected_graph = getGraphBar(toolbar, end)
+        addUserToGraphBar(df_userOne, selected_graph, 'red', 0, brev)
+        script_graph, selected_graph = components(selected_graph)
+    elif graph == 'contour':
+        selected_graph = getGraphContour(df_userOne, url, w, h)
+        script_graph, selected_graph = components(selected_graph)
 
     #BOKEH
 
@@ -115,9 +120,9 @@ def home(request):
     
 
         #Convert to HTML
-    script_bokeh, graphs_bokeh = components(gridplot([graph_line,  graph_gaze],ncols=2, sizing_mode="scale_both"))
+    #script_bokeh, graphs_bokeh = components(gridplot([graph_line,  graph_gaze],ncols=2, sizing_mode="scale_both"))
     #script_bars = script_bar
-    script_bar, graph_bar = components(graph_bar)
+    #script_bar, graph_bar = components(graph_bar)
     #script_gaze, script_line, graph_gaze, graph_line = components(gridplot([graph_line, graph_gaze], ncols=2, sizing_mode="scale_both"))
     
     #PLOTLY
@@ -126,22 +131,24 @@ def home(request):
     #Stimuli dropdown
     stimuli_list = getAllStimulis()
     user_list = getAllUsersByStimuli(stimuli)
-
+    graph_list = {'gaze', 'contour', 'bar', 'line'}
 
     context = {
-        'selected_graph' : graph_selected,
+        'graph_selected' : selected_graph,
         'selected_stimuli': stimuli,
         'selected_user': user,
         'selected_color': color,
         'stimuli_list': stimuli_list,
         'user_list': user_list,
-        'graph_contour': graph_contour,
-        'graphs_bokeh': graphs_bokeh,
-        'graph_bar': graph_bar,
-        'graph_line': graph_line,
-        'graph_gaze': graph_gaze,
-        'script_bokeh' : script_bokeh,
-        'script_bar' : script_bar
+        'script_graph': script_graph
+        #'graph_contour': graph_contour,
+        #'graph_bar': graph_bar,
+        #'graph_line': graph_line,
+        #'graph_gaze': graph_gaze,
+        #'script_bar' : script_bar,
+        #'script_contour': graph_contour,
+        #'script_line': graph_line,
+        #'script_gaze': graph_gaze
     }
     return render(request, 'manual.html', context)
 
