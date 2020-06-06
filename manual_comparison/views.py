@@ -56,8 +56,8 @@ def home(request):
 
     #functionality
     if request.GET.get('graph') is not None:
-        graph = parseToBool(request.Get['graph'].lower())
-        print('GRAPH IS RECEIVED' +str(graph))
+        graph = request.GET['graph']
+        print('GRAPH IS RECEIVED' + graph)
 
     #getData
     df_userOne = getUserData(user, stimuli, color)
@@ -92,7 +92,7 @@ def home(request):
         script_graph, selected_graph = components(selected_graph)
     elif graph == 'contour':
         selected_graph = getGraphContour(df_userOne, url, w, h)
-        script_graph, selected_graph = components(selected_graph)
+        script_graph = 0
 
     #BOKEH
 
