@@ -37,7 +37,7 @@ def home(request):
     toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
 
     stimuli = '06_Hamburg_S1.jpg'
-    user = 'p1'
+    user = 'p2'
     brev = False
 
     if request.GET.get('stimuli') is not None:
@@ -75,8 +75,8 @@ def home(request):
     end = len(df_userOne.index) + len(df_userTwo.index)+ 1000
     #end = len(df_userOne.index) + 1000
     graph_bar = getGraphBar(toolbar, end)
-    addUserToGraphBar(df_userOne, graph_bar, 'red', 0, brev)
-    addUserToGraphBar(df_userTwo, graph_bar, 'yellow', len(df_userOne.index), brev)
+    addUserToGraphBar(df_userOne, graph_bar, 'red', 0, brev, 'color')
+    addUserToGraphBar(df_userTwo, graph_bar, 'yellow', len(df_userOne.index), brev, 'gray')
     #addUserToGraphBar(df_userThree, graph_bar, 'blue', len(df_userOne.index) + len(df_userTwo.index))
     
 

@@ -17,7 +17,7 @@ from bokeh.io import output_file, show
 from homepage.models import getUserData
 
 
-def addUserToGraph(userData, p, color, start_index, invert):
+def addUserToGraph(userData, p, color, start_index, invert, legend):
     if (invert):
         userData = userData.reindex(index=userData.index[::-1])
     user = userData['user'].iloc[0]
