@@ -140,7 +140,8 @@ def home(request):
         'selected_color': color,
         'stimuli_list': stimuli_list,
         'user_list': user_list,
-        'script_graph': script_graph
+        'script_graph': script_graph,
+        'graph_list' : graph_list,
         #'graph_contour': graph_contour,
         #'graph_bar': graph_bar,
         #'graph_line': graph_line,
