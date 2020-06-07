@@ -61,8 +61,6 @@ def home(request):
 
     #getData
     df_userOne = getUserData(user, stimuli, color)
-    #df_userTwo = getUserData('p16', stimuliMap)
-    #df_userThree = getUserData('p12', stimuliMap)
 
     # ---Start Coding by Fanni Egresits
     #GetBackground images
@@ -95,40 +93,6 @@ def home(request):
         script_graph = 0
         #end coding Fanni and Laura
 
-    #BOKEH
-
-        #Get Bar graph
-    #end = len(df_userOne.index) + len(df_userTwo.index)+ 1000
-    #end = len(df_userOne.index) + 1000
-    #graph_bar = getGraphBar(toolbar, end)
-    #addUserToGraphBar(df_userOne, graph_bar, 'red', 0, brev)
-    #addUserToGraphBar(df_userTwo, graph_bar, 'yellow', len(df_userOne.index))
-    #addUserToGraphBar(df_userThree, graph_bar, 'blue', len(df_userOne.index) + len(df_userTwo.index))
-    
-
-        #Get Line graph
-    #graph_line = getGraphLine(toolbar)
-    #addUserToGraphLine(df_userOne, graph_line, 'red')
-    #addUserToGraphLine(df_userTwo, graph_line, 'yellow')
-    #addUserToGraphLine(df_userThree, graph_line, 'blue')
-    
-        #Get Gaze graph
-    #graph_gaze = getGraphGaze(toolbar, url, w, h)
-    #addUserToGraphGaze(df_userOne, graph_gaze, 'red')
-    #addUserToGraphGaze(df_userTwo, graph_gaze, 'yellow')
-    #addUserToGraphGaze(df_userThree, graph_gaze, 'blue')
-
-    
-
-        #Convert to HTML
-    #script_bokeh, graphs_bokeh = components(gridplot([graph_line,  graph_gaze],ncols=2, sizing_mode="scale_both"))
-    #script_bars = script_bar
-    #script_bar, graph_bar = components(graph_bar)
-    #script_gaze, script_line, graph_gaze, graph_line = components(gridplot([graph_line, graph_gaze], ncols=2, sizing_mode="scale_both"))
-    
-    #PLOTLY
-    #graph_contour = getGraphContour(df_userOne, url, w, h)
-
     #Stimuli dropdown
     stimuli_list = getAllStimulis()
     user_list = getAllUsersByStimuli(stimuli)
@@ -137,6 +101,7 @@ def home(request):
     #Updated from homepage context by Fanni and Laura
     context = {
         'graph_selected' : selected_graph,
+        'graphselection' : graph,
         'selected_stimuli': stimuli,
         'selected_user': user,
         'selected_color': color,
@@ -144,14 +109,6 @@ def home(request):
         'user_list': user_list,
         'script_graph': script_graph,
         'graph_list' : graph_list,
-        #'graph_contour': graph_contour,
-        #'graph_bar': graph_bar,
-        #'graph_line': graph_line,
-        #'graph_gaze': graph_gaze,
-        #'script_bar' : script_bar,
-        #'script_contour': graph_contour,
-        #'script_line': graph_line,
-        #'script_gaze': graph_gaze
     }
     return render(request, 'manual.html', context)
 
