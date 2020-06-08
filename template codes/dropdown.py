@@ -138,3 +138,49 @@ fig.update_layout(
         ),
     ]
 )
+
+# dropdowns for user comparison page
+
+# color dropdown
+fig.update_layout(
+        updatemenus=[
+            dict(
+                buttons=list([
+                    dict(
+                        args=["colorscale", "Hot"],
+                        label="Orange",
+                        method="restyle"
+                    ),
+                    dict(
+                        args=["colorscale", "Greys"],
+                        label="Grey",
+                        method="restyle"
+                    ),
+                    dict(
+                        args=["colorscale", "Greens"],
+                        label="Green",
+                        method="restyle"
+                    ),
+                    dict(
+                        args=["colorscale", "Viridis"],
+                        label="Viridis",
+                        method="restyle"
+                    ),
+                    dict(
+                        args=["colorscale", "Cividis"],
+                        label="Cividis",
+                        method="restyle"
+                    ),
+                ]),
+                # position might need updating when you move it
+                direction="down",
+                pad={"r": 10, "t": 10},
+                showactive=True,
+                x=0.12,
+                xanchor="left",
+                y=1.10,
+                yanchor="top"
+            ),
+        ]
+)
+
