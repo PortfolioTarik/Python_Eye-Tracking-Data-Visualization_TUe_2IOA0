@@ -30,7 +30,9 @@ def getGraph(df_user, url, w, h):
     #stimuli = df_user["StimuliName"][0]
 
     layout = go.Layout(
-        title='Contourplot area of interest',
+        title='Areas of interest',
+        xaxis_title='Mapped Fixation Point X',
+        yaxis_title='Mapped Fixation Point Y',
         autosize=False,
         width=800,
         height=600,

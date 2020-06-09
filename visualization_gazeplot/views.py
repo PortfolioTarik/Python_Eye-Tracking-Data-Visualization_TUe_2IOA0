@@ -52,7 +52,7 @@ def addUserToGraph(userData, p, color):
 def getGraph(toolbar, url, w, h):
     #Create plot
     p = figure(plot_width=800, plot_height=600, x_range=(0, w), y_range=(0, h),
-               title="Gaze Plot of Fixation Duration per Timestamp", x_axis_label='Mapped Fixation Point X',
+               title="Areas of interest", x_axis_label='Mapped Fixation Point X',
                y_axis_label='Mapped Fixation Point Y', tools=toolbar)
 
     #Set Background
