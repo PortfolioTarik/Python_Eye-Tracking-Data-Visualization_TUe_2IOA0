@@ -61,14 +61,6 @@ def home(request):
         color_right = request.GET['color_right']
         print('COLOR IS RECEIVED:' + color_right)
 
-    # same as stimuli but for barchart so that you can reverse it order.
-    if request.GET.get('brev_left') is not None:
-        brev_left = parseToBool(request.GET['brev_left'].lower())
-        print('BREV IS RECEIVED:' + str(brev_left))
-    if request.GET.get('brev_right') is not None:
-        brev_right = parseToBool(request.GET['brev_right'].lower())
-        print('BREV IS RECEIVED:' + str(brev_right))
-
     # Coded by Laura
     if request.GET.get('graph_left') is not None:
         graph_left = request.GET['graph_left']
