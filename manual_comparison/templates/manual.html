@@ -37,7 +37,7 @@
 						<span class = "right">Select graph type:</span>
 					</div>
 					<div class="Select_graph">
-						<span class = "left1">Stimuli User Color:</span>
+						<span class = "left">Stimuli User Color:</span>
 						<span class = "right">Stimuli User Color:</span>
 					</div>
 
@@ -46,7 +46,7 @@
 						Select visualization
 						<select onchange="changeGraph(this.value)">
 							{% for graph in graph_list %}
-							<div>
+							<div >
 								{% if graph != graphselection %}
 									<option value="{{ graph }}">{{ graph }}</option>
 								{% else %}
@@ -92,12 +92,13 @@
 					</span>
 				</span>
     </body>
-	
 	{{ graph_selected | safe }}
+
 
 		</body>
 		<!-- Start Coding Tarik Hacialiogullari -->
-		{{ script_graph | safe }}
+		{{ script_graph_left | safe }}
+
 	<script>
 		// <!-- SEE homepage/templates/home.HTML for the comments -->
 		function changeGraph(graph)
