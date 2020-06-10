@@ -166,7 +166,7 @@
 		function changeStimuliRight(stimuli) 
 		{
 			var url = new window.URL(document.location);
-			url.searchParams.set("stimuli", stimuli);
+			url.searchParams.set("stimuli_right", stimuli);
 			window.location.href = url.toString();
 			// + '&user=' + 'p1';
 		}
@@ -197,7 +197,7 @@
 		function changeStimuliLeft(stimuli) 
 		{
 			var url = new window.URL(document.location);
-			url.searchParams.set("stimuli", stimuli);
+			url.searchParams.set("stimuli_left", stimuli);
 			window.location.href = url.toString();
 			// + '&user=' + 'p1';
 		}

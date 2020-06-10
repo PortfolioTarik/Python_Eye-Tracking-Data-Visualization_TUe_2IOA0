@@ -31,21 +31,26 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 def home(request):
     toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
 
-    # stimuli has to be the same for left and right
-    stimuli = '06_Hamburg_S1.jpg'
+    # stimuli has to be the same for left
+    stimuli_left = '06_Hamburg_S1.jpg'
     user_left = 'p1'
     color_left = 'color'
     brev_left = False
     graph_left = 'gaze'
 
+    stimuli_right = '06_Hamburg_S1.jpg'
     user_right = 'p1'
     color_right = 'color'
     brev_right = False
     graph_right = 'gaze'
 
-    if request.GET.get('stimuli') is not None:
-        stimuli = request.GET['stimuli']
-        print('STIMULI IS RECEIVED:' + stimuli)
+    if request.GET.get('stimuli_left') is not None:
+        stimuli_left = request.GET['stimuli_left']
+        print('STIMULI_LEFT IS RECEIVED:' + stimuli_left)
+    
+    if request.GET.get('stimuli_right') is not None:
+        stimuli_right = request.GET['stimuli_right']
+        print('STIMULI_RIGHT IS RECEIVED:' + stimuli_right)
 
     if request.GET.get('user_left') is not None:
         user_left = request.GET['user_left']
@@ -69,7 +74,12 @@ def home(request):
         graph_right = request.GET['graph_right']
         print('GRAPH IS RECEIVED' + graph_right)
         # end coding Laura
-
+ #REMOVE ME ------------------------------------------------------- TEMPORARY----------------------------
+    #I didn't see any stimuli_left and stimuli_right I have made it enabeld to retrieve stimuli_left and stimuli_right
+    #it is up to the one who is responsible for the task to implemend it.
+    #So for now I do assign this.
+    stimuli = stimuli_left
+#REMOVE ME ------------------------------------------------------- TEMPORARY-----------------------------
     # getData
     df_userLeft = getUserData(user_left, stimuli, color_left)
     df_userRight = getUserData(user_right, stimuli, color_right)
