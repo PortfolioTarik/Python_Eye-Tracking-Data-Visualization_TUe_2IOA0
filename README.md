@@ -6,6 +6,7 @@ This is the porject for eye tracking visualizations, where we will give all the 
 To run the server locally you must type 'python manage.py runserver' in terminal and press enter. An http link will appear where you much press CTRL and click on the link to open it. To quit the server press CTRL+BREAK.
 
 ## Prerequisites
+Install python at https://www.python.org/downloads/ click the 'add to path' checkbox while installing
 ### Libraries
 bokeh == 2.0.2\
 Django == 3.0.5\
@@ -21,6 +22,8 @@ Microsoft Edge == 44.18362.449.0\
 Firefox == 76.0.1
 ## Installing
 Some commands must be entered in the command prompt to be able to use the libraries listed above. Here are the commands required, enter each line separately.\
+either (in the root of the project): pip3 install -r requirements.txt \
+or:\
 pip install Django\
 pip install bokeh\
 pip install pandas\
