@@ -74,31 +74,33 @@ def home(request):
         graph_right = request.GET['graph_right']
         print('GRAPH IS RECEIVED' + graph_right)
         # end coding Laura
- #REMOVE ME ------------------------------------------------------- TEMPORARY----------------------------
-    #I didn't see any stimuli_left and stimuli_right I have made it enabeld to retrieve stimuli_left and stimuli_right
-    #it is up to the one who is responsible for the task to implemend it.
-    #So for now I do assign this.
-    stimuli = stimuli_left
-#REMOVE ME ------------------------------------------------------- TEMPORARY-----------------------------
+
     # getData
-    df_userLeft = getUserData(user_left, stimuli, color_left)
-    df_userRight = getUserData(user_right, stimuli, color_right)
+    df_userLeft = getUserData(user_left, stimuli_left, color_left)
+    df_userRight = getUserData(user_right, stimuli_right, color_right)
 
     # ---Start Coding by Fanni Egresits
     # GetBackground images
-    url = '/static/stimuli/{}'.format(stimuli)
-    img_url = "http://" + request.get_host() + url
+    url_left = '/static/stimuli/{}'.format(stimuli_left)
+    img_url_left = "http://" + request.get_host() + url_left
+    url_right = '/static/stimuli/{}'.format(stimuli_right)
+    img_url_right = "http://" + request.get_host() + url_right
+    
 
     # Get the parameters of map (width, height)
-    response = requests.get(img_url)
-    w, h = Image.open(BytesIO(response.content)).size
+    response_left = requests.get(img_url_left)
+    w_left, h_left = Image.open(BytesIO(response_left.content)).size
+    response_right = requests.get(img_url_right)
+    w_right, h_right = Image.open(BytesIO(response_right.content)).size
+    
     # ---End Coding by Fanni Egresits
+
 
     # Coded by Fanni and Laura
     selected_graph_left = 0
     script_graph_left = 0
     if graph_left == 'gaze':
-        selected_graph_left = getGraphGaze(toolbar, url, w, h)
+        selected_graph_left = getGraphGaze(toolbar, url_left, w_left, h_left)
         addUserToGraphGaze(df_userLeft, selected_graph_left, 'red')
         script_graph_left , selected_graph_left = components(selected_graph_left)
     elif graph_left == 'line':
@@ -111,12 +113,12 @@ def home(request):
         addUserToGraphBar(df_userLeft, selected_graph_left, 'red', 0, brev_left)
         script_graph_left , selected_graph_left = components(selected_graph_left)
     elif graph_left == 'contour':
-        selected_graph_left = getGraphContour(df_userLeft, url, w, h)
+        selected_graph_left = getGraphContour(df_userLeft, url_left, w_left, h_left)
 
     selected_graph_right = 0
     script_graph_right = 0
     if graph_right == 'gaze':
-        selected_graph_right = getGraphGaze(toolbar, url, w, h)
+        selected_graph_right = getGraphGaze(toolbar, url_right, w_right, h_right)
         addUserToGraphGaze(df_userRight, selected_graph_right, 'red')
         script_graph_right , selected_graph_right = components(selected_graph_right)
     elif graph_right == 'line':
@@ -129,13 +131,14 @@ def home(request):
         addUserToGraphBar(df_userRight, selected_graph_right, 'red', 0, brev_right)
         script_graph_right , selected_graph_right = components(selected_graph_right)
     elif graph_right == 'contour':
-        selected_graph_right = getGraphContour(df_userRight, url, w, h)
+        selected_graph_right = getGraphContour(df_userRight, url_right, w_right, h_right)
 
         # end coding Fanni and Laura
 
     # Stimuli dropdown
     stimuli_list = getAllStimulis()
-    user_list = getAllUsersByStimuli(stimuli)
+    user_list_left = getAllUsersByStimuli(stimuli_left)
+    user_list_right = getAllUsersByStimuli(stimuli_right)
     graph_list = {'gaze', 'contour', 'bar', 'line'}
 
 
@@ -149,13 +152,15 @@ def home(request):
         'selected_graph_right': selected_graph_right,
         'graph_left': graph_left,
         'graph_right': graph_right,
-        'selected_stimuli': stimuli,
+        'selected_stimuli_left': stimuli_left,
+        'selected_stimuli_right': stimuli_right,
         'selected_user_left': user_left,
         'selected_user_right': user_right,
         'selected_color_left': color_left,
         'selected_color_right': color_right,
         'stimuli_list': stimuli_list,
-        'user_list': user_list,
+        'user_list_left': user_list_left,
+        'user_list_right': user_list_right,
         'script_graph_left': script_graph_left,
         'script_graph_right': script_graph_right,
         'graph_list': graph_list
