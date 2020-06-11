@@ -11,14 +11,20 @@ def upload_csv(request):
 
     prompt = {'profiles': 'data'}
 
+    csvfile = 0
     if request.method == "GET":
         return render(request, template, prompt)
+        csvfile = request.FILES['file']
 
     # save the uploaded file as csvfile
-    csvfile = request.FILES['file']
+    
+    if csvfile == 0:
+        list(messages.get_messages(request))
+        messages.add_message(request, messages.INFO, 'select a file')
+        return render(request, template, prompt)
 
     # check whether the file is of the correct type
-    if not csvfile.name.endswith('.csv'):
+    if csvfile != 0 and not csvfile.name.endswith('.csv'):
         list(messages.get_messages(request))
         messages.add_message(request, messages.INFO, 'This is not a csv file')
         return render(request, template, prompt)
