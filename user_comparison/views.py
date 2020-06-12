@@ -59,10 +59,19 @@ def home(request):
         brev = parseToBool(request.GET['brev'].lower())
         print('BREV IS RECEIVED:' + str(brev))
 
+
+    user_list = getAllUsersByStimuliAndColor(stimuli, color)
+    print(user_list)
+
     
     #getData
     #We can get already the first selected user.
     df_userOne = getUserData(users[0], stimuli, color)
+    print(len(df_userOne))
+    if len(df_userOne) <= 0:
+        print("User doesn't exists: " + users[0] + "for this map, so we switched to another user :)")
+        users[0] = user_list[0]
+        df_userOne = getUserData(users[0], stimuli, color)
     df_userTwo = ''
     df_userThree = ''
     #With booleans it is easy to see how many users there are, it is more optimal compared to everytime array look up.
@@ -72,9 +81,17 @@ def home(request):
     if(amountOfUsers >= 2):
         boolUserTwo = True
         df_userTwo = getUserData(users[1], stimuli, color)
+        if len(df_userTwo) <= 0:
+            print("User doesn't exists: " + users[1] + "for this map, so we switched to another user :)")
+            users[1] = user_list[1]
+            df_userTwo = getUserData(users[1], stimuli, color)
     if(amountOfUsers >= 3):
         boolUserThree = True
         df_userThree = getUserData(users[2], stimuli, color)
+        if len(df_userThree) <= 0:
+            print("User doesn't exists: " + users[2] + "for this map, so we switched to another user :)")
+            users[2] = user_list[2]
+            df_userThree = getUserData(users[2], stimuli, color)
 
     # ---Start Coding by Fanni Egresits
     #GetBackground images
@@ -128,7 +145,6 @@ def home(request):
 
     #Stimuli dropdown
     stimuli_list = getAllStimulis()
-    user_list = getAllUsersByStimuliAndColor(stimuli, color)
 
     context = {
         'selected_stimuli': stimuli,
