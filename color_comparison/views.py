@@ -26,27 +26,27 @@ import requests
 from io import BytesIO
 from django.contrib.staticfiles.storage import staticfiles_storage
 
-webpages = [
-    {
-        'title': 'Import_csv',
-        'url': '/import'
-    },
-]
 
 def home(request):
     toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
 
     stimuli = '06_Hamburg_S1.jpg'
-    user = 'p1'
+    userColor = 'p1'
+    userGray = 'p2'
     brev = False
 
     if request.GET.get('stimuli') is not None:
         stimuli = request.GET['stimuli']
         print('STIMULI IS RECEIVED:' + stimuli)
 
-    if request.GET.get('user') is not None:
-        user = request.GET['user']
-        print('USER IS RECEIVED:' + user)
+    #color and gray user from url param.
+    if request.GET.get('userColor') is not None:
+        userColor = request.GET['userColor']
+        print('USERCOLOR IS RECEIVED:' + userColor)
+    
+    if request.GET.get('userGray') is not None:
+        userGray = request.GET['userGray']
+        print('USERGRAY IS RECEIVED:' + userGray)
 
     #same as stimuli but for barchart so that you can reverse it order.
     if request.GET.get('brev') is not None:
@@ -55,8 +55,14 @@ def home(request):
 
 
     #getData
-    df_userOne = getUserData(user, stimuli, 'color')
-    df_userTwo = getUserData(user, stimuli, 'gray')
+    df_userOne = getUserData(userColor, stimuli, 'color')
+    df_userTwo = getUserData(userGray, stimuli, 'gray')
+    userOne_exist = False
+    userTwo_exist = False
+    if len(df_userOne) > 0:
+        userOne_exist = True
+    if len(df_userTwo) > 0:
+        userTwo_exist = True
     #df_userThree = getUserData('p12', stimuliMap)
 
     # ---Start Coding by Fanni Egresits
@@ -75,45 +81,55 @@ def home(request):
     end = len(df_userOne.index) + len(df_userTwo.index)+ 1000
     #end = len(df_userOne.index) + 1000
     graph_bar = getGraphBar(toolbar, end)
-    addUserToGraphBar(df_userOne, graph_bar, 'red', 0, brev)
-    addUserToGraphBar(df_userTwo, graph_bar, 'yellow', len(df_userOne.index), brev)
+    if userOne_exist:
+        addUserToGraphBar(df_userOne, graph_bar, 'red', 0, brev)
+    if userTwo_exist:
+        addUserToGraphBar(df_userTwo, graph_bar, 'yellow', len(df_userOne.index), brev)
     #addUserToGraphBar(df_userThree, graph_bar, 'blue', len(df_userOne.index) + len(df_userTwo.index))
     
 
         #Get Line graph
     graph_line = getGraphLine(toolbar)
-    addUserToGraphLine(df_userOne, graph_line, 'red')
-    addUserToGraphLine(df_userTwo, graph_line, 'yellow')
+    if userOne_exist:
+        addUserToGraphLine(df_userOne, graph_line, 'red')
+    if userTwo_exist:
+        addUserToGraphLine(df_userTwo, graph_line, 'yellow')
     #addUserToGraphLine(df_userThree, graph_line, 'blue')
     
         #Get Gaze graph
     graph_gaze = getGraphGaze(toolbar, url, w, h)
-    addUserToGraphGaze(df_userOne, graph_gaze, 'red')
-    addUserToGraphGaze(df_userTwo, graph_gaze, 'yellow')
+    if userOne_exist:
+        addUserToGraphGaze(df_userOne, graph_gaze, 'red')
+    if userTwo_exist:
+        addUserToGraphGaze(df_userTwo, graph_gaze, 'yellow')
     #addUserToGraphGaze(df_userThree, graph_gaze, 'blue')
 
     
 
         #Convert to HTML
     script_bokeh, graphs_bokeh = components(gridplot([graph_line,  graph_gaze],ncols=2, sizing_mode="scale_both"))
-    #Start of code by Omar and Youssef
-    #script_bars = script_bar
     script_bar, graph_bar = components(graph_bar)
-    #End of code by Omar and Youssef
     #script_gaze, script_line, graph_gaze, graph_line = components(gridplot([graph_line, graph_gaze], ncols=2, sizing_mode="scale_both"))
     
     #PLOTLY
-    graph_contour = getGraphContour(df_userOne, url, w, h)
-
+    graph_contour = ''
+    if userOne_exist:
+        graph_contour = getGraphContour(df_userOne, url, w, h)
+    if userTwo_exist:
+        graph_contour = getGraphContour(df_userTwo, url, w, h)
+        
     #Stimuli dropdown
     stimuli_list = getAllStimulis()
-    user_list = getAllUsersByStimuliAndColor(stimuli, color)
+    user_list_color = getAllUsersByStimuliAndColor(stimuli, 'color')
+    user_list_gray = getAllUsersByStimuliAndColor(stimuli, 'gray')
 
     context = {
         'selected_stimuli': stimuli,
-        'selected_user': user,
+        'selected_userColor': userColor,
+        'selected_userGray': userGray,
         'stimuli_list': stimuli_list,
-        'user_list': user_list,
+        'user_list_gray': user_list_gray,
+        'user_list_color': user_list_color,
         'graph_contour': graph_contour,
         'graphs_bokeh': graphs_bokeh,
         'graph_bar': graph_bar,

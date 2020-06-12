@@ -44,11 +44,23 @@
 						</div>
 						{% endfor %}
 					</select>
-					Select an user:
-					<select onchange="changeUser(this.value)">
-						{% for user in user_list %}
+					Select a color user:
+					<select onchange="changeUserColor(this.value)">
+						{% for user in user_list_color %}
 						<div>
-							{% if user != selected_user %}
+							{% if user != selected_userColor %}
+								<option value="{{ user }}">{{ user }}</option>
+							{% else %}
+								<option selected="selected" value="{{ user }}">{{ user }}</option>
+							{% endif %}
+						</div>
+						{% endfor %}
+					</select>
+					Select a gray user:
+					<select onchange="changeUserGray(this.value)">
+						{% for user in user_list_gray %}
+						<div>
+							{% if user != selected_userGray %}
 								<option value="{{ user }}">{{ user }}</option>
 							{% else %}
 								<option selected="selected" value="{{ user }}">{{ user }}</option>
@@ -95,10 +107,17 @@
 			window.location.href = url.toString();
 		}
 
-		function changeUser(user)
+		function changeUserColor(user)
 		{
 			var url = new window.URL(document.location);
-			url.searchParams.set("user", user);
+			url.searchParams.set("userColor", user);
+			window.location.href = url.toString();
+		}
+
+		function changeUserGray(user)
+		{
+			var url = new window.URL(document.location);
+			url.searchParams.set("userGray", user);
 			window.location.href = url.toString();
 		}
 

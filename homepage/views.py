@@ -63,8 +63,9 @@ def home(request):
     df_userOne = getUserData(user, stimuli, color)
     print(len(df_userOne))
     if len(df_userOne) <= 0:
-        print("User doesn't exists: " + user_list[0])
-        df_userOne = getUserData(user_list[0], stimuli, color)
+        print("User doesn't exists: " + user + "for this map, so we switched to another user :)")
+        user = user_list[0]
+        df_userOne = getUserData(user, stimuli, color)
     #df_userSorted = getSortedUserData(user, stimuli, color, order)
 
 

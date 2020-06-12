@@ -40,7 +40,7 @@ def getUserData(user, mapName, color):
                'MappedFixationPointX', 'MappedFixationPointY', 'user', 'description']
     columns_sql = ', '.join(columns)
     query = "SELECT " + columns_sql + " FROM Fixation_data WHERE user = '" + user + "' AND StimuliName LIKE '%" + trimmed_stimuli + "%' AND description = '" + color + "'"
-    print('query sent:' + query)
+    # print('query sent:' + query)
     queryset_userData = FixationData.objects.raw(query)
     return querySetToPandas(queryset_userData)
 
@@ -55,9 +55,9 @@ def getAllUsersByStimuliAndColor(stimuli, color):
     #start = stimuli.find('_') + 1
     trimmed_stimuli = stimuli[stimuli.find("_"):]
     query_raw = "SELECT DISTINCT user, 1 as id FROM Fixation_data WHERE StimuliName LIKE '%" + trimmed_stimuli + "%' AND description = '" + color + "'  ORDER BY CAST(substr(user, 2, length(user)) as integer) ASC;"
-    print("--------------------------")
-    print(query_raw)
-    print("--------------------------")
+    # print("--------------------------")
+    # print(query_raw)
+    # print("--------------------------")
     query_users = FixationData.objects.raw(query_raw)
     user_list = []
     for userEach in query_users: 
