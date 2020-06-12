@@ -79,6 +79,22 @@ def home(request):
     df_userLeft = getUserData(user_left, stimuli_left, color_left)
     df_userRight = getUserData(user_right, stimuli_right, color_right)
 
+    #each graph own users regarding their selected options.
+    user_list_left = getAllUsersByStimuliAndColor(stimuli_left, color_left)
+    user_list_right = getAllUsersByStimuliAndColor(stimuli_right, color_right)
+
+    print(len(df_userLeft))
+    if len(df_userLeft) <= 0:
+        print("UserLeft doesn't exists: " + user_left + "for this map, so we switched to another user :)")
+        user_left = user_list_left[0]
+        df_userLeft = getUserData(user_left, stimuli_left, color_left)
+        print(len(df_userLeft))
+
+    if len(df_userRight) <= 0:
+        print("UserLeft doesn't exists: " + user_right + "for this map, so we switched to another user :)")
+        user_right = user_list_right[0]
+        df_userRight = getUserData(user_right, stimuli_right, color_right)
+
     # ---Start Coding by Fanni Egresits
     # GetBackground images
     url_left = '/static/stimuli/{}'.format(stimuli_left)
@@ -137,8 +153,6 @@ def home(request):
 
     # Stimuli dropdown
     stimuli_list = getAllStimulis()
-    user_list_left = getAllUsersByStimuliAndColor(stimuli_left, color)
-    user_list_right = getAllUsersByStimuliAndColor(stimuli_right, color)
     graph_list = {'gaze', 'contour', 'bar', 'line'}
 
 
