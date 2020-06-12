@@ -9,7 +9,7 @@ from bokeh.models import Select, ColumnDataSource
 from bokeh.models.widgets import Dropdown
 from bokeh.io import output_file, show
 
-from homepage.models import getUserData, getAllStimulis, getAllUsersByStimuli, getSortedUserData
+from homepage.models import getUserData, getAllStimulis, getAllUsersByStimuliAndColor
 
 from visualization_heatmap.views import getGraph as getGraphContour
 
@@ -57,8 +57,14 @@ def home(request):
         print('BREV IS RECEIVED:' + str(brev))
 
 
+    #Get all the users which are on this stimuli.
+    user_list = getAllUsersByStimuliAndColor(stimuli, color)
     #Take the selected user (by stimuli and color) from the database.
     df_userOne = getUserData(user, stimuli, color)
+    print(len(df_userOne))
+    if len(df_userOne) <= 0:
+        print("User doesn't exists: " + user_list[0])
+        df_userOne = getUserData(user_list[0], stimuli, color)
     #df_userSorted = getSortedUserData(user, stimuli, color, order)
 
 
@@ -71,6 +77,7 @@ def home(request):
     response = requests.get(img_url)
     w, h = Image.open(BytesIO(response.content)).size
     # ---End Coding by Fanni Egresits
+
 
     #BOKEH
         #Get Bar graph
@@ -103,8 +110,7 @@ def home(request):
     #Stimuli dropdown
     #Get all the stimulis in order to send it with context to the homepage.
     stimuli_list = getAllStimulis()
-    #Get all the users which are on this stimuli.
-    user_list = getAllUsersByStimuli(stimuli)
+    
 
     #the array that we send to the homepage.
     context = {
