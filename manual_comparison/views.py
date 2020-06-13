@@ -32,10 +32,10 @@ def home(request):
     toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
 
     # stimuli has to be the same for left
-    barchart_width = 600
-    barchart_height = 450
-    linechart_width = 600
-    linechart_height = 450
+    barchart_width = 685
+    barchart_height = 510
+    linechart_width = 685
+    linechart_height = 510
     percent = 85
     stimuli_left = '06_Hamburg_S1.jpg'
     user_left = 'p1'
