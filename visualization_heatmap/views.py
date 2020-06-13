@@ -124,7 +124,7 @@ def getGraph(df_user, url, w, h, percent = 100):
                 showactive=True,
                 x=0.12,
                 xanchor="left",
-                y=1.10,
+                y=1.12,
                 yanchor="top"
             ),
         ]
@@ -133,7 +133,7 @@ def getGraph(df_user, url, w, h, percent = 100):
     fig.update_layout(
         annotations=[    #---End Coding by Andrada
             #---Start Coding by Fanni Egresits
-            dict(text="Colorscale", x=0, xref="paper", y=1.06,
+            dict(text="Colorscale", x=0, xref="paper", y=1.08,
                  yref="paper", showarrow=False),
         ])
 
