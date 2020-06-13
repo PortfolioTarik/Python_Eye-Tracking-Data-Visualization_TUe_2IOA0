@@ -54,6 +54,16 @@
 						</div>
 						{% endfor %}
 					</select>
+					Select the color:
+					<select onchange="changeColor(this.value)">
+						{% if "gray" != selected_color %}
+						<option selected="selected" value="color">Color</option>
+						<option value="gray">Gray</option>
+						{% else %}
+						<option value="color">Color</option>
+						<option selected="selected" value="gray">Gray</option>
+						{% endif %}
+					</select>
 					Select a user:
 					<select id="users" style="width:150px;" data-placeholder="Begin typing a name to filter..." multiple class="chosen-select" name="test">
 						{% for user in user_list %}
@@ -67,16 +77,6 @@
 						{% endfor %}
 					  </select>
 					  <button class = "Change_users" onclick="changeUsers()">Apply Users</button>
-					Select the color:
-					<select onchange="changeColor(this.value)">
-						{% if "gray" != selected_color %}
-						<option selected="selected" value="color">Color</option>
-						<option value="gray">Gray</option>
-						{% else %}
-						<option value="color">Color</option>
-						<option selected="selected" value="gray">Gray</option>
-						{% endif %}
-					</select>
 				</span>
 				
 					<h1 style="color:yellowgreen;">Line Chart and Gaze Plot:</h1>
