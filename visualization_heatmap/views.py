@@ -24,18 +24,18 @@ import os
 
 
 
-def getGraph(df_user, url, w, h):
+def getGraph(df_user, url, w, h, percent = 100):
     x = df_user["MappedFixationPointX"]
     y = df_user["MappedFixationPointY"]
     #stimuli = df_user["StimuliName"][0]
 
     layout = go.Layout(
-        title='Areas of interest',
+        title='Areas of interest of the user ' + df_user['user'].iloc[0],
         xaxis_title='Mapped Fixation Point X',
         yaxis_title='Mapped Fixation Point Y',
         autosize=False,
-        width=800,
-        height=600,
+        width=int((800/100) * percent),
+        height=int((600/100) * percent),
         xaxis = dict(
             range= (0, w),  # sets the range of xaxis
             constrain="domain",  # meanwhile compresses the xaxis by decreasing its "domain"

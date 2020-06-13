@@ -17,7 +17,8 @@ def upload_csv(request):
         csvfile = request.FILES['file']
 
     # save the uploaded file as csvfile
-    
+    print(csvfile)
+    print(request.method)
     if csvfile == 0:
         list(messages.get_messages(request))
         messages.add_message(request, messages.INFO, 'select a file')
@@ -40,26 +41,27 @@ def upload_csv(request):
     print(df_eye)
 
     #fill the dataset using the uploaded file
-    #rows = []
-    #for i in range(len(df_eye)):
-    #    print(df_eye[i])
-        #rows.append(
-        #    FixationData(
-        #        Timestamp=df_eye.iloc[i][0],
-        #        StimuliName=df_eye.iloc[i][1],
-        #        FixationIndex=df_eye.iloc[i][2],
-        #        FixationDuration=df_eye.iloc[i][3],
-        #        MappedFixationPointX=df_eye.iloc[i][4],
-        #        MappedFixationPointY=df_eye.iloc[i][5],
-        #        user=df_eye.iloc[i][6],
-        #        description=df_eye.iloc[i][7],
-        #    )
-        #)
-        #if ((i % 10000) == 0):
-        #    print(str(i))
+    print("hiero")
+    rows = []
+    for i in range(len(df_eye)):
+        print(df_eye[i])
+        rows.append(
+            FixationData(
+                Timestamp=df_eye.iloc[i][0],
+                StimuliName=df_eye.iloc[i][1],
+                FixationIndex=df_eye.iloc[i][2],
+                FixationDuration=df_eye.iloc[i][3],
+                MappedFixationPointX=df_eye.iloc[i][4],
+                MappedFixationPointY=df_eye.iloc[i][5],
+                user=df_eye.iloc[i][6],
+                description=df_eye.iloc[i][7],
+                )
+            )
+    if ((i % 10000) == 0):
+        print(str(i))
 
-    # print(rows)
-    #FixationData.objects.bulk_create(rows)
+    print(rows)
+    FixationData.objects.bulk_create(rows)
     #---End Coding by Tarik Hacialiogullari
 
     

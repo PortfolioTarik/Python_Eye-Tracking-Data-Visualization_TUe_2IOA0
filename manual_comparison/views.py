@@ -32,6 +32,9 @@ def home(request):
     toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
 
     # stimuli has to be the same for left
+    barchart_width = 600
+    barchart_height = 450
+    percent = 85
     stimuli_left = '06_Hamburg_S1.jpg'
     user_left = 'p1'
     color_left = 'color'
@@ -108,6 +111,7 @@ def home(request):
     w_left, h_left = Image.open(BytesIO(response_left.content)).size
     response_right = requests.get(img_url_right)
     w_right, h_right = Image.open(BytesIO(response_right.content)).size
+    #w_right = (w_right/100) *70
     
     # ---End Coding by Fanni Egresits
 
@@ -116,7 +120,7 @@ def home(request):
     selected_graph_left = 0
     script_graph_left = 0
     if graph_left == 'gaze':
-        selected_graph_left = getGraphGaze(toolbar, url_left, w_left, h_left)
+        selected_graph_left = getGraphGaze(toolbar, url_left, w_left, h_left, percent)
         addUserToGraphGaze(df_userLeft, selected_graph_left, 'red')
         script_graph_left , selected_graph_left = components(selected_graph_left)
     elif graph_left == 'line':
@@ -125,16 +129,16 @@ def home(request):
         script_graph_left , selected_graph_left = components(selected_graph_left)
     elif graph_left == 'bar':
         end = len(df_userLeft.index) + 1000
-        selected_graph_left = getGraphBar(toolbar, end)
+        selected_graph_left = getGraphBar(toolbar, end, barchart_width, barchart_height)
         addUserToGraphBar(df_userLeft, selected_graph_left, 'red', 0, brev_left)
         script_graph_left , selected_graph_left = components(selected_graph_left)
     elif graph_left == 'contour':
-        selected_graph_left = getGraphContour(df_userLeft, url_left, w_left, h_left)
+        selected_graph_left = getGraphContour(df_userLeft, url_left, w_left, h_left, percent)
 
     selected_graph_right = 0
     script_graph_right = 0
     if graph_right == 'gaze':
-        selected_graph_right = getGraphGaze(toolbar, url_right, w_right, h_right)
+        selected_graph_right = getGraphGaze(toolbar, url_right, w_right, h_right, percent)
         addUserToGraphGaze(df_userRight, selected_graph_right, 'red')
         script_graph_right , selected_graph_right = components(selected_graph_right)
     elif graph_right == 'line':
@@ -143,11 +147,11 @@ def home(request):
         script_graph_right , selected_graph_right = components(selected_graph_right)
     elif graph_right == 'bar':
         end = len(df_userRight.index) + 1000
-        selected_graph_right = getGraphBar(toolbar, end)
+        selected_graph_right = getGraphBar(toolbar, end, barchart_width, barchart_height)
         addUserToGraphBar(df_userRight, selected_graph_right, 'red', 0, brev_right)
         script_graph_right , selected_graph_right = components(selected_graph_right)
     elif graph_right == 'contour':
-        selected_graph_right = getGraphContour(df_userRight, url_right, w_right, h_right)
+        selected_graph_right = getGraphContour(df_userRight, url_right, w_right, h_right, percent)
 
         # end coding Fanni and Laura
 

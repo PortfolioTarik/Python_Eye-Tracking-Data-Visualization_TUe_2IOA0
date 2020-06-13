@@ -49,9 +49,9 @@ def addUserToGraph(userData, p, color):
 
 # ---Start Coding by Fanni Egresits
 # generate graph with background and return it.
-def getGraph(toolbar, url, w, h):
+def getGraph(toolbar, url, w, h, percent = 100):
     #Create plot
-    p = figure(plot_width=800, plot_height=600, x_range=(0, w), y_range=(0, h),
+    p = figure(plot_width=int((800/100) * percent), plot_height=int((600/100) * percent), x_range=(0, w), y_range=(0, h),
                title="Areas of interest", x_axis_label='Mapped Fixation Point X',
                y_axis_label='Mapped Fixation Point Y', tools=toolbar)
 

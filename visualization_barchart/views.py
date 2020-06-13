@@ -37,7 +37,7 @@ def addUserToGraph(userData, p, color, start_index, invert):
 
     return
 
-def getGraph(toolbar, end):
+def getGraph(toolbar, end, width = 1500, height = 300):
     start = 1000
     
     text_x_axis = list(range(start, end))
@@ -46,7 +46,7 @@ def getGraph(toolbar, end):
     #---Start Coding by Youssef Selim
     #graph visualisation information such as width, titles etc.
     p = figure(
-        plot_height=300, plot_width=1500, title="Bar chart of hamburg for users", x_axis_label='Timestamp', y_axis_label='Fixation Duration',
+        plot_height=height, plot_width=width, title="Bar chart of hamburg for users", x_axis_label='Timestamp', y_axis_label='Fixation Duration',
         toolbar_location="right", tools=toolbar,  x_range=text_x_axis)
     p.xgrid.grid_line_color = None
     #changes x axis label size and orientation so that the numbers are visible
