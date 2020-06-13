@@ -63,3 +63,18 @@ def getAllUsersByStimuliAndColor(stimuli, color):
     for userEach in query_users: 
         user_list.append(userEach.user)
     return user_list
+
+# def deleteAll():
+#     FixationData.objects.raw("DELETE FROM Fixation_data ")
+#     return stimuli_list
+
+# def checkExistingData():
+#         columns = ['ID', 'Timestamp', 'StimuliName', 'FixationIndex', 'FixationDuration',
+#                'MappedFixationPointX', 'MappedFixationPointY', 'user', 'description']
+#     columns_sql = ', '.join(columns)
+#     query_maps = FixationData.objects.raw("(SELECT TOP 1 user FROM Fixation_data) (SELECT TOP 1 user FROM Fixation_data) ")
+#     return 
+#     stimuli_list = []
+#     for stimulidata in query_maps: 
+#         stimuli_list.append(str(stimulidata.StimuliName))
+#     return stimuli_list
