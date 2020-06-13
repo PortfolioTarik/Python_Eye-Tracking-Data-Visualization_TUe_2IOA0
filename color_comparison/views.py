@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from bokeh.embed import components
 from bokeh.layouts import row, gridplot
 
-from homepage.models import getUserData, getAllStimulis, getAllUsersByStimuliAndColor
+from homepage.models import getUserData, getAllStimulis, getAllUsersByStimuliAndColor, getPreUserByColor, getPreUserByColorAndStimuli
 
 from visualization_heatmap.views import getGraph as getGraphContour
 
@@ -29,10 +29,11 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 
 def home(request):
     toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
-
-    stimuli = '06_Hamburg_S1.jpg'
-    userColor = 'p1'
-    userGray = 'p2'
+    df_userOne = getPreUserByColor('color')
+    stimuli = df_userOne['StimuliName'].iloc[0]
+    df_userTwo = getPreUserByColorAndStimuli('gray', stimuli)
+    userColor = df_userOne['user'].iloc[0]
+    userGray = df_userTwo['user'].iloc[0]
     brev = False
 
     if request.GET.get('stimuli') is not None:

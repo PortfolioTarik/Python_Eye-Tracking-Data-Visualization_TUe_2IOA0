@@ -9,7 +9,7 @@ from bokeh.models import Select, ColumnDataSource
 from bokeh.models.widgets import Dropdown
 from bokeh.io import output_file, show
 
-from homepage.models import getUserData, getAllStimulis, getAllUsersByStimuliAndColor
+from homepage.models import getUserData, getAllStimulis, getAllUsersByStimuliAndColor, getPreUserByColor
 
 from visualization_heatmap.views import getGraph as getGraphContour
 
@@ -34,9 +34,10 @@ def home(request):
     #Standard toolbar (on the right / above) for every graph.
     toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
     #Pre-data (always these 3 options are selected when opening website)
-    stimuli = '06_Hamburg_S1.jpg'
-    user = 'p1'
-    color = 'color'
+    df_userOne = getPreUserByColor('color')
+    stimuli = df_userOne['StimuliName'].iloc[0]
+    user = df_userOne['user'].iloc[0]
+    color = df_userOne['description'].iloc[0]
     brev = False
 
     #If there is a stimuli in the URL like '?stimuli=istanbul.jpg' then overwrite the pre-data of above and put that in.
@@ -55,7 +56,9 @@ def home(request):
     if request.GET.get('brev') is not None:
         brev = parseToBool(request.GET['brev'].lower())
         print('BREV IS RECEIVED:' + str(brev))
+    
 
+    #print(getPreUserByColor('color').head())
 
     #Get all the users which are on this stimuli.
     user_list = getAllUsersByStimuliAndColor(stimuli, color)

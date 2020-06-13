@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from bokeh.embed import components
 from bokeh.layouts import row, gridplot
 
-from homepage.models import getUserData, getAllStimulis, getAllUsersByStimuliAndColor
+from homepage.models import getUserData, getAllStimulis, getAllUsersByStimuliAndColor, getPreUserByColor
 
 from visualization_heatmap.views import getGraph as getGraphContour
 
@@ -37,15 +37,18 @@ def home(request):
     linechart_width = 685
     linechart_height = 510
     percent = 85
-    stimuli_left = '06_Hamburg_S1.jpg'
-    user_left = 'p1'
-    color_left = 'color'
+
+    df_userLeft = getPreUserByColor('color')
+    stimuli_left = df_userLeft['StimuliName'].iloc[0]
+    user_left = df_userLeft['user'].iloc[0]
+    color_left = df_userLeft['description'].iloc[0]
     brev_left = False
     graph_left = 'gaze'
 
-    stimuli_right = '06_Hamburg_S1.jpg'
-    user_right = 'p1'
-    color_right = 'color'
+    df_userRight = getPreUserByColor('color')
+    stimuli_right = df_userRight['StimuliName'].iloc[0]
+    user_right =  df_userRight['user'].iloc[0]
+    color_right = df_userRight['description'].iloc[0]
     brev_right = False
     graph_right = 'gaze'
 

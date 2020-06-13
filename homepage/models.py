@@ -78,3 +78,22 @@ def getAllUsersByStimuliAndColor(stimuli, color):
 #     for stimulidata in query_maps: 
 #         stimuli_list.append(str(stimulidata.StimuliName))
 #     return stimuli_list
+
+def getPreUserByColor(color):
+    preUser = FixationData.objects.raw("SELECT user, StimuliName, 1 as id FROM Fixation_data WHERE description = '"+color+"' ORDER BY id ASC LIMIT 1")
+    mapName = ''
+    userName = ''
+    for pre in preUser:
+        mapName = pre.StimuliName
+        userName = pre.user
+    return getUserData(userName, mapName, color)
+
+def getPreUserByColorAndStimuli(color, stimuli):
+    trimmed_stimuli = stimuli[stimuli.find("_"):]
+    preUser = FixationData.objects.raw("SELECT user, StimuliName, 1 as id FROM Fixation_data WHERE description = '"+color+"' AND StimuliName LIKE '%" + trimmed_stimuli + "%' ORDER BY id ASC LIMIT 1")
+    mapName = ''
+    userName = ''
+    for pre in preUser:
+        mapName = pre.StimuliName
+        userName = pre.user
+    return getUserData(userName, mapName, color)
