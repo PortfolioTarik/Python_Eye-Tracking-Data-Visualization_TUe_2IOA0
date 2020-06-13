@@ -1,34 +1,4 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Upload csv file</title>
-</head>
-<body>
-    {% if messages %}
-        {% for message in messages %}
-                <li class="{{ message.tags }}">{{ message }}</li>
-        {% endfor %}
-    {% endif %}
-    <form action="" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <large>On this page you can upload your dataset.</large>
-        <br>
-        <small>Your dataset should contain: Timestamp, Stimuli name, Fixation index, Fixation duration, Mapped fixation point X, Mapped fixation point Y, User, Description.</small>
-        <br>
-        <label for="file1"> Upload a file</label>
-        <input type="file" id="file1" name="file">
-        <br>
-        <td></td><small> Only accepts CSV files</small>
-        <button type="submit">Upload</button>
-    </form>
-    {% for profile in profiles %}
-    {{profile.name}}
-    {% endfor %}
-</body>
-</html> -->
-
-<!-- Coded by Omar, Youssef and Laura-->
+<!-- Programmed functionality by Laura and Tarik, Fron-end Design and Layout by Omar, Youssef,   -->
 <!DOCTYPE html>
 {% load static %} 
 <html>
@@ -59,14 +29,18 @@
                     <button class="Upload" type="submit">
 						Upload
                     </button>
-                    <a href="/"><button class="Home">
-						Home
-					</button></a>
                 </div>
-            </form>
-            {% for profile in profiles %}
+        </div>
+    </form>
+    <div class="heading">
+    <a href="/">
+        <input type="submit" class="Home" value="← Return to Home" />
+    </a>
+    </div>
+
+            <!-- {% for profile in profiles %}
             {{profile.name}}
-            {% endfor %}
+            {% endfor %} -->
 
 <style>
 *{

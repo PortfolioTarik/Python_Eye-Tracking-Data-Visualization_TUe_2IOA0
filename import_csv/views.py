@@ -1,50 +1,45 @@
 from django.shortcuts import render
 
-# Coded by Laura except when noted.
+import csv
+import io
 from django.contrib import messages
 from import_csv.models import FixationData
 import pandas as pd
 
+# full file written by Laura 1385739
+# Create your views here.
+
+
 def upload_csv(request):
     template = "website_import.html"
-    #data = FixationData.objects.all()
+    data = ''
 
-    prompt = {'profiles': 'data'}
+    prompt = {'profiles': data}
 
-    csvfile = 0
     if request.method == "GET":
         return render(request, template, prompt)
-    csvfile = request.FILES['file']
 
-    # save the uploaded file as csvfile
-    print(csvfile)
-    print(request.method)
-    if csvfile == 0:
-        list(messages.get_messages(request))
-        messages.add_message(request, messages.INFO, 'select a file')
+    
+    if bool(request.FILES.get('filepath', False)) == True:
+        csvfile = request.FILES['file']
+    else:
         return render(request, template, prompt)
 
-    # check whether the file is of the correct type
-    if csvfile != 0 and not csvfile.name.endswith('.csv'):
+    if not csvfile.name.endswith('.csv'):
         list(messages.get_messages(request))
         messages.add_message(request, messages.INFO, 'This is not a csv file')
         return render(request, template, prompt)
 
-    # Give an update to the website user that a file has been uploaded
     if csvfile.name.endswith('csv'):
         list(messages.get_messages(request))
         messages.add_message(request, messages.INFO,
                              'csv file succesfully uploaded')
 
-    #---Start Coding by Tarik Hacialiogullari
-    df_eye = pd.read_csv(csvfile, encoding='unicode_escape', sep='\t')
-    print(df_eye)
+    df_eye = pd.read_csv(csvfile, encoding='unicode_escape', sep="\t")
+    print(df_eye.info())
 
-    #fill the dataset using the uploaded file
-    print("hiero")
     rows = []
     for i in range(len(df_eye)):
-        print(df_eye[i])
         rows.append(
             FixationData(
                 Timestamp=df_eye.iloc[i][0],
@@ -55,18 +50,14 @@ def upload_csv(request):
                 MappedFixationPointY=df_eye.iloc[i][5],
                 user=df_eye.iloc[i][6],
                 description=df_eye.iloc[i][7],
-                )
             )
-    if ((i % 10000) == 0):
-        print(str(i))
+        )
+        if ((i % 10000) == 0):
+            print(str(i))
 
-    print(rows)
+    # print(rows)
     FixationData.objects.bulk_create(rows)
-    #---End Coding by Tarik Hacialiogullari
 
-    
-
-# The initial coding by Laura to upload a dataset, updated due to loadingtime issues
     # dataset = csvfile.read().decode('UTF-8', 'replace')
 
     # io_string = io.StringIO(dataset)
