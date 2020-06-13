@@ -19,20 +19,24 @@ def upload_csv(request):
     #---End Coding by Laura van der Bij
 
     #check if there is a file selected given.
-    if bool(request.FILES.get('filepath', False)) == True:
+    if bool(request.FILES.get('file', False)) == True:
         csvfile = request.FILES['file']
     else:
+        print(request.FILES)
+        print('no file given return')
         return render(request, template, prompt)
 
     #---Start Coding by Laura van der Bij
     # check whether the file is of the correct type
     if not csvfile.name.endswith('.csv'):
+        print('no csv file given return')
         list(messages.get_messages(request))
         messages.add_message(request, messages.INFO, 'This is not a csv file')
         return render(request, template, prompt)
 
     # Give an update to the website user that a file has been uploaded
     if csvfile.name.endswith('csv'):
+        print('yes a csv file given return')
         list(messages.get_messages(request))
         messages.add_message(request, messages.INFO,
                              'csv file succesfully uploaded')
@@ -42,8 +46,13 @@ def upload_csv(request):
     df_eye = pd.read_csv(csvfile, encoding='unicode_escape', sep="\t")
     print(df_eye.info())
     #Delete all previous data.
-    FixationData.objects.raw("DELETE FROM Fixation_data ")
+    #print("Start delete.")
+    #FixationData.objects.all().delete()
+    # for item in FixationData.objects.all():
+    #     item.delete()
+    #FixationData.objects.raw("DELETE FROM Fixation_data; ")
     #fill the dataset using the uploaded file
+    #print("Done delete.")
     rows = []
     for i in range(len(df_eye)):
         rows.append(
