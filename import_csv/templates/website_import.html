@@ -1,9 +1,8 @@
-
-<!-- <html>
+<!-- <!DOCTYPE html>
+<html>
 <head>
-
     <meta charset="UTF-8">
-    <title>Upload Csv File</title>
+    <title>Upload csv file</title>
 </head>
 <body>
     {% if messages %}
@@ -21,13 +20,14 @@
         <input type="file" id="file1" name="file">
         <br>
         <td></td><small> Only accepts CSV files</small>
-        <b
+        <button type="submit">Upload</button>
     </form>
     {% for profile in profiles %}
     {{profile.name}}
     {% endfor %}
-</body> 
+</body>
 </html> -->
+
 <!-- Coded by Omar, Youssef and Laura-->
 <!DOCTYPE html>
 {% load static %} 
@@ -66,8 +66,7 @@
             </form>
             {% for profile in profiles %}
             {{profile.name}}
-            {% endfor %} -->
-    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script>
+            {% endfor %}
 
 <style>
 *{

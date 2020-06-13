@@ -14,7 +14,7 @@ def upload_csv(request):
     csvfile = 0
     if request.method == "GET":
         return render(request, template, prompt)
-        csvfile = request.FILES['file']
+    csvfile = request.FILES['file']
 
     # save the uploaded file as csvfile
     print(csvfile)
