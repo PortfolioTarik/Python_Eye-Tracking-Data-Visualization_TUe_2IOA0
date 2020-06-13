@@ -27,8 +27,8 @@ def addUserToGraph(userData, p, color):
     return
 
 #---Putting Toolbar and creatig Linechart
-def getGraph(toolbar):
-    p = figure(plot_width=600, plot_height=450, y_range=(100, 900),
+def getGraph(toolbar, width = 600, height = 450):
+    p = figure(plot_width=width, plot_height=height, y_range=(100, 900),
                 title="Line Chart of Fixation Duration per Timestamp", x_axis_label='Timestamp',
                 y_axis_label='FixationDuration', tools=toolbar)
     return p

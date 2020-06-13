@@ -34,6 +34,8 @@ def home(request):
     # stimuli has to be the same for left
     barchart_width = 600
     barchart_height = 450
+    linechart_width = 600
+    linechart_height = 450
     percent = 85
     stimuli_left = '06_Hamburg_S1.jpg'
     user_left = 'p1'
@@ -124,7 +126,7 @@ def home(request):
         addUserToGraphGaze(df_userLeft, selected_graph_left, 'red')
         script_graph_left , selected_graph_left = components(selected_graph_left)
     elif graph_left == 'line':
-        selected_graph_left = getGraphLine(toolbar)
+        selected_graph_left = getGraphLine(toolbar, linechart_width, linechart_height)
         addUserToGraphLine(df_userLeft, selected_graph_left, 'red')
         script_graph_left , selected_graph_left = components(selected_graph_left)
     elif graph_left == 'bar':
@@ -142,7 +144,7 @@ def home(request):
         addUserToGraphGaze(df_userRight, selected_graph_right, 'red')
         script_graph_right , selected_graph_right = components(selected_graph_right)
     elif graph_right == 'line':
-        selected_graph_right = getGraphLine(toolbar)
+        selected_graph_right = getGraphLine(toolbar, linechart_width, linechart_height)
         addUserToGraphLine(df_userRight, selected_graph_right, 'red')
         script_graph_right , selected_graph_right = components(selected_graph_right)
     elif graph_right == 'bar':
