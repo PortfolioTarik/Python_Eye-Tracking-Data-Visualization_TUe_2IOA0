@@ -23,10 +23,11 @@ import base64
 import os
 
 
-
+#Added third dimension and colorbar label by Fanni Egresits
 def getGraph(df_user, url, w, h, percent = 100):
     x = df_user["MappedFixationPointX"]
     y = df_user["MappedFixationPointY"]
+    z = df_user["FixationDuration"]
     #stimuli = df_user["StimuliName"][0]
 
     layout = go.Layout(
@@ -62,6 +63,13 @@ def getGraph(df_user, url, w, h, percent = 100):
         y=y,
         colorscale='Hot',
         reversescale=True,
+        colorbar=dict(
+            title='Fixation Duration in seconds',  # title here
+            titleside='right',
+            titlefont=dict(
+                size=14,
+                family='Arial, sans-serif')
+        ),
 
     ), layout)
     
