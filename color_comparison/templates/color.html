@@ -84,7 +84,16 @@
 				
 
 <h1 style="color:yellowgreen;">Plotly's Contour Map:</h1>
-
+<div style="color: whitesmoke;">Currently viewing {{ selected_color }} user, select the user color: </div>
+<select onchange="changeUserContour(this.value)">
+	{% if "gray" != selected_color %}
+	<option selected="selected" value="color">Color user</option>
+	<option value="gray">Gray user</option>
+	{% else %}
+	<option value="color">Color user</option>
+	<option selected="selected" value="gray">Gray user</option>
+	{% endif %}
+</select>
 {{ graph_contour | safe }}
 
             </h1>
@@ -113,6 +122,13 @@
 		{
 			var url = new window.URL(document.location);
 			url.searchParams.set("userGray", user);
+			window.location.href = url.toString();
+		}
+
+		function changeUserContour(user)
+		{
+			var url = new window.URL(document.location);
+			url.searchParams.set("userContour", user);
 			window.location.href = url.toString();
 		}
 	</script>

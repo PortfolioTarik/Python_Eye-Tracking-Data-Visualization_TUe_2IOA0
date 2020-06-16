@@ -34,6 +34,7 @@ def home(request):
     df_userTwo = getPreUserByColorAndStimuli('gray', stimuli)
     userColor = df_userOne['user'].iloc[0]
     userGray = df_userTwo['user'].iloc[0]
+    userContour = 'color'
     brev = False
 
     if request.GET.get('stimuli') is not None:
@@ -48,6 +49,10 @@ def home(request):
     if request.GET.get('userGray') is not None:
         userGray = request.GET['userGray']
         print('USERGRAY IS RECEIVED:' + userGray)
+    
+    if request.GET.get('userContour') is not None:
+        userContour = request.GET['userContour']
+        print('USERCONTOUR IS RECEIVED:' + userContour)
 
     #same as stimuli but for barchart so that you can reverse it order.
     if request.GET.get('brev') is not None:
@@ -114,9 +119,9 @@ def home(request):
     
     #PLOTLY
     graph_contour = ''
-    if userOne_exist:
+    if userOne_exist and userContour.lower() == 'color':
         graph_contour = getGraphContour(df_userOne, url, w, h)
-    if userTwo_exist:
+    elif userTwo_exist and userContour.lower() == 'gray':
         graph_contour = getGraphContour(df_userTwo, url, w, h)
         
     #Stimuli dropdown
@@ -128,6 +133,7 @@ def home(request):
         'selected_stimuli': stimuli,
         'selected_userColor': userColor,
         'selected_userGray': userGray,
+        'selected_color': userContour.lower(),
         'stimuli_list': stimuli_list,
         'user_list_gray': user_list_gray,
         'user_list_color': user_list_color,
