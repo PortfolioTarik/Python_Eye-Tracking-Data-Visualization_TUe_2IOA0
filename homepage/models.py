@@ -31,7 +31,7 @@ def querySetToPandas(queryset_userData):
                         description = str(fixatData.description)
                     )
         userData = userData.append(dics, ignore_index=True)
-    return userData
+    return userData.drop_duplicates(subset=None, keep='first', inplace=False)
 
 #Get all the data of the user for a particular map.
 def getUserData(user, mapName, color):
