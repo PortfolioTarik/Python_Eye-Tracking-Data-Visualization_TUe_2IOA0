@@ -46,6 +46,9 @@ def getGraph(toolbar, width = 600, height = 450):
     p = figure(plot_width=width, plot_height=height, y_range=(100, 900),  x_range=text_x_axis,
                 title="Line Chart of Fixation Duration per Timestamp", x_axis_label='Timestamp',
                 y_axis_label='FixationDuration', tools=toolbar)
+                
+    p.xaxis.major_label_orientation = 1
+    p.xaxis.major_label_text_font_size = "6pt"
     return p
 #---Start Coding by Omar Salem & Updated by Tarik Hacialiogullari
 
