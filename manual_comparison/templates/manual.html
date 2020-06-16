@@ -1,4 +1,4 @@
-<!-- Coded by Omar and Youssef-->
+<!-- Coded by Omar and Youssef, except where noted -->
 <!DOCTYPE html>
 {% load static %} 
 <html>
@@ -42,6 +42,7 @@
 		  <!-- Left -->
 				<div class = "split_left">
 					<div class="center">
+<!-- Start Coding Tarik Hacialiogullari -->
 							Select visualization
 							<select onchange="changeGraphLeft(this.value)">
 								{% for graph in graph_list %}
@@ -83,9 +84,11 @@
 						{{ selected_graph_left | safe }}
 					</div>	
 				</div>
+<!-- End Coding Tarik Hacialiogullari -->
 		  <!-- Right -->
 		  <div class = "split_right">
 			<div class="center">
+<!-- Start Coding Tarik Hacialiogullari -->
 						Select visualization
 						<select onchange="changeGraphRight(this.value)">
 							{% for graph in graph_list %}
@@ -134,7 +137,6 @@
 
 
 		</body>
-    <!-- Start Coding Tarik Hacialiogullari -->
 	<script>
     // <!-- SEE homepage/templates/home.HTML for the comments -->
     //RIGHT

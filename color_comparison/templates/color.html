@@ -1,4 +1,4 @@
-<!-- Coded by Omar and Youssef-->
+<!-- Coded by Omar and Youssef, except where noted -->
 <!DOCTYPE html>
 {% load static %} 
 <html>
@@ -84,6 +84,7 @@
 				
 
 <h1 style="color:yellowgreen;">Plotly's Contour Map:</h1>
+<!-- Start Coding Tarik Hacialiogullari -->
 <div style="color: whitesmoke;">Currently viewing {{ selected_color }} user, select the user color: </div>
 <select onchange="changeUserContour(this.value)">
 	{% if "gray" != selected_color %}
@@ -96,12 +97,10 @@
 </select>
 {{ graph_contour | safe }}
 
-            </h1>
         </div>
     </body>
 	{{ script_bokeh | safe }}
 	{{ script_bar | safe }}
-	<!-- Start Coding Tarik Hacialiogullari -->
 	<script>
 		// <!-- SEE homepage/templates/home.HTML for the comments -->
 		function changeStimuli(stimuli) 
@@ -132,10 +131,10 @@
 			window.location.href = url.toString();
 		}
 	</script>
+	<script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script>
 	<!-- End Coding Tarik Hacialiogullari -->
 
-    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script>
-<!-- css information for all classes-->
+	<!-- css information for all classes-->
 <style>
 *{
 	margin:0;

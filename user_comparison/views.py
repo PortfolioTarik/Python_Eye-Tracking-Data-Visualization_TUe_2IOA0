@@ -37,6 +37,7 @@ def home(request):
     color = df_userOne['description'].iloc[0]
     amountOfUsers = 1
     brev = False
+    userContour = 1
     
 
     if request.GET.get('stimuli') is not None:
@@ -54,6 +55,10 @@ def home(request):
     if request.GET.get('color') is not None:
         color = request.GET['color']
         print('COLOR IS RECEIVED:' + color)
+
+    if request.GET.get('userContour') is not None:
+        userContour = int(request.GET['userContour'])
+        print('USERCONTOUR IS RECEIVED:' + str(userContour))
 
     #same as stimuli but for barchart so that you can reverse it order.
     if request.GET.get('brev') is not None:
@@ -142,7 +147,12 @@ def home(request):
     script_bar, graph_bar = components(graph_bar)
     
     #PLOTLY
-    graph_contour = getGraphContour(df_userOne, url, w, h)
+    if userContour == 1:
+        graph_contour = getGraphContour(df_userOne, url, w, h)
+    elif userContour == 2:
+        graph_contour = getGraphContour(df_userTwo, url, w, h)
+    elif userContour == 3:
+        graph_contour = getGraphContour(df_userThree, url, w, h)
 
     #Stimuli dropdown
     stimuli_list = getAllStimulis()
@@ -151,6 +161,7 @@ def home(request):
         'selected_stimuli': stimuli,
         'selected_users': users,
         'selected_color': color,
+        'selected_user_contour': userContour,
         'stimuli_list': stimuli_list,
         'user_list': user_list,
         'graph_contour': graph_contour,

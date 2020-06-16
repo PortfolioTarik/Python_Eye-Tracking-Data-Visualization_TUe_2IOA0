@@ -50,7 +50,7 @@
 					</button></a>
 				</div>
 				<span class = "dropdowns">
-					<!-- Start Coding Tarik Hacialiogullari -->
+<!-- Start Coding Tarik Hacialiogullari -->
 					Select a stimuli:
 					<!-- When there is selected (e.g. onchange) a different stimuli, it calls the javascript function changeStimuli with the newly selected stimuli -->
 					<select onchange="changeStimuli(this.value)">
@@ -91,13 +91,13 @@
 						<option selected="selected" value="gray">Gray</option>
 						{% endif %}
 					</select>
-					<!-- End Coding Tarik Hacialiogullari -->
+<!-- End Coding Tarik Hacialiogullari -->
 				</span>
 				<!-- displaying all visualisations to the webpage-->
 					<h1 style="color:yellowgreen;">Gaze Plot and Line Chart:</h1>
 					{{ graphs_bokeh | safe }}
 					<h1 style="color:yellowgreen;">Bar Chart:</h1>
-					<!-- Start Coding Tarik Hacialiogullari -->
+<!-- Start Coding Tarik Hacialiogullari -->
 					<h5 style="color:yellowgreen;">Reverse: <label class="switch">
 						{% if brev %}
 						<input checked type="checkbox" onchange="reverseBarchart(this)">
@@ -107,15 +107,15 @@
 						<span class="slider round"></span>
 					</label></h5>
 					{{ graph_bar | safe }}
-					<!-- End Coding Tarik Hacialiogullari -->
+<!-- End Coding Tarik Hacialiogullari -->
 				
 				
 
 <h1 style="color:yellowgreen;">Plotly's Contour Map:</h1>
+<!-- Start Coding Tarik Hacialiogullari -->
 {{ graph_contour | safe }}
 
 	</body>
-	<!-- Start Coding Tarik Hacialiogullari -->
 	{{ script_bokeh | safe }}
 	{{ script_bar | safe }}
 	<script>
@@ -158,9 +158,9 @@
 		}
 		
 	</script>
-	<!-- End Coding Tarik Hacialiogullari -->
-	
-    <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script>
+	<script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script>
+<!-- End Coding Tarik Hacialiogullari -->
+
 <!-- css information for all classes-->
 <style>
 *{

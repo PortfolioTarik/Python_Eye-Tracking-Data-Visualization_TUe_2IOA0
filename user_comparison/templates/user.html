@@ -1,4 +1,4 @@
-<!-- Coded by Omar and Youssef-->
+<!-- Coded by Omar and Youssef, except where noted -->
 <!DOCTYPE html>
 {% load static %} 
 <html>
@@ -41,6 +41,7 @@
 						</div>
 					</div>
 				<span class = "dropdowns">
+<!-- Start Coding Tarik Hacialiogullari -->
 					<!-- SEE homepage/templates/home.HTML for the comments -->
 					Select a stimuli:
 					<select onchange="changeStimuli(this.value)">
@@ -86,6 +87,18 @@
 				
 
 <h1 style="color:yellowgreen;">Plotly's Contour Map:</h1>
+<div style="color: whitesmoke;">Select a user for the contour map:</div>
+<select onchange="changeUserContour(this.value)">
+	{% for user in selected_users %}
+	<div>
+		{% if forloop.counter != selected_user_contour %}
+			<option value="{{ forloop.counter }}">{{ user }}</option>
+		{% else %}
+			<option selected="selected" value="{{ forloop.counter }}">{{ user }}</option>
+		{% endif %}
+	</div>
+	{% endfor %}
+</select>
 {{ graph_contour | safe }}
 
     </body>
@@ -131,6 +144,13 @@
 			window.location.href = url.toString();
 		}
 
+		function changeUserContour(user)
+		{
+			var url = new window.URL(document.location);
+			url.searchParams.set("userContour", user);
+			window.location.href = url.toString();
+		}
+
 		$( document ).ready(function() {
 			$(".chosen-select").chosen({
   				no_results_text: "Oops, nothing found!"
@@ -140,7 +160,7 @@
 	</script>
 	
 	<script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.0.1.min.js"></script>
-
+<!-- End Coding Tarik Hacialiogullari -->
 <!-- css information for all classes-->
 <style>
 *{
