@@ -1,3 +1,5 @@
+#coded by Andrada Pancu
+
 #Create slider steps and traces
 for step in np.arange(0, 5, 0.1):
     fig.add_trace(

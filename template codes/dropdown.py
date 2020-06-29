@@ -1,3 +1,5 @@
+#coded by Andrada Pancu
+
 import plotly.graph_objects as go
 
 import pandas as pd
@@ -77,7 +79,7 @@ fig.update_layout(
 
 #fig.show()
 
-
+# create stimuli list > create traces for each stimuli > set to trigger 1 by 1 via dropdown
 # with query input
 columns = ['ID', 'Timestamp', 'StimuliName', 'FixationIndex', 'FixationDuration',
                'MappedFixationPointX', 'MappedFixationPointY', 'user', 'description']

@@ -1,5 +1,4 @@
-
-# will need to find and note application name and table name in order for those to properly work 
+#coded by Andrada Pancu
 
 
 #overall input query
