@@ -1,4 +1,4 @@
-# Copied and Combined from other pages by Tarik. This isn't used anymore, so no comments.
+# Copied and Combined from other files and group partners by Tarik. This isn't used anymore, so no comments.
 from django.shortcuts import render
 from django.http import HttpResponse
 from bokeh.plotting import figure, output_file, show

@@ -55,23 +55,9 @@ def getGraph(toolbar, end, width = 1500, height = 300):
     p.y_range.start = 0
     #---End Coding by Youssef Selim
 
-    #Start of code by Andrada Pancu
-    #Get sorted user data and remake the bar chart with the new data 
-    # order = 'ASC'
-    # df_user = getSortedUserData('p1', '06_Hamburg_S1.jpg', 'color', order)
-
-    # menu = Select(options=['ASC','DESC'], value = 'ASC', title = 'Order')
-    # def callback(attr, old, new):
-    #     if menu.value == 'ASC' : order = 'ASC'
-    #     elif menu.value == 'DESC' : order = 'DESC' 
-    #     df_user = getSortedUserData(user, stimuli, 'color', order)
-        
-    
-    # menu.on_change('value', callback)
-    #End of code by Andrada Pancu
-
     return p
 
+#By Tarik Hacialiogullari but it is only used to see individual graphs and experiment. (so for coding purposes not for the researchers)
 def home(request):
     #toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
 

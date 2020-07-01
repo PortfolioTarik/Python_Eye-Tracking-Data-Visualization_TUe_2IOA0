@@ -62,7 +62,7 @@ def getGraph(toolbar, url, w, h, percent = 100):
 # ---End Coding by Fanni Egresits
 
 
-# home is is not in use. just if someone wants to use this for now.
+#By Tarik Hacialiogullari but it is only used to see individual graphs and experiment. (so for coding purposes not for the researchers)
 def home(request):
     # toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
     # df_userOne = getUserData('p1', '06_Hamburg_S1.jpg', 'color')

@@ -20,6 +20,7 @@ def getSortedUserData(user, mapName, color, order):
 #End of code by Andrada Pancu
 
 #Start of code by Andrada Pancu - in barchart views
+#Get sorted user data and remake the bar chart with the new data 
     order = 'ASC'
     df_user = getSortedUserData('p1', '06_Hamburg_S1.jpg', 'color', order)
 

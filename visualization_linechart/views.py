@@ -50,8 +50,9 @@ def getGraph(toolbar, width = 600, height = 450):
     p.xaxis.major_label_orientation = 1
     p.xaxis.major_label_text_font_size = "6pt"
     return p
-#---Start Coding by Omar Salem & Updated by Tarik Hacialiogullari
+#---End Coding by Omar Salem & Updated by Tarik Hacialiogullari
 
+#By Tarik Hacialiogullari but it is only used to see individual graphs and experiment. (so for coding purposes not for the researchers)
 def home(request):
     toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
     p = getGraph(toolbar)

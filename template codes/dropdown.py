@@ -186,3 +186,35 @@ fig.update_layout(
         ]
 )
 
+
+
+ 
+    # #---Start Coding by Andrada
+    # #img_url =  '/static/stimuli/{}'.format(stimuli)
+    # #encoded_image = base64.b64encode(open(stimuli, 'rb').read())
+    # fig.add_layout_image(
+    #         #source = "http://" + request.get_host() + img_url,
+    #         #source = 'data:image/jpg;base64,{}'.format(encoded_image.decode()),
+    #         #source = request.build_absolute_uri('/static/stimuli/{}'+ stimuli),
+    #         source='https://i.ibb.co/VQSkMnN/06-Hamburg-S1.jpg',
+    #         x = 0,
+    #         y = 1200,
+    #         sizex = 1600,
+    #         sizey = 1200,
+    #         sizing = "stretch",
+    #         opacity = 0.7,
+    #         layer = "above"
+
+    # )
+
+    # encoded_image = base64.b64encode(open(stimuli, 'rb').read())
+    # fig.update_layout(
+    #             images= [dict(
+    #                 source='data:image/png;base64,{}'.format(encoded_image.decode()),
+    #                 #xref="paper", yref="paper",
+    #                 x=0, y=1,
+    #                 sizex=0.5, sizey=0.5,
+    #                 xanchor="left",
+    #                 yanchor="top",
+    #                 #sizing="stretch",
+    #                 layer="below")])

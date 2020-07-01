@@ -2,7 +2,6 @@
 
 from django.shortcuts import render
 
-# Create your views here.
 from django.http import HttpResponse
 from django.contrib.staticfiles.storage import staticfiles_storage
 from bokeh.plotting import figure, output_file, show
@@ -72,37 +71,8 @@ def getGraph(df_user, url, w, h, percent = 100):
         ),
 
     ), layout)
-    
-    # #---Start Coding by Andrada
-    # #img_url =  '/static/stimuli/{}'.format(stimuli)
-    # #encoded_image = base64.b64encode(open(stimuli, 'rb').read())
-    # fig.add_layout_image(
-    #         #source = "http://" + request.get_host() + img_url,
-    #         #source = 'data:image/jpg;base64,{}'.format(encoded_image.decode()),
-    #         #source = request.build_absolute_uri('/static/stimuli/{}'+ stimuli),
-    #         source='https://i.ibb.co/VQSkMnN/06-Hamburg-S1.jpg',
-    #         x = 0,
-    #         y = 1200,
-    #         sizex = 1600,
-    #         sizey = 1200,
-    #         sizing = "stretch",
-    #         opacity = 0.7,
-    #         layer = "above"
-
-    # )
-
-    # encoded_image = base64.b64encode(open(stimuli, 'rb').read())
-    # fig.update_layout(
-    #             images= [dict(
-    #                 source='data:image/png;base64,{}'.format(encoded_image.decode()),
-    #                 #xref="paper", yref="paper",
-    #                 x=0, y=1,
-    #                 sizex=0.5, sizey=0.5,
-    #                 xanchor="left",
-    #                 yanchor="top",
-    #                 #sizing="stretch",
-    #                 layer="below")])
-
+   
+            #---Start Coding by Andrada
     fig.update_layout(
         updatemenus=[
             dict(
@@ -139,19 +109,22 @@ def getGraph(df_user, url, w, h, percent = 100):
     )
 
     fig.update_layout(
-        annotations=[    #---End Coding by Andrada
+        annotations=[    
+            #---End Coding by Andrada
             #---Start Coding by Fanni Egresits
             dict(text="Colorscale", x=0, xref="paper", y=1.08,
                  yref="paper", showarrow=False),
         ])
 
     fig.update_layout(template="plotly_white")
+           #---End Coding by Fanni Egresits
     graph = fig.to_html(
         full_html=False, default_height=500, default_width=1000)
 
     return graph
 
 
+#By Tarik Hacialiogullari but it is only used to see individual graphs and experiment. (so for coding purposes not for the researchers)
 def home(request):
 
     #df_user = getUserData('p1', '06_Hamburg_S1.jpg', 'color')
