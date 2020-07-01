@@ -17,16 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 # Coded by Tarik Hacialiogullari
+
+prefix = '~20191635/'
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('homepage.urls')),
-    path('color/', include('color_comparison.urls')),
-    path('user/', include('user_comparison.urls')),
-    path('manual/', include('manual_comparison.urls')),
-    path('import/', include('import_csv.urls')),
-    path('heatmap/', include('visualization_heatmap.urls')),
-    path('linechart/', include('visualization_linechart.urls')),
-    path('barchart/', include('visualization_barchart.urls')),
-    path('gazeplot/', include('visualization_gazeplot.urls')),
-    path('synchronized/', include('visualization_synchronized.urls')),
+    path(prefix + 'admin/', admin.site.urls),
+    path(prefix + '', include('homepage.urls')),
+    path(prefix + 'color/', include('color_comparison.urls')),
+    path(prefix + 'user/', include('user_comparison.urls')),
+    path(prefix + 'manual/', include('manual_comparison.urls')),
+    path(prefix + 'import/', include('import_csv.urls')),
+    path(prefix + 'heatmap/', include('visualization_heatmap.urls')),
+    path(prefix + 'linechart/', include('visualization_linechart.urls')),
+    path(prefix + 'barchart/', include('visualization_barchart.urls')),
+    path(prefix + 'gazeplot/', include('visualization_gazeplot.urls')),
+    path(prefix + 'synchronized/', include('visualization_synchronized.urls')),
 ]
