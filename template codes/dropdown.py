@@ -77,8 +77,8 @@ fig.update_layout(
     ]
 )
 
+#---- Start Coding by Tarik Hacialiogullari
 #fig.show()
-
 # create stimuli list > create traces for each stimuli > set to trigger 1 by 1 via dropdown
 # with query input
 columns = ['ID', 'Timestamp', 'StimuliName', 'FixationIndex', 'FixationDuration',
@@ -93,7 +93,7 @@ columns = ['ID', 'Timestamp', 'StimuliName', 'FixationIndex', 'FixationDuration'
     for stimulidata in query_maps: 
         stimuli_list.append(stimulidata.StimuliName)
 
-
+#---- End Coding by Tarik Hacialiogullari
 for i in len(stimuli_list):
     if i != "StimuliName:":
         fig.add_trace(

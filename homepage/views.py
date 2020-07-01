@@ -1,4 +1,4 @@
-# Generated en coded by Tarik Hacialiogullari except where noted.
+# Generated and coded by Tarik Hacialiogullari except where noted.
 from django.shortcuts import render
 
 from django.http import HttpResponse
@@ -22,12 +22,14 @@ from visualization_barchart.views import addUserToGraph as addUserToGraphBar
 from visualization_linechart.views import getGraph as getGraphLine
 from visualization_linechart.views import addUserToGraph as addUserToGraphLine
 
-#Some of them are for background not sure which one, just putting all in it m8.
+#Background with using static files imports
+# ---Start Coding by Fanni Egresits
 import eye_tracking_visualizations_group23a.settings
 from PIL import Image
 import requests
 from io import BytesIO
 from django.contrib.staticfiles.storage import staticfiles_storage
+# ---End Coding by Fanni Egresits
 
 
 def home(request):
@@ -58,8 +60,6 @@ def home(request):
         print('BREV IS RECEIVED:' + str(brev))
     
 
-    #print(getPreUserByColor('color').head())
-
     #Get all the users which are on this stimuli.
     user_list = getAllUsersByStimuliAndColor(stimuli, color)
     #Take the selected user (by stimuli and color) from the database.
@@ -72,7 +72,7 @@ def home(request):
     #df_userSorted = getSortedUserData(user, stimuli, color, order)
 
 
-    # ---Start Coding by Fanni Egresits
+# ---Start Coding by Fanni Egresits
     #GetBackground images
     url = '/static/stimuli/{}'.format(stimuli)
     img_url = "http://" + request.get_host() + url
@@ -80,7 +80,7 @@ def home(request):
         #Get the parameters of map (width, height)
     response = requests.get(img_url)
     w, h = Image.open(BytesIO(response.content)).size
-    # ---End Coding by Fanni Egresits
+# ---End Coding by Fanni Egresits
 
 
     #BOKEH

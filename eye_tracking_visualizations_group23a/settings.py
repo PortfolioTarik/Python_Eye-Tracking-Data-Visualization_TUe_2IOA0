@@ -1,3 +1,4 @@
+# Generated en coded by Tarik Hacialiogullari.
 """
 Django settings for eye_tracking_visualizations_group23a project.
 

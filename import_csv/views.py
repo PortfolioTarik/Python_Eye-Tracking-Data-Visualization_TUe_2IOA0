@@ -1,4 +1,4 @@
-# Generated and coded by Tarik Hacialiogullari except when noted.
+# Generated and coded by Tarik Hacialiogullari except where noted.
 from django.shortcuts import render
 import csv
 import io
@@ -11,12 +11,12 @@ import pandas as pd
 def upload_csv(request):
     template = "website_import.html"
     data = ''
-    #---Start Coding by Laura van der Bij
+#---Start Coding by Laura van der Bij
     prompt = {'profiles': data}
 
     if request.method == "GET":
         return render(request, template, prompt)
-    #---End Coding by Laura van der Bij
+#---End Coding by Laura van der Bij
 
     #check if there is a file selected given.
     if bool(request.FILES.get('file', False)) == True:
@@ -26,7 +26,7 @@ def upload_csv(request):
         print('no file given return')
         return render(request, template, prompt)
 
-    #---Start Coding by Laura van der Bij
+#---Start Coding by Laura van der Bij
     # check whether the file is of the correct type
     if not csvfile.name.endswith('.csv'):
         print('no csv file given return')
@@ -40,12 +40,12 @@ def upload_csv(request):
         list(messages.get_messages(request))
         messages.add_message(request, messages.INFO,
                              'csv file succesfully uploaded')
-    #---End Coding by Laura van der Bij
+#---End Coding by Laura van der Bij
 
     #Read with Pandas the CSV by tab delimited.
     df_eye = pd.read_csv(csvfile, encoding='unicode_escape', sep="\t")
     print(df_eye.info())
-    #Delete all previous data.
+    #Delete all previous data. Commented reason: Deleting all rows locked in sqlite Django?
     #print("Start delete.")
     #FixationData.objects.all().delete()
     # for item in FixationData.objects.all():

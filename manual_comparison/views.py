@@ -1,4 +1,4 @@
-# Generated en coded by Tarik Hacialiogullari except where noted.
+# Generated and coded by Tarik Hacialiogullari except where noted.
 from django.shortcuts import render
 
 from django.http import HttpResponse
@@ -19,19 +19,20 @@ from visualization_barchart.views import addUserToGraph as addUserToGraphBar
 from visualization_linechart.views import getGraph as getGraphLine
 from visualization_linechart.views import addUserToGraph as addUserToGraphLine
 
-# Some of them are for background not sure which one, just putting all in it m8.
+# ---Start Coding by Fanni Egresits
 import eye_tracking_visualizations_group23a.settings
 from PIL import Image
 import requests
 from io import BytesIO
 from django.contrib.staticfiles.storage import staticfiles_storage
+# ---End Coding by Fanni Egresits
 
 
 # SEE homepage/views.py for the comments
 def home(request):
     toolbar = "box_select, lasso_select, wheel_zoom, pan, reset, save, hover, help"
 
-    # stimuli has to be the same for left
+    # The sizes need to be custom by having the graphs both next to each other.
     barchart_width = 685
     barchart_height = 510
     linechart_width = 685
@@ -74,14 +75,14 @@ def home(request):
         color_right = request.GET['color_right']
         print('COLOR IS RECEIVED:' + color_right)
 
-    # Coded by Laura
+# Coded by Laura
     if request.GET.get('graph_left') is not None:
         graph_left = request.GET['graph_left']
         print('GRAPH IS RECEIVED' + graph_left)
     if request.GET.get('graph_right') is not None:
         graph_right = request.GET['graph_right']
         print('GRAPH IS RECEIVED' + graph_right)
-        # end coding Laura
+# end coding Laura
 
     # getData
     df_userLeft = getUserData(user_left, stimuli_left, color_left)
@@ -103,7 +104,7 @@ def home(request):
         user_right = user_list_right[0]
         df_userRight = getUserData(user_right, stimuli_right, color_right)
 
-    # ---Start Coding by Fanni Egresits
+# ---Start Coding by Fanni Egresits
     # GetBackground images
     url_left = '/static/stimuli/{}'.format(stimuli_left)
     img_url_left = "http://" + request.get_host() + url_left
@@ -118,10 +119,10 @@ def home(request):
     w_right, h_right = Image.open(BytesIO(response_right.content)).size
     #w_right = (w_right/100) *70
     
-    # ---End Coding by Fanni Egresits
+# ---End Coding by Fanni Egresits
 
 
-    # Coded by Fanni and Laura
+# Coded by Fanni and Laura
     selected_graph_left = 0
     script_graph_left = 0
     if graph_left == 'gaze':
@@ -158,7 +159,7 @@ def home(request):
     elif graph_right == 'contour':
         selected_graph_right = getGraphContour(df_userRight, url_right, w_right, h_right, percent)
 
-        # end coding Fanni and Laura
+# end coding Fanni and Laura
 
     # Stimuli dropdown
     stimuli_list = getAllStimulis()

@@ -1,4 +1,4 @@
-# Generated en coded by Tarik Hacialiogullari except where noted.
+# Generated and coded by Tarik Hacialiogullari except where noted.
 from django.shortcuts import render
 
 from django.http import HttpResponse
@@ -19,12 +19,13 @@ from visualization_barchart.views import addUserToGraph as addUserToGraphBar
 from visualization_linechart.views import getGraph as getGraphLine
 from visualization_linechart.views import addUserToGraph as addUserToGraphLine
 
-#Some of them are for background not sure which one, just putting all in it m8.
+# ---Start Coding by Fanni Egresits
 import eye_tracking_visualizations_group23a.settings
 from PIL import Image
 import requests
 from io import BytesIO
 from django.contrib.staticfiles.storage import staticfiles_storage
+# ---End Coding by Fanni Egresits
 
 
 #SEE homepage/views.py for the comments, except for multiple users section.

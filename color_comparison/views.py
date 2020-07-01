@@ -1,4 +1,4 @@
-# Generated en coded by Tarik Hacialiogullari except when noted.
+# Generated en coded by Tarik Hacialiogullari except where noted.
 from django.shortcuts import render
 
 from django.http import HttpResponse

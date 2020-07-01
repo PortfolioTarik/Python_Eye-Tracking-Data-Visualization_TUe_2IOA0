@@ -1,4 +1,4 @@
-#Tarik Hacialiogullari
+#Generated and Coded by Tarik Hacialiogullari
 from django.db import models
 from import_csv.models import FixationData
 import numpy as np
